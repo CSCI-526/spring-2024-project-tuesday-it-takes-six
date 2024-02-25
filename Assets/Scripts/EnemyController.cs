@@ -35,7 +35,7 @@ public class EnemyController : MonoBehaviour
             // otherwise the player die
             else
             {
-                // TODO: player will die
+                // TODO: player will die, show the finish scene
                 Debug.Log("Player died");
             }
         }
@@ -48,7 +48,8 @@ public class EnemyController : MonoBehaviour
 
         corpse.SetActive(true);
 
-        // TODO: resize collider box
+        // TODO: resize collider box to the size of the corpse
+
         // TODO: make corpse push-able
     }
 
