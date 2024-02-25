@@ -42,7 +42,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void Die()
+    public void Die()
     {
         alive = false;
         Destroy(body);
