@@ -46,12 +46,12 @@ public class EnemyController : MonoBehaviour
     {
         alive = false;
         Destroy(body);
-
+        // corpse is already pushable since it is an rigid body
         corpse.SetActive(true);
-
-        // TODO: resize collider box to the size of the corpse
-        
-        // TODO: make corpse push-able
+        // if enemy die in the past, its corpse can be used in the present
+        if (transform.parent == GameObject.Find("Past").transform)
+            transform.parent = GameObject.Find("Common").transform;
+       
     }
 
     private string DetectCollisionSide(Collider2D collider)
