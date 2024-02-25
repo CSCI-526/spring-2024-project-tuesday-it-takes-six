@@ -21,6 +21,7 @@ public class EnemyController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("Detect collision with enemy body");
         Collider2D collider = collision.collider;
 
         if (alive && collider.CompareTag("Player"))
@@ -49,7 +50,7 @@ public class EnemyController : MonoBehaviour
         corpse.SetActive(true);
 
         // TODO: resize collider box to the size of the corpse
-
+        
         // TODO: make corpse push-able
     }
 
