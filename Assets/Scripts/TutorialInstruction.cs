@@ -20,6 +20,8 @@ public class TutorialInstruction : MonoBehaviour
         (0, $"Press {KeyMapping.LEFT}/{KeyMapping.RIGHT} to move"),
         (6, $"Press {KeyMapping.JUMP} to jump"),
         (20, $"Press {KeyMapping.TIME_SWITCH} to switch time"),
+        (32, "Jump on enemies to kill them"),
+        (40, "Now try to push the corpse of the enemy"),
     };
 
     void Start()

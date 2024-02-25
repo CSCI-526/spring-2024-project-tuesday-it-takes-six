@@ -44,8 +44,6 @@ public class TimeSwitch : MonoBehaviour
 
     private void Switch()
     {
-        tt = tt == TimeTense.PRESENT
-            ? TimeTense.PAST
-            : TimeTense.PRESENT;
+        tt = tt == TimeTense.PRESENT ? TimeTense.PAST : TimeTense.PRESENT;
     }
 }
