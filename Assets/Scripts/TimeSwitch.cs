@@ -12,6 +12,7 @@ public class TimeSwitch : MonoBehaviour
 
     public GameObject presentObjects;
     public GameObject pastObjects;
+    public GameObject changableObjects;
 
     // please not use var starting with an underscore inside/outside of class
     private TimeTense _tt;

@@ -492,6 +492,7 @@ MonoBehaviour:
   label: {fileID: 1470460374}
   presentObjects: {fileID: 193968907}
   pastObjects: {fileID: 319989201}
+  changableObjects: {fileID: 400860110}
 --- !u!1 &109970516
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,6 +1423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae3e1ec2b9c6f4fc7b4197fd5c8da58c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  label: {fileID: 1470460374}
 --- !u!1 &754659508
 GameObject:
   m_ObjectHideFlags: 0
