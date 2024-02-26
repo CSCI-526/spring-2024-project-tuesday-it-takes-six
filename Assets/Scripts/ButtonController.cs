@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game;
 
 public class ButtonController : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class ButtonController : MonoBehaviour
     private GameObject nextLevelDoor;
     void Start()
     {
-
+   
     }
 
 
@@ -25,13 +26,15 @@ public class ButtonController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         transform.localScale = Pressedsize;
-        nextLevelDoor.SendMessage("setDoorOpen");
+        if(GlobalData.Instance.tt == TimeTense.PRESENT)
+            nextLevelDoor.SendMessage("setDoorOpen");
     }
 
     void OnTriggerStay2D(Collider2D other) 
     {
         transform.localScale = Pressedsize;
-        nextLevelDoor.SendMessage("setDoorOpen");
+        if (GlobalData.Instance.tt == TimeTense.PRESENT)
+            nextLevelDoor.SendMessage("setDoorOpen");
     }
 
 
@@ -39,6 +42,7 @@ public class ButtonController : MonoBehaviour
     {
         // isPressed = false;
         transform.localScale = size;
-        nextLevelDoor.SendMessage("setDoorClosed");
+        if (GlobalData.Instance.tt == TimeTense.PRESENT)
+            nextLevelDoor.SendMessage("setDoorClosed");
     }
 }

@@ -815,8 +815,9 @@ GameObject:
   m_Component:
   - component: {fileID: 290825010}
   - component: {fileID: 290825011}
+  - component: {fileID: 290825012}
   m_Layer: 0
-  m_Name: NextLevel
+  m_Name: NextLevelDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -831,7 +832,7 @@ Transform:
   m_GameObject: {fileID: 290825009}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.43836, y: 7.832, z: 0}
+  m_LocalPosition: {x: -0.11, y: 7.832, z: 0}
   m_LocalScale: {x: 0.09604333, y: 13.865, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -889,6 +890,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &290825012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290825009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50f598bfe13fbdc468e8b1b29f19e760, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isOpen: 0
 --- !u!1 &319989201
 GameObject:
   m_ObjectHideFlags: 0
@@ -1626,6 +1640,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1088348098}
+  - component: {fileID: 1088348099}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -1652,6 +1667,19 @@ Transform:
   - {fileID: 400860111}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1088348099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1088348097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0fe44c057d91934886dd9b1addfbc16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tt: 0
 --- !u!1 &1239217940
 GameObject:
   m_ObjectHideFlags: 0
@@ -3065,7 +3093,7 @@ Transform:
   m_GameObject: {fileID: 2042731299}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 53.994, y: 0.096, z: 0}
+  m_LocalPosition: {x: 52.16, y: 0.096, z: 0}
   m_LocalScale: {x: 0.8120724, y: 0.16360807, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3225,7 +3253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c61c93e81f8fc840945788f06a46dd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextLevelDoor: {fileID: 0}
+  nextLevelDoor: {fileID: 290825009}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

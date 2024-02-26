@@ -39,6 +39,7 @@ public class TimeSwitch : MonoBehaviour
         changableCalls = new Dictionary<string, string>();
         changableCalls.Add("Present", "OnPresent");
         changableCalls.Add("Past", "OnPast");
+        GlobalData.Instance.tt = TimeTense.PRESENT;
     }
 
     void Update()
@@ -52,8 +53,12 @@ public class TimeSwitch : MonoBehaviour
     private void Switch()
     {
         tt = tt == TimeTense.PRESENT ? TimeTense.PAST : TimeTense.PRESENT;
-        
+        // change global data to let other objects know current time
+        GlobalData.Instance.tt = GlobalData.Instance.tt == TimeTense.PRESENT ? TimeTense.PAST : TimeTense.PRESENT;
+
         changableObjects.BroadcastMessage(changableCalls[label.text]);
+
         
+
     }
 }
