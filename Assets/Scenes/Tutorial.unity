@@ -764,8 +764,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1399296144}
   - {fileID: 1885102046}
-  - {fileID: 290825010}
   m_Father: {fileID: 1088348098}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &246814509
@@ -831,12 +831,11 @@ Transform:
   m_GameObject: {fileID: 290825009}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 68.144, y: 2.4999998, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.43836, y: 7.832, z: 0}
+  m_LocalScale: {x: 0.09604333, y: 13.865, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1399296144}
-  m_Father: {fileID: 193968908}
+  m_Children: []
+  m_Father: {fileID: 1399296144}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &290825011
 SpriteRenderer:
@@ -880,7 +879,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1810,11 +1809,12 @@ Transform:
   m_GameObject: {fileID: 1399296143}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.183998, y: -0.6999998, z: 0}
+  m_LocalPosition: {x: 62.96, y: 1.8, z: 0}
   m_LocalScale: {x: 12, y: 0.19999999, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 290825010}
+  m_Children:
+  - {fileID: 290825010}
+  m_Father: {fileID: 193968908}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1399296145
 BoxCollider2D:
@@ -3048,6 +3048,7 @@ GameObject:
   - component: {fileID: 2042731302}
   - component: {fileID: 2042731301}
   - component: {fileID: 2042731303}
+  - component: {fileID: 2042731304}
   m_Layer: 0
   m_Name: NextlevelButton
   m_TagString: Untagged
@@ -3212,6 +3213,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2042731304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042731299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c61c93e81f8fc840945788f06a46dd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextLevelDoor: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

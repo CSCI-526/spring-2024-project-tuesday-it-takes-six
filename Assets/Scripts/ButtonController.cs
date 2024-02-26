@@ -8,6 +8,8 @@ public class ButtonController : MonoBehaviour
     // private bool isPressed = false;
     private Vector3 size = new Vector3(0.8120f, 0.1636081f);
     private Vector3 Pressedsize = new Vector3(0.8120f, 0.036081f);
+    [SerializeField]
+    private GameObject nextLevelDoor;
     void Start()
     {
 
@@ -20,16 +22,23 @@ public class ButtonController : MonoBehaviour
         
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        // TODO: maybe add some code here to specify what kind of objects can press the button
-        // isPressed = true;
         transform.localScale = Pressedsize;
+        nextLevelDoor.SendMessage("setDoorOpen");
     }
+
+    void OnTriggerStay2D(Collider2D other) 
+    {
+        transform.localScale = Pressedsize;
+        nextLevelDoor.SendMessage("setDoorOpen");
+    }
+
 
     void OnTriggerExit2D(Collider2D other)
     {
         // isPressed = false;
         transform.localScale = size;
+        nextLevelDoor.SendMessage("setDoorClosed");
     }
 }
