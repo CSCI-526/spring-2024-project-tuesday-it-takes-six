@@ -10,18 +10,18 @@ public class PlayerDeath : MonoBehaviour
 
     [SerializeField] private bool died;
 
-    private Transform playerTransform;
+    private Transform playerRBTransform; // PlayerRB, not Player 
 
     private void Start()
     {
         died = false;
         OnPlayerDiedEventTriggered = false;
-        playerTransform = GetComponent<Transform>();
+        playerRBTransform = GetComponent<Transform>().Find("PlayerRB");
     }
 
     private void Update()
     {
-        if (playerTransform.position.y < -10.0f)
+        if (playerRBTransform.position.y < -10.0f)
         {
             died = true;
         }
@@ -30,7 +30,7 @@ public class PlayerDeath : MonoBehaviour
         {
             OnPlayerDiedEventTriggered = true;
             Debug.Log("Player Died! Player stop move! OnPlayerDied.Invoked!");
-            Rigidbody2D playerRigidbody = playerTransform.Find("PlayerRB").GetComponent<Rigidbody2D>();
+            Rigidbody2D playerRigidbody = playerRBTransform.GetComponent<Rigidbody2D>();
             playerRigidbody.bodyType = RigidbodyType2D.Static;
             OnPlayerDied?.Invoke(this, EventArgs.Empty);
         }
