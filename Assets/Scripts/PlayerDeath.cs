@@ -10,7 +10,7 @@ public class PlayerDeath : MonoBehaviour
 
     [SerializeField] private bool died;
 
-    private Transform playerRBTransform; // PlayerRB, not Player 
+    [SerializeField] private Transform playerRBTransform; // Player rigid body, not Player 
 
     private void Start()
     {

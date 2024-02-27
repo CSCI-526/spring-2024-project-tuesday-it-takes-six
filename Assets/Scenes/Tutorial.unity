@@ -506,6 +506,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a1ff7d7fa281c48a65b2aa4b7086c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerRBTransform: {fileID: 1872540780}
+  died: 0
 --- !u!1 &109970516
 GameObject:
   m_ObjectHideFlags: 0
