@@ -1,0 +1,6 @@
+# config linter only for C# files
+[*.cs]
+## Indentation and spacing
+indent_size = 4
+indent_style = space
+tab_width = 4
