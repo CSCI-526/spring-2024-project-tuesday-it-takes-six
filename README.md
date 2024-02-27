@@ -9,5 +9,18 @@
 
 
 ## Code Structures
-// TODO
+### Data Manage
+Codes related to data is under `Assets/Scripts/Data`. `GlobalData` is a static class that store all the global data shared between scenes and scripts.
+
+When adding data in `GlobalData`, please strictly control the access to read and write the data. Updating value by an explicit setter function is strongly recommended. Please DO NOT just make variables public and assign value to it outside `GlobalData` class.
+
+If the logics is too heavy, please create a class to handle the logics. Please keep the `GlobalData` as SHORT as possible.
+
+
+### Utils
+Common util functions should be placed under `Assets/Scripts/Utils.cs`.
+
+
+### Controller
+Every script that needs to be attached to a game object should be in this folder.
 

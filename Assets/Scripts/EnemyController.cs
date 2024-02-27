@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game;
 
 public class EnemyController : MonoBehaviour
 {
@@ -26,7 +27,7 @@ public class EnemyController : MonoBehaviour
 
         if (alive && collider.CompareTag("Player"))
         {
-            string side = DetectCollisionSide(collider);
+            string side = Utils.DetectCollisionSide(gameObject, collider);
 
             // jump on top will kill the enemy
             if (side == "Top")
@@ -59,14 +60,5 @@ public class EnemyController : MonoBehaviour
             transform.parent = GameObject.Find("Common").transform;
     }
 
-    private string DetectCollisionSide(Collider2D collider)
-    {
-        Vector3 dir = (collider.gameObject.transform.position - gameObject.transform.position).normalized;
-        var angle = Vector2.SignedAngle(transform.right, dir);
 
-        if (Mathf.Abs(angle) <= 45) return "Right";
-        if (angle > 45 && angle <= 135) return "Top";
-        if (angle < 45 && angle >= -135) return "Bottom";
-        return "Left";
-    }
 }

@@ -7,6 +7,7 @@ public class EndMenu : MonoBehaviour
 {
     public void ClickRestartButton ()
     {
+        // TODO: read last checkpoint, reload from there
         SceneManager.LoadScene("Tutorial");
     }
 
