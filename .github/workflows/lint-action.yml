@@ -29,6 +29,4 @@ jobs:
         with:
           dotnet_format: true
           auto_fix: true
-          black: true
-          black_auto_fix: true
 
