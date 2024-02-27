@@ -21,8 +21,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        MoveControl();
-        JumpControl();
+        if (!GlobalData.Instance.playerDied)
+        {
+            MoveControl();
+            JumpControl();
+        }
+        
     }
 
     private void MoveControl()

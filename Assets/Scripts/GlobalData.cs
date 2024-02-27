@@ -7,13 +7,14 @@ public class GlobalData : MonoBehaviour
 {
 	public static GlobalData Instance;
 	public TimeTense tt;
-    
 
+	public bool playerDied;
     
 	
 	private void Awake()
 	{
 		Instance = this;
+		this.playerDied = false;
 	}
 
 

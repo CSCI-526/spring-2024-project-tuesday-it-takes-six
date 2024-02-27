@@ -507,7 +507,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRBTransform: {fileID: 1872540780}
-  died: 0
 --- !u!1 &109970516
 GameObject:
   m_ObjectHideFlags: 0
@@ -1695,6 +1694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tt: 0
+  playerDied: 0
 --- !u!1 &1239217940
 GameObject:
   m_ObjectHideFlags: 0
