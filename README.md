@@ -24,3 +24,8 @@ Common util functions should be placed under `Assets/Scripts/Utils.cs`.
 ### Controller
 Every script that needs to be attached to a game object should be in this folder.
 
+### UI Controller
+Every script that needs to be attached to a UI element should be in this folder.
+
+### namespace file
+It is a place for put our game related terms, definitions, data structure and etc.
