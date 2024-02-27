@@ -37,7 +37,10 @@ public class EnemyController : MonoBehaviour
             else
             {
                 // TODO: player will die, show the finish scene
-                Debug.Log("Player died");
+                if (collider.gameObject.transform.parent.TryGetComponent<PlayerDeath>(out PlayerDeath playerDeath)){
+                    Debug.Log("Get death component");
+                    playerDeath.SetDeath(true);
+                }
             }
         }
     }
