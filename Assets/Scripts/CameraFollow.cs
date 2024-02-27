@@ -9,7 +9,7 @@ public class CameraFollow : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     void LateUpdate()

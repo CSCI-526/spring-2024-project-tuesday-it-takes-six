@@ -26,8 +26,8 @@ public class TimePortalController : MonoBehaviour
 
     private void DrawLaser()
     {
-      lineDrawer.SetLineStyle(0.05f, 0.05f, Color.yellow);
-      lineDrawer.DrawLine(lauchStartPoint, lauchStartPoint+rayLength*lauchDirection);
+        lineDrawer.SetLineStyle(0.05f, 0.05f, Color.yellow);
+        lineDrawer.DrawLine(lauchStartPoint, lauchStartPoint+rayLength*lauchDirection);
     }
 
     private void HitDetect()
@@ -81,6 +81,6 @@ public class TimePortalController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

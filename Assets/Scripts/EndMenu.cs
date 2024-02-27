@@ -14,6 +14,4 @@ public class EndMenu : MonoBehaviour
     {
         SceneManager.LoadScene("StartMenu");
     }
-
-  
 }

@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
             MoveControl();
             JumpControl();
         }
-        
     }
 
     private void MoveControl()

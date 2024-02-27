@@ -57,7 +57,6 @@ public class EnemyController : MonoBehaviour
         // if enemy die in the past, its corpse can be used in the present
         if (transform.parent == GameObject.Find("Past").transform)
             transform.parent = GameObject.Find("Common").transform;
-       
     }
 
     private string DetectCollisionSide(Collider2D collider)

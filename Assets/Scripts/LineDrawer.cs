@@ -38,7 +38,7 @@ public class LineDrawer : MonoBehaviour
 
     public void SetLineStyle(float start_width, float end_width, Color c)
     {
-    	lineRenderer.startWidth = start_width;
+        lineRenderer.startWidth = start_width;
         lineRenderer.endWidth = end_width;
         lineRenderer.material.color = c;
     }
@@ -46,6 +46,6 @@ public class LineDrawer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

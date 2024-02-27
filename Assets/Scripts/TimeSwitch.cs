@@ -57,8 +57,5 @@ public class TimeSwitch : MonoBehaviour
         GlobalData.Instance.tt = GlobalData.Instance.tt == TimeTense.PRESENT ? TimeTense.PAST : TimeTense.PRESENT;
 
         changableObjects.BroadcastMessage(changableCalls[label.text]);
-
-        
-
     }
 }

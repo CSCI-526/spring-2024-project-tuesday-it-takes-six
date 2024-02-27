@@ -13,14 +13,14 @@ public class ButtonController : MonoBehaviour
     private GameObject nextLevelDoor;
     void Start()
     {
-   
+
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -30,7 +30,7 @@ public class ButtonController : MonoBehaviour
             nextLevelDoor.SendMessage("setDoorOpen");
     }
 
-    void OnTriggerStay2D(Collider2D other) 
+    void OnTriggerStay2D(Collider2D other)
     {
         transform.localScale = Pressedsize;
         if (GlobalData.Instance.tt == TimeTense.PRESENT)
