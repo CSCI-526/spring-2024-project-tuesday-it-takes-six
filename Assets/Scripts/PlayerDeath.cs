@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Game;
 
 public class PlayerDeath : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class PlayerDeath : MonoBehaviour
 
     private void Start()
     {
-        GlobalData.Instance.playerDied = false;
+        GlobalData.playerDied = false;
         OnPlayerDiedEventTriggered = false;
     }
 
@@ -21,10 +22,10 @@ public class PlayerDeath : MonoBehaviour
     {
         if (playerRBTransform.position.y < -10.0f)
         {
-            GlobalData.Instance.playerDied = true;
+            GlobalData.playerDied = true;
         }
 
-        if (GlobalData.Instance.playerDied && !OnPlayerDiedEventTriggered)
+        if (GlobalData.playerDied && !OnPlayerDiedEventTriggered)
         {
             OnPlayerDiedEventTriggered = true;
             Debug.Log("Player Died! Player stop move! Load End scene in 2 seconds");
@@ -41,11 +42,11 @@ public class PlayerDeath : MonoBehaviour
 
     public void SetDeath(bool died)
     {
-        GlobalData.Instance.playerDied = died;
+        GlobalData.playerDied = died;
     }
 
     public bool GetDeath()
     {
-        return GlobalData.Instance.playerDied;
+        return GlobalData.playerDied;
     }
 }

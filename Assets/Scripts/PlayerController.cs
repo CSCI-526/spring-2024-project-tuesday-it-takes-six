@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!GlobalData.Instance.playerDied)
+        if (!GlobalData.playerDied)
         {
             MoveControl();
             JumpControl();

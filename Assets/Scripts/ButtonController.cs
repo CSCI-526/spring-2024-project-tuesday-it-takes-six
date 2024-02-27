@@ -26,14 +26,14 @@ public class ButtonController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         transform.localScale = Pressedsize;
-        if(GlobalData.Instance.tt == TimeTense.PRESENT)
+        if (GlobalData.TimeTenseData.IsPresent())
             nextLevelDoor.SendMessage("setDoorOpen");
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
         transform.localScale = Pressedsize;
-        if (GlobalData.Instance.tt == TimeTense.PRESENT)
+        if (GlobalData.TimeTenseData.IsPresent())
             nextLevelDoor.SendMessage("setDoorOpen");
     }
 
@@ -42,7 +42,7 @@ public class ButtonController : MonoBehaviour
     {
         // isPressed = false;
         transform.localScale = size;
-        if (GlobalData.Instance.tt == TimeTense.PRESENT)
+        if (GlobalData.TimeTenseData.IsPresent())
             nextLevelDoor.SendMessage("setDoorClosed");
     }
 }
