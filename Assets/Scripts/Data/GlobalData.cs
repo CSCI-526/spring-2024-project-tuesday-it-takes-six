@@ -18,6 +18,6 @@ namespace Game
 
 		public static TimeTenseDataManager TimeTenseData = new TimeTenseDataManager();
 
-		public static bool playerDied;
+		public static bool playerDied = false;
 	}
 }

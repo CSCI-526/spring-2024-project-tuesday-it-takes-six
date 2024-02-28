@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,10 +15,16 @@ public class PlayerController : MonoBehaviour
     public float horizontalInput;
     public Rigidbody2D rb;
 
+    // public event EventHandler OnPlayerDied;  // leave for future in-scene game over screen
+    private bool OnPlayerDiedEventTriggered;
+
     void Start()
     {
         // prevent it from rotating when hitting other objects
         rb.freezeRotation = true;
+
+        GlobalData.playerDied = false;
+        OnPlayerDiedEventTriggered = false;
     }
 
     void Update()
@@ -27,6 +34,8 @@ public class PlayerController : MonoBehaviour
             MoveControl();
             JumpControl();
         }
+
+        DeathCheck();
     }
 
     private void MoveControl()
@@ -53,5 +62,37 @@ public class PlayerController : MonoBehaviour
         {
             rb.gravityScale = FALLING_GRAVITY_SCALE;
         }
+    }
+
+    private void DeathCheck()
+    {
+        if (rb.position.y < -10.0f)
+        {
+            GlobalData.playerDied = true;
+        }
+
+        if (GlobalData.playerDied && !OnPlayerDiedEventTriggered)
+        {
+            OnPlayerDiedEventTriggered = true;
+            Invoke("LoadEndScene", 1.5f);
+            Debug.Log("Player Died! Player stop move! Load End scene in 1.5 seconds.");
+
+            // OnPlayerDied?.Invoke(this, EventArgs.Empty);  // leave for future in-game game over screen
+        }
+    }
+
+    private void LoadEndScene()
+    {
+        SceneManager.LoadScene("EndScene");
+    }
+
+    public void SetDeath(bool died)
+    {
+        GlobalData.playerDied = died;
+    }
+
+    public bool GetDeath()
+    {
+        return GlobalData.playerDied;
     }
 }
