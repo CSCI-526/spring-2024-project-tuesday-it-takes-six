@@ -6,8 +6,6 @@ using Game;
 
 public class TimePortalController : MonoBehaviour, IChangeable
 {
-    [SerializeField]
-    private TMP_Text label;
 
     private LineDrawer lineDrawer;
     private TimeTense currentTime;
@@ -33,9 +31,9 @@ public class TimePortalController : MonoBehaviour, IChangeable
     private void HitDetect()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, lauchDirection, rayLength, 1<<0);
-        if (hit.collider != null && hit.transform.name == "Enemy")
+        if (hit.collider != null && hit.collider.tag == "Enemy")
         {
-            GameObject enemyObj = GameObject.Find("Enemy");
+            GameObject enemyObj = hit.transform.parent.gameObject;
             enemyObj.SendMessage("Die");
         }
     }

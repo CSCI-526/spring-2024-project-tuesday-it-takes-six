@@ -8,6 +8,8 @@ public class LaserLauncherControll : MonoBehaviour
 
     [SerializeField] private Vector3 lauchDirection = new Vector3(1,0,0);
     [SerializeField] private float rayLength = 15.0f;
+    private float rotateAngle = 45.0f;
+
     private LineDrawer lineDrawer;
     // Start is called before the first frame update
     void Start()
@@ -24,13 +26,28 @@ public class LaserLauncherControll : MonoBehaviour
         }
     }
 
+    private bool HitEnemy(RaycastHit2D[] hitObjs, out GameObject bodyObj)
+    {
+        bodyObj = null;
+        foreach (RaycastHit2D hitObj in hitObjs)
+        {
+            if (hitObj.collider.tag == "Enemy")
+            {
+                bodyObj = hitObj.collider.transform.parent.gameObject;
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void HitDetect()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, lauchDirection, rayLength, 1<<0);
-        if (hit.collider != null && hit.transform.name == "Enemy")
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, lauchDirection, rayLength, 1<<0);
+        GameObject bodyObj;
+        if (HitEnemy(hits, out bodyObj))
         {
-            GameObject enemyObj = GameObject.Find("Enemy");
-            enemyObj.SendMessage("Die");
+            // Debug.Log("Hit one enemy ");
+            bodyObj.SendMessage("Die");
         }
         else
         {

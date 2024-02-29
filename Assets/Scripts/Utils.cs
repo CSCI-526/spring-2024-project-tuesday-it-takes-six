@@ -64,5 +64,11 @@ namespace Game
 
             return false;
         }
+
+        public static Vector3 RotateRound(Vector3 position, Vector3 center, Vector3 axis, float angle)
+        {
+            return Quaternion.AngleAxis(angle, axis) * (position - center) + center;
+        }
+
     }
 }

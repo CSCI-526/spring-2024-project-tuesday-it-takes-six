@@ -70,7 +70,7 @@ public class EnemyController : MonoBehaviour
 
         // corpse is already pushable since it is an rigid body
         // if enemy die in the past, its corpse can be used in the present
-        if (transform.parent == GameObject.Find("Past").transform)
+        if (transform.parent.name == "Past")
             transform.parent = GameObject.Find("Common").transform;
 
         return true;
