@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
-    public const float MOVE_SPEED = 15;
-    public const float JUMP_SPEED = 50;
-    public const float GRAVITY_SCALE = 10;
+    public const float MOVE_SPEED = 8;
+    public const float JUMP_SPEED = 45;
+    public const float GRAVITY_SCALE = 8;
     public const float FALLING_GRAVITY_SCALE = 12;
     public const double EPS = 1e-4;
 
@@ -25,6 +25,10 @@ public class PlayerController : MonoBehaviour
 
         GlobalData.playerDied = false;
         OnPlayerDiedEventTriggered = false;
+
+        if(GlobalData.HasReachedCheckpoint){
+            transform.position = GlobalData.LastCheckpointPosition;
+        }
     }
 
     void Update()
@@ -74,12 +78,15 @@ public class PlayerController : MonoBehaviour
         if (GlobalData.playerDied && !OnPlayerDiedEventTriggered)
         {
             OnPlayerDiedEventTriggered = true;
+            //Store the Scene Name to allow Restart to re-load the scene
+            GlobalData.CurrentSceneName = SceneManager.GetActiveScene().name;
             Invoke("LoadEndScene", 1.5f);
             Debug.Log("Player Died! Player stop move! Load End scene in 1.5 seconds.");
 
             // OnPlayerDied?.Invoke(this, EventArgs.Empty);  // leave for future in-game game over screen
         }
     }
+
 
     private void LoadEndScene()
     {

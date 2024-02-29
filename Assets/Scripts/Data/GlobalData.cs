@@ -19,5 +19,32 @@ namespace Game
 		public static TimeTenseDataManager TimeTenseData = new TimeTenseDataManager();
 
 		public static bool playerDied = false;
+
+		private static bool _hasReachedCheckpoint = false;
+		private static Vector2 _lastCheckpointPosition;
+
+		private static string _currentSceneName = "";
+
+	
+        public static string CurrentSceneName
+        {
+            get { return _currentSceneName; }
+            set { _currentSceneName = value; }
+        }
+
+
+		// Public accessor for hasReachedCheckpoint
+        public static bool HasReachedCheckpoint
+        {
+            get { return _hasReachedCheckpoint; }
+            set { _hasReachedCheckpoint = value; }
+        }
+
+		// Public accessor for lastCheckpointPosition
+        public static Vector2 LastCheckpointPosition
+        {
+            get { return _lastCheckpointPosition; }
+            set { _lastCheckpointPosition = value; }
+        }
 	}
 }
