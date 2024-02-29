@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using Game;
 
-public class TimePortalController : MonoBehaviour
+public class TimePortalController : MonoBehaviour, IChangeable
 {
     [SerializeField]
     private TMP_Text label;

@@ -13,7 +13,10 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         alive = true;
-        corpse.SetActive(false);
+        body.SetActive(alive);
+        corpse.SetActive(!alive);
+
+        GetComponent<Rigidbody2D>().freezeRotation = true;
     }
 
     void Update()
@@ -29,6 +32,7 @@ public class EnemyController : MonoBehaviour
         if (alive && collider.CompareTag("Player"))
         {
             string side = Utils.DetectCollisionSide(gameObject, collider);
+            Debug.Log($"Collide on side: {side}");
 
             // jump on top will kill the enemy
             if (side == "Top")
@@ -51,20 +55,25 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    public void Die()
+    protected bool Die()
     {
-        // Enemy already died, no need to die again
-        if (!alive) return;
+        // if enemy already died, no need to die again
+        if (!alive)
+        {
+            Debug.LogWarning("Enemy.Die() not triggered because enemy already died");
+            return false;
+        }
 
         alive = false;
-        Destroy(body);
+        body.SetActive(alive);
+        corpse.SetActive(!alive);
 
         // corpse is already pushable since it is an rigid body
-        corpse.SetActive(true);
         // if enemy die in the past, its corpse can be used in the present
-        Debug.Log(transform.parent);
         if (transform.parent == GameObject.Find("Past").transform)
             transform.parent = GameObject.Find("Common").transform;
+
+        return true;
     }
 
 }
