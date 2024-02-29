@@ -21,8 +21,11 @@ public class CheckPointController : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Check point!");
-            // TODO: save progress, load next scene
+            // get current check point id
+            int id = GetInstanceID();
+
+            // TODO: save progress by check point id. If player died later, revive the player to the last checkpoint
+            Debug.Log($"Just past a check point with id #{id}");
         }
     }
 }
