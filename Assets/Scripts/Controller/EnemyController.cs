@@ -10,6 +10,9 @@ public class EnemyController : MonoBehaviour
     public GameObject body;
     public GameObject corpse;
 
+    // time portal that may interat with the enemy
+    [SerializeField] private GameObject timePortal;
+
     void Start()
     {
         alive = true;
@@ -19,9 +22,25 @@ public class EnemyController : MonoBehaviour
         GetComponent<Rigidbody2D>().freezeRotation = true;
     }
 
+    private void CheckPortalTransfer()
+    {
+        if (timePortal != null && !alive)
+        {
+            if (Mathf.Abs(corpse.transform.position[0] - timePortal.transform.position[0]) < 0.1f)
+            {
+                Debug.Log("corpse enter the time portal");
+                // only transfer present corpse
+                if (transform.parent.name == "Present")
+                {
+                    transform.parent = GameObject.Find("Common").transform;
+                }
+            }
+        }
+    }
+
     void Update()
     {
-
+        CheckPortalTransfer();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -53,6 +72,8 @@ public class EnemyController : MonoBehaviour
                 }
             }
         }
+
+        
     }
 
     protected bool Die()
