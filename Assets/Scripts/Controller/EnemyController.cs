@@ -72,12 +72,11 @@ public class EnemyController : MonoBehaviour
                 }
             }
         }
-
-        
     }
 
-    protected bool Die()
+    protected virtual bool Die()
     {
+        Debug.Log("Enemy Die: old school version");
         // if enemy already died, no need to die again
         if (!alive)
         {
@@ -96,5 +95,4 @@ public class EnemyController : MonoBehaviour
 
         return true;
     }
-
 }
