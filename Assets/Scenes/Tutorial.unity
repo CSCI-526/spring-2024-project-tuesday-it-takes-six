@@ -415,7 +415,7 @@ MonoBehaviour:
   label: {fileID: 1470460374}
   presentObjects: {fileID: 193968907}
   pastObjects: {fileID: 319989201}
-  changableObjects: {fileID: 400860110}
+  ChangeableObjects: {fileID: 0}
 --- !u!1 &66175972
 GameObject:
   m_ObjectHideFlags: 0
@@ -1464,7 +1464,7 @@ GameObject:
   m_Component:
   - component: {fileID: 400860111}
   m_Layer: 0
-  m_Name: Changable
+  m_Name: Changeable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4608,6 +4608,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4fbf58cbf81141eabc9f175dea23884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lauchDirection: {x: 1, y: 0, z: 0}
+  rayLength: 15
 --- !u!1 &1974557046
 GameObject:
   m_ObjectHideFlags: 0

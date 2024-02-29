@@ -10,7 +10,7 @@ public class TimeSwitch : MonoBehaviour
     [SerializeField]
     private TMP_Text label;
 
-    private static readonly Dictionary<TimeTense, string> changableCalls = new Dictionary<TimeTense, string>()
+    private static readonly Dictionary<TimeTense, string> ChangeableCalls = new Dictionary<TimeTense, string>()
     {
         { TimeTense.PRESENT, "OnPresent" },
         { TimeTense.PAST, "OnPast" }
@@ -18,7 +18,7 @@ public class TimeSwitch : MonoBehaviour
 
     public GameObject presentObjects;
     public GameObject pastObjects;
-    public GameObject changableObjects;
+    public GameObject ChangeableObjects;
 
     void Start()
     {
@@ -44,7 +44,7 @@ public class TimeSwitch : MonoBehaviour
         pastObjects.SetActive(GlobalData.TimeTenseData.IsPast());
         presentObjects.SetActive(GlobalData.TimeTenseData.IsPresent());
 
-        changableObjects.BroadcastMessage(changableCalls[GlobalData.TimeTenseData.GetTimeTense()]);
+        ChangeableObjects.BroadcastMessage(ChangeableCalls[GlobalData.TimeTenseData.GetTimeTense()]);
 
         // update text
         label.text = GlobalData.TimeTenseData.GetDisplayText();

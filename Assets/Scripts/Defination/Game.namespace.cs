@@ -20,13 +20,4 @@ namespace Game
         // our customized keystrokes, in "edit" - "setting" - "input manager"
         public const string TIME_SWITCH = "Q";
     }
-
-    /// <summary>
-    /// Every changeable objects must implement this interface
-    /// </summary>
-    interface IChangeableObject
-    {
-        void OnPast();
-        void OnPresent();
-    }
 }
