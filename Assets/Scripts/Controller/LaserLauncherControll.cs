@@ -6,16 +6,12 @@ using Game;
 public class LaserLauncherControll : MonoBehaviour
 {
 
-    private Vector3 lauchDirection = new Vector3(1,0,0);
-    private float rayLength = 15.0f;
+    [SerializeField] private Vector3 lauchDirection = new Vector3(1,0,0);
+    [SerializeField] private float rayLength = 15.0f;
     private LineDrawer lineDrawer;
     // Start is called before the first frame update
     void Start()
     {
-        // Note: delete this when it is available to modify the scene!
-        transform.localScale = new Vector3(1,1,1);
-        transform.position = new Vector3(39, (float) 0.5, 0);
-
         Physics2D.queriesStartInColliders = false;
         lineDrawer = GetComponent<LineDrawer>();
         if (lineDrawer == null)
