@@ -14,6 +14,26 @@ public class EnemyPatrol : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (leftEnd == null)
+        {
+            Debug.LogError("Left end for enemy patrol is missing!");
+        }
+
+        if (rightEnd == null)
+        {
+            Debug.LogError("Right end for enemy patrol is missing!");
+        }
+
+        if (leftEnd.transform.position.x > transform.position.x )
+        {
+            Debug.LogError("Check left end position. Left patrol end has to be on the left of enemy default position!");
+        }
+
+        if (rightEnd.transform.position.x < transform.position.x)
+        {
+            Debug.LogError("Check right end position. Right patrol end has to be on the right of enemy default position");
+        }
+
         rigidBody = GetComponent<Rigidbody2D>();
         currentTarget = rightEnd.transform;
     }
