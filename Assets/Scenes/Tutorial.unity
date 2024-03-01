@@ -347,7 +347,6 @@ GameObject:
   m_Component:
   - component: {fileID: 40806927}
   - component: {fileID: 40806926}
-  - component: {fileID: 40806928}
   - component: {fileID: 40806929}
   m_Layer: 0
   m_Name: Player
@@ -386,20 +385,6 @@ Transform:
   - {fileID: 1872540780}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &40806928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 40806925}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 967e2e7b56965453a917f2003e445956, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  t: {fileID: 109970518}
-  player: {fileID: 40806925}
 --- !u!114 &40806929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,6 +496,7 @@ GameObject:
   - component: {fileID: 109970517}
   - component: {fileID: 109970519}
   - component: {fileID: 109970518}
+  - component: {fileID: 109970520}
   m_Layer: 5
   m_Name: TutorialInstruction
   m_TagString: Untagged
@@ -636,6 +622,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 109970516}
   m_CullTransparentMesh: 1
+--- !u!114 &109970520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109970516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 967e2e7b56965453a917f2003e445956, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  t: {fileID: 109970518}
+  player: {fileID: 40806925}
+  objects:
+  - {fileID: 395305513}
 --- !u!1 &117948781
 GameObject:
   m_ObjectHideFlags: 0
@@ -911,7 +913,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 40806925}
   rightBoundary: {fileID: 270433560}
-  rightmostPosition: 0
 --- !u!1 &193968907
 GameObject:
   m_ObjectHideFlags: 0
@@ -1726,7 +1727,7 @@ Transform:
   m_GameObject: {fileID: 507825330}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 41.5, y: 5.1, z: 0}
+  m_LocalPosition: {x: 39.5, y: 5.1, z: 0}
   m_LocalScale: {x: 0.3, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2496,7 +2497,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0

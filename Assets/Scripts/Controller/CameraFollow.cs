@@ -5,11 +5,12 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField]
-    public GameObject player;
+    private GameObject player;
 
-    public GameObject rightBoundary;
+    [SerializeField]
+    private GameObject rightBoundary;
 
-    public float rightmostPosition;
+    private float rightmostPosition;
 
     void Start()
     {

@@ -8,8 +8,11 @@ public class EnemyController : MonoBehaviour
 {
     private bool alive;
 
-    public GameObject body;
-    public GameObject corpse;
+    [SerializeField]
+    private GameObject body;
+
+    [SerializeField]
+    private GameObject corpse;
 
     // time portal that may interat with the enemy
     [SerializeField] private GameObject timePortal;
@@ -77,14 +80,12 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    protected virtual bool Die()
+    private void Die()
     {
-        Debug.Log("Enemy Die: old school version");
         // if enemy already died, no need to die again
         if (!alive)
         {
             Debug.LogWarning("Enemy.Die() not triggered because enemy already died");
-            return false;
         }
 
         alive = false;
@@ -95,7 +96,10 @@ public class EnemyController : MonoBehaviour
         // if enemy die in the past, its corpse can be used in the present
         if (transform.parent.name == "Past")
             transform.parent = GameObject.Find("Common").transform;
+    }
 
-        return true;
+    public bool IsAlive()
+    {
+        return alive;
     }
 }
