@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game;
+using UnityEngine.UIElements;
 
 public class EnemyController : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class EnemyController : MonoBehaviour
 
     // time portal that may interat with the enemy
     [SerializeField] private GameObject timePortal;
+
+    
 
     void Start()
     {
@@ -68,7 +71,7 @@ public class EnemyController : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogError("Player gameobject do not have a PlayerController script attached!");
+                    Debug.LogError("collider's parent do not have a PlayerController script attached!");
                 }
             }
         }
