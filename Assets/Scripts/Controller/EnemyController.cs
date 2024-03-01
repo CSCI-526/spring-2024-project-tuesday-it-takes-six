@@ -32,14 +32,16 @@ public class EnemyController : MonoBehaviour
     {
         if (timePortal != null && !alive)
         {
-            if (Mathf.Abs(corpse.transform.position[0] - timePortal.transform.position[0]) < 0.1f)
+            if (Mathf.Abs(corpse.transform.position[0] - (timePortal.transform.position[0] + 0.2f)) < 0.1f)
             {
                 Debug.Log("corpse enter the time portal");
-                // only transfer present corpse
+                // only transfer present corpse ?
                 if (transform.parent.name == "Present")
                 {
-                    transform.parent = GameObject.Find("Common").transform;
+                    this.gameObject.SetActive(false);
+                    transform.parent = GameObject.Find("Past").transform;
                 }
+
             }
         }
     }

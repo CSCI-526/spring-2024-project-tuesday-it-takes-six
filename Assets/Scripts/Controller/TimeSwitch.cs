@@ -22,7 +22,13 @@ public class TimeSwitch : MonoBehaviour
 
     void Start()
     {
-        pastObjects.SetActive(false);
+        pastObjects.SetActive(true);
+        foreach (Transform pastTransform in pastObjects.transform)
+        {
+            GameObject pastObj = pastTransform.gameObject;
+            pastObj.SetActive(false);
+        }
+
         presentObjects.SetActive(true);
         label.text = "Present";
     }
@@ -41,8 +47,19 @@ public class TimeSwitch : MonoBehaviour
         GlobalData.TimeTenseData.SwitchTimeTense();
 
         // update object groups
-        pastObjects.SetActive(GlobalData.TimeTenseData.IsPast());
-        presentObjects.SetActive(GlobalData.TimeTenseData.IsPresent());
+        // pastObjects.SetActive(GlobalData.TimeTenseData.IsPast());
+        // presentObjects.SetActive(GlobalData.TimeTenseData.IsPresent());
+        foreach (Transform pastTransform in pastObjects.transform)
+        {
+            GameObject pastObj = pastTransform.gameObject;
+            pastObj.SetActive(GlobalData.TimeTenseData.IsPast());
+        }
+
+        foreach (Transform presentTransform in presentObjects.transform)
+        {
+            GameObject presentObj = presentTransform.gameObject;
+            presentObj.SetActive(GlobalData.TimeTenseData.IsPresent());
+        }
 
         ChangeableObjects.BroadcastMessage(ChangeableCalls[GlobalData.TimeTenseData.GetTimeTense()]);
 
