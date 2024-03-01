@@ -27,12 +27,11 @@ public class TutorialInstruction : MonoBehaviour
         (20, $"Press {KeyMapping.TIME_SWITCH} to switch time"),
         (28, "Jump on enemies to kill them"),
         // idx = 4
-        (-1, "Now try to push the corpse of the enemy through the time portal"),
-        // idx = 5
-        (-1, "Now try to push the corpse of the enemy"),
+        (-1, "Push the corpse through the time portal"),
+        (40, "Push the corpse towards the spikes and jump on it"),
+        (50, "Switch to present, you can see a laser launcher.\nThe laser can kill EVERYONE including you"),
+        (68, "Pass the green door to reach next level")
     };
-
-    // private Dictionary<int, int> EVENT_MAPPING = {}
 
     void Start()
     {
