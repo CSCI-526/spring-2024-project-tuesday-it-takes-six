@@ -7,9 +7,11 @@ public class EnemyPatrol : MonoBehaviour
     // used for enemy patrol
     public GameObject leftEnd;
     public GameObject rightEnd;
+    public float speed;
+
     private Rigidbody2D rigidBody;
     private Transform currentTarget; // current left/right point that the enemy is approaching to
-    public float speed;
+    private EnemyController enemyController;
 
     // Start is called before the first frame update
     void Start()
@@ -35,13 +37,29 @@ public class EnemyPatrol : MonoBehaviour
         }
 
         rigidBody = GetComponent<Rigidbody2D>();
+        enemyController = GetComponent<EnemyController>();
+
         currentTarget = rightEnd.transform;
+        rigidBody.velocity = new Vector2(speed, 0);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        // decide which end point is moving to and change velocity
+        if (enemyController.IsAlive())
+        {
+            PatrolUpdate();
+        }
+        else
+        {
+            this.enabled = false;
+        }
+    }
+
+    void PatrolUpdate()
+    {
+        // keep assigning velocity for constant move
         if (currentTarget == rightEnd.transform)
         {
             rigidBody.velocity = new Vector2(speed, 0);
@@ -49,20 +67,20 @@ public class EnemyPatrol : MonoBehaviour
         else
         {
             rigidBody.velocity = new Vector2(-speed, 0);
+
         }
 
-        // decide if switch direction
-        if (Vector2.Distance(transform.position, currentTarget.position) < 0.5f
-            &&
-            currentTarget == rightEnd.transform)
+        // change move target
+        if (Vector2.Distance(transform.position, currentTarget.position) < 0.5f)
         {
-            currentTarget = leftEnd.transform;
-        }
-        else if (Vector2.Distance(transform.position, currentTarget.position) < 0.5f
-                  &&
-                 currentTarget == leftEnd.transform)
-        {
-            currentTarget = rightEnd.transform;
+            if (currentTarget == leftEnd.transform)
+            {
+                currentTarget = rightEnd.transform;
+            }
+            else
+            {
+                currentTarget = leftEnd.transform;
+            }
         }
     }
 
