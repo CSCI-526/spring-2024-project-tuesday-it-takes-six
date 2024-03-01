@@ -17,8 +17,6 @@ public class EnemyController : MonoBehaviour
     // time portal that may interat with the enemy
     [SerializeField] private GameObject timePortal;
 
-    
-
     void Start()
     {
         alive = true;
