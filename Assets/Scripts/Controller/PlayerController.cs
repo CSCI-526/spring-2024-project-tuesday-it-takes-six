@@ -44,9 +44,8 @@ public class PlayerController : MonoBehaviour
 
     private void MoveControl()
     {
-        // deal with left/right arrows
         horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.right * Time.deltaTime * MOVE_SPEED * horizontalInput);
+        rb.velocity = new Vector3(horizontalInput * MOVE_SPEED, rb.velocity.y, 0);
     }
 
     private void JumpControl()

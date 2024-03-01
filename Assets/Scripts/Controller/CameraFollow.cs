@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField]
-    private GameObject player;
+    private GameObject playerRB;
 
     [SerializeField]
     private GameObject rightBoundary;
@@ -21,9 +21,9 @@ public class CameraFollow : MonoBehaviour
     {
         // only follow x and z, make y a constant for better view
         transform.position = new Vector3(
-            Mathf.Min(player.transform.position.x + 2, rightmostPosition),
+            Mathf.Min(playerRB.transform.position.x + 2, rightmostPosition),
             3,
-            player.transform.position.z - 1
+            playerRB.transform.position.z - 1
         );
     }
 }

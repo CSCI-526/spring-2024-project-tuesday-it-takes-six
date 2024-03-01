@@ -911,7 +911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d7a581ef6b614f85b3536425078259b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 40806925}
+  playerRB: {fileID: 1872540777}
   rightBoundary: {fileID: 270433560}
 --- !u!1 &193968907
 GameObject:
