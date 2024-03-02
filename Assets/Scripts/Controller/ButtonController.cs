@@ -7,7 +7,9 @@ public class ButtonController : MonoBehaviour
 {
     // Start is called before the first frame update
     // private bool isPressed = false;
+    [SerializeField]
     private Vector3 size = new Vector3(0.8120f, 0.1636081f);
+    [SerializeField]
     private Vector3 Pressedsize = new Vector3(0.8120f, 0.036081f);
     [SerializeField]
     private GameObject nextLevelDoor;
@@ -23,26 +25,34 @@ public class ButtonController : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
+        
         transform.localScale = Pressedsize;
         if (GlobalData.TimeTenseData.IsPresent())
             nextLevelDoor.SendMessage("setDoorOpen");
+        
+        
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D collider)
     {
+
         transform.localScale = Pressedsize;
         if (GlobalData.TimeTenseData.IsPresent())
             nextLevelDoor.SendMessage("setDoorOpen");
+
     }
 
 
-    void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D collider)
     {
         // isPressed = false;
+       
         transform.localScale = size;
         if (GlobalData.TimeTenseData.IsPresent())
             nextLevelDoor.SendMessage("setDoorClosed");
+        
+        
     }
 }

@@ -24,7 +24,6 @@ public class SpeedTriggerController : MonoBehaviour
     // So far the speed trigger is only applied to enemy corpse
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        GameObject enterObject = collider.gameObject;
         if (collider.CompareTag("Corpse"))
         {
             Debug.Log("Speed Trigger: An Enemy Corpse enter a speed trigger zoom");
@@ -54,8 +53,9 @@ public class SpeedTriggerController : MonoBehaviour
         foreach (GameObject o in Objects)
         {
             o.transform.parent.gameObject.GetComponent<Rigidbody2D>().velocity = Velocity;
+            /*o.transform.gameObject.GetComponent<Rigidbody2D>().velocity = Velocity;*/
         }
-        
-        
+
+
     }
 }
