@@ -29,7 +29,7 @@ public class TutorialInstruction : MonoBehaviour
         // idx = 4
         (-1, "Push the corpse through the time portal"),
         (40, "Push the corpse towards the spikes and jump on it"),
-        (50, $"Switch to present, you can see a laser launcher.\nThe laser can kill EVERYONE including you. \n Press {KeyMapping.LASER_ROTATE} to rotate the laser."),
+        (58, $"Switch to present, you can see a laser launcher.\nThe laser can kill EVERYONE including you. \n Go close and press {KeyMapping.LASER_ROTATE} to rotate the laser."),
         (68, "Pass the green door to reach next level")
     };
 
