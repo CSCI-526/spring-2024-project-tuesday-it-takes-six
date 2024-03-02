@@ -31,39 +31,6 @@ public class LaserLauncherControll : MonoBehaviour
         }
     }
 
-    private bool HitTimePortal(out HitInfo hitInfo)
-    {
-        hitInfo.hitDistance = 1000.0f;
-        hitInfo.hitObj = null;
-        hitInfo.hitPoint = new Vector3();
-        bool hitFlag = false;
-        foreach (GameObject portalObj in timePortals)
-        {
-            Vector3 portalHeight = new Vector3(0, 1.0f, 0); // better to read from portalObj
-
-            Vector3 laserStart = transform.position;
-            Vector3 laserEnd = transform.position+rayLength*lauchDirection;
-            Vector3 portalStart = portalObj.transform.position + portalHeight;
-            Vector3 portalEnd = portalObj.transform.position - portalHeight;
-
-            Vector3 intersectPos;
-            bool isIntersect = Utils.IsSegmentsIntersect(laserStart, laserEnd, portalStart, portalEnd, out intersectPos);
-            if (isIntersect)
-            {
-                hitFlag = true;
-                // Debug.Log("laser collide portal");
-                float currentDistance = Mathf.Sqrt((transform.position - intersectPos).sqrMagnitude);
-                if (currentDistance < hitInfo.hitDistance)
-                {
-                    hitInfo.hitObj = portalObj;
-                    hitInfo.hitDistance = currentDistance;
-                    hitInfo.hitPoint = intersectPos;
-                }
-            }
-        }
-        return hitFlag;
-    }
-
     private bool HitPhysicalObject(out HitInfo hitInfo)
     {
         hitInfo.hitDistance = 1000.0f;
@@ -94,58 +61,59 @@ public class LaserLauncherControll : MonoBehaviour
         return true; 
     }
 
+    private void ClearPortalLaser()
+    {
+        foreach (GameObject portalObj in timePortals)
+        {
+            portalObj.SendMessage("LaserGone");
+        }
+    }
+
     private void HitDetect()
     {
-        HitInfo hitPortalInfo = new HitInfo();
         HitInfo hitPhysicalInfo = new HitInfo();
-        bool hitWithPortal = HitTimePortal(out hitPortalInfo);
         bool hitWithPhysicalObj = HitPhysicalObject(out hitPhysicalInfo);
-        Dictionary<string, HitInfo> hitCollection = new Dictionary<string, HitInfo>()
-        {
-            { "Portal", hitPortalInfo },
-            { "Physical", hitPhysicalInfo }
-        };
 
-        if (hitWithPortal || hitWithPhysicalObj)
+        if (hitWithPhysicalObj)
         {
-            string hitKey = (hitCollection["Portal"].hitDistance < hitCollection["Physical"].hitDistance) ? "Portal" : "Physical";
-            
-            DrawLaser(hitCollection[hitKey].hitPoint);
-            switch (hitCollection[hitKey].hitObj.tag)
+            DrawLaser(hitPhysicalInfo.hitPoint);
+            switch (hitPhysicalInfo.hitObj.tag)
             {
-                case "Enemy":
-                {
-                    // Debug.Log("Laser hit Enemy");
-                    Debug.Log(hitCollection[hitKey].hitObj.name);
-                    // TODO: why the collider box of Enemy is smaller than body
-                    hitCollection[hitKey].hitObj.transform.parent.gameObject.SendMessage("Die");
-                    break;
-                }
                 case "Portal":
                 {
                     // Debug.Log("Laser hit Time Portal");
                     object[] para = new object[3];
                     para[0] = lauchDirection;
-                    para[1] = rayLength - hitCollection[hitKey].hitDistance;
-                    para[2] = hitCollection[hitKey].hitPoint;
-                    hitCollection[hitKey].hitObj.SendMessage("TransferLaser", para, SendMessageOptions.RequireReceiver);
+                    para[1] = rayLength - hitPhysicalInfo.hitDistance;
+                    para[2] = hitPhysicalInfo.hitPoint;
+                    hitPhysicalInfo.hitObj.SendMessage("TransferLaser", para, SendMessageOptions.RequireReceiver);
+                    break;
+                }
+                case "Enemy":
+                {
+                    // Debug.Log("Laser hit Enemy");
+                    Debug.Log(hitPhysicalInfo.hitObj.name);
+                    hitPhysicalInfo.hitObj.transform.parent.gameObject.SendMessage("Die");
+                    ClearPortalLaser();
                     break;
                 }
                 case "Player":
                 {
-                    // Debug.Log("Laser hit Player");
                     // kill player, it is the PlayerRB be hit
-                    hitCollection[hitKey].hitObj.transform.parent.gameObject.SendMessage("SetDeath", true);
+                    hitPhysicalInfo.hitObj.transform.parent.gameObject.SendMessage("SetDeath", true);
+                    ClearPortalLaser();
                     break;
                 }
                 default:
                 {
+                    ClearPortalLaser();
                     break;
                 }
             }
         }
         else
         {
+            ClearPortalLaser();
             DrawLaser(transform.position+rayLength*lauchDirection);
         }
 

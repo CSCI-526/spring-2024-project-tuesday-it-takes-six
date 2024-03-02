@@ -22,6 +22,22 @@ public class TimePortalController : MonoBehaviour, IChangeable
         lineDrawer = GetComponent<LineDrawer>();
     }
 
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+
+        if (other.CompareTag("Corpse"))
+        {
+            GameObject enemyObj = other.transform.parent.gameObject;
+            if (enemyObj.transform.parent.name == "Present")
+            {
+                Debug.Log(enemyObj.transform.parent.name);
+                enemyObj.transform.position = new Vector3(enemyObj.transform.position.x+1.0f, enemyObj.transform.position.y, 0.0f);
+                enemyObj.gameObject.SetActive(false);
+                enemyObj.transform.parent = GameObject.Find("Past").transform;
+            }
+        }
+    }
+
     private void DrawLaser()
     {
         lineDrawer.SetLineStyle(0.05f, 0.05f, Color.yellow);
@@ -45,6 +61,13 @@ public class TimePortalController : MonoBehaviour, IChangeable
         lauchDirection = (Vector3) drawInfo[0];
         rayLength = (float) drawInfo[1];
         lauchStartPoint = (Vector3) drawInfo[2];
+    }
+
+    public void LaserGone()
+    {
+        Debug.Log("LaserGone");
+        lineDrawer.ClearLine();
+        rayLength = -1.0f;
     }
 
 

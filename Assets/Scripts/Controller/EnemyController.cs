@@ -26,27 +26,9 @@ public class EnemyController : MonoBehaviour
         GetComponent<Rigidbody2D>().freezeRotation = true;
     }
 
-    private void CheckPortalTransfer()
-    {
-        if (timePortal != null && !alive)
-        {
-            if (Mathf.Abs(corpse.transform.position[0] - (timePortal.transform.position[0] + 0.2f)) < 0.1f)
-            {
-                Debug.Log("corpse enter the time portal");
-                // only transfer present corpse ?
-                if (transform.parent.name == "Present")
-                {
-                    this.gameObject.SetActive(false);
-                    transform.parent = GameObject.Find("Past").transform;
-                }
-
-            }
-        }
-    }
-
     void Update()
     {
-        CheckPortalTransfer();
+
     }
 
     void OnCollisionEnter2D(Collision2D collision)
