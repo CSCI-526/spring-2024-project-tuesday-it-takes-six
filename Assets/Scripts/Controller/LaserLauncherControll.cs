@@ -69,14 +69,25 @@ public class LaserLauncherControll : MonoBehaviour
         hitInfo.hitDistance = 1000.0f;
         hitInfo.hitObj = null;
         hitInfo.hitPoint = new Vector3();
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, lauchDirection, rayLength, 1<<0);
-        if (!hit)
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, lauchDirection, rayLength, 1<<0);
+        if (hits.Length==0)
         {
             return false;
         }
-        
         // Debug.Log(hit.collider.transform.name);
         // Debug.Log(hit.point);
+        RaycastHit2D hit = hits[0];
+        if (hit.collider.tag == "Checkpoint")
+        {
+            if (hits.Length > 1)
+            {
+                hit = hits[1];
+            }
+            else
+            {
+                return false;
+            }
+        }
         hitInfo.hitObj = hit.collider.gameObject;
         hitInfo.hitPoint = new Vector3(hit.point.x, hit.point.y, 0);
         hitInfo.hitDistance = Mathf.Sqrt((transform.position - hitInfo.hitPoint).sqrMagnitude);
@@ -99,6 +110,7 @@ public class LaserLauncherControll : MonoBehaviour
         {
             string hitKey = (hitCollection["Portal"].hitDistance < hitCollection["Physical"].hitDistance) ? "Portal" : "Physical";
             
+            DrawLaser(hitCollection[hitKey].hitPoint);
             switch (hitCollection[hitKey].hitObj.tag)
             {
                 case "Enemy":
@@ -107,7 +119,6 @@ public class LaserLauncherControll : MonoBehaviour
                     Debug.Log(hitCollection[hitKey].hitObj.name);
                     // TODO: why the collider box of Enemy is smaller than body
                     hitCollection[hitKey].hitObj.transform.parent.gameObject.SendMessage("Die");
-                    DrawLaser(hitCollection[hitKey].hitPoint);
                     break;
                 }
                 case "Portal":
@@ -118,24 +129,17 @@ public class LaserLauncherControll : MonoBehaviour
                     para[1] = rayLength - hitCollection[hitKey].hitDistance;
                     para[2] = hitCollection[hitKey].hitPoint;
                     hitCollection[hitKey].hitObj.SendMessage("TransferLaser", para, SendMessageOptions.RequireReceiver);
-                    DrawLaser(hitCollection[hitKey].hitPoint);
                     break;
                 }
                 case "Player":
                 {
                     // Debug.Log("Laser hit Player");
-                    // TODO: kill player
-                    DrawLaser(hitCollection[hitKey].hitPoint);
-                    break;
-                }
-                case "CheckPoint":
-                {
-                    // TODO: ignore the checkpoints;
+                    // kill player, it is the PlayerRB be hit
+                    hitCollection[hitKey].hitObj.transform.parent.gameObject.SendMessage("SetDeath", true);
                     break;
                 }
                 default:
                 {
-                    DrawLaser(hitCollection[hitKey].hitPoint);
                     break;
                 }
             }
@@ -153,13 +157,20 @@ public class LaserLauncherControll : MonoBehaviour
         lineDrawer.DrawLine(transform.position, destination);
     }
 
+    private bool PlayerIsClose()
+    {
+        GameObject player = GameObject.Find("PlayerRB");
+        Vector3 playerPos = player.transform.position;
+        float distance = Vector3.Distance(playerPos, transform.position);
+        return (distance <= 2.0f);
+    }
+
     private void DetectRotate()
     {
-        if (Input.GetButtonDown("LaserRotate"))
+        if (PlayerIsClose() && Input.GetButtonDown("LaserRotate"))
         {
             lauchDirection = Utils.RotateRound(lauchDirection, new Vector3(0, 0, 0), Vector3.forward, rotateAngle);
         }
-        // TODO: rotate clockwise
     }
 
     // Update is called once per frame
