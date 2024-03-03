@@ -702,11 +702,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 40535ae4-0d0c-4cbd-886a-72dcfd86e158
+  cloudProjectId: 1da907fe-444a-4206-b97e-27d60b7cc15c
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: It takes six
-  organizationId: yzhou075
+  organizationId: ashukla23
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
