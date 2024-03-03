@@ -88,8 +88,8 @@ public class PlayerController : MonoBehaviour
             OnPlayerDiedEventTriggered = true;
             //Store the Scene Name to allow Restart to re-load the scene
             GlobalData.CurrentSceneName = SceneManager.GetActiveScene().name;
-            Invoke("LoadEndScene", 1.5f);
-            Debug.Log("Player Died! Player stop move! Load End scene in 1.5 seconds.");
+            Invoke("LoadEndScene", 0.6f);
+            Debug.Log("Player Died! Player stop move! Load End scene in 0.6 seconds.");
 
             // OnPlayerDied?.Invoke(this, EventArgs.Empty);  // leave for future in-game game over screen
         }

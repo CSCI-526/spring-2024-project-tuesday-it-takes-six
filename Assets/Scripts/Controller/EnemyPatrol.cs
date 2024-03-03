@@ -1,3 +1,4 @@
+using Game;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,12 +29,13 @@ public class EnemyPatrol : MonoBehaviour
 
     private void Update()
     {
-        if (enemyController.IsAlive())
+        if (enemyController.IsAlive() && !GlobalData.playerDied)
         {
             PatrolUpdate();
         }
         else
         {
+            rigidBody.bodyType = RigidbodyType2D.Static;
             this.enabled = false;
         }
     }
