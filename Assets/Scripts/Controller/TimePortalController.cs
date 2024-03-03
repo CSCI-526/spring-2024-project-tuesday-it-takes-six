@@ -8,41 +8,52 @@ public class TimePortalController : MonoBehaviour, IChangeable
 {
 
     private LineDrawer lineDrawer;
-    private TimeTense currentTime;
-    private TimeTense laserTime;
+    private TimeTense currentTimeTense;
+    private TimeTense laserTimeTense;
 
     private Vector3 lauchDirection;
     private float rayLength = 0.0f;
     private Vector3 lauchStartPoint;
+
+    private float currentTime = 0.0f;
+    private float sleepDuration = 5.0f;
+	private float activeDuration = 5.0f;
+    private bool isActive = false;
+    private GameObject portalUI;
+
     // Start is called before the first frame update
     void Start()
     {
-        currentTime = TimeTense.PRESENT;
+        portalUI = this.transform.GetChild(0).gameObject;
+        currentTimeTense = TimeTense.PRESENT;
+        portalUI.GetComponent<SpriteRenderer>().color = Color.black;
         Physics2D.queriesStartInColliders = false;
         lineDrawer = GetComponent<LineDrawer>();
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-
-        if (other.CompareTag("Corpse"))
+        if (isActive)
         {
-            GameObject enemyObj = other.transform.parent.gameObject;
-            float xDistance = (enemyObj.transform.position.x - transform.position.x)*2.5f;
-            if (enemyObj.transform.parent.name != "Common")
+            if (other.CompareTag("Corpse"))
             {
-                Debug.Log(enemyObj.transform.parent.name);
-                enemyObj.transform.position = new Vector3(enemyObj.transform.position.x-xDistance, enemyObj.transform.position.y, 0.0f);
-                
-                enemyObj.gameObject.SetActive(false);
-                if (enemyObj.transform.parent.name == "Present")
+                GameObject enemyObj = other.transform.parent.gameObject;
+                float xDistance = (enemyObj.transform.position.x - transform.position.x)*2.5f;
+                if (enemyObj.transform.parent.name != "Common")
                 {
+                    Debug.Log(enemyObj.transform.parent.name);
+                    enemyObj.transform.position = new Vector3(enemyObj.transform.position.x-xDistance, enemyObj.transform.position.y, 0.0f);
                     
-                    enemyObj.transform.parent = GameObject.Find("Past").transform;
-                }
-                else 
-                {
-                     enemyObj.transform.parent = GameObject.Find("Present").transform;
+                    enemyObj.gameObject.SetActive(false);
+                    if (enemyObj.transform.parent.name == "Present")
+                    {
+                        
+                        enemyObj.transform.parent = GameObject.Find("Past").transform;
+                    }
+                    else 
+                    {
+                        enemyObj.transform.parent = GameObject.Find("Present").transform;
+                    }
                 }
             }
         }
@@ -67,7 +78,7 @@ public class TimePortalController : MonoBehaviour, IChangeable
     public void TransferLaser(object[] drawInfo)
     {
         Debug.Log("transfer laser");
-        laserTime = currentTime == TimeTense.PRESENT ? TimeTense.PAST : TimeTense.PRESENT;
+        laserTimeTense = currentTimeTense == TimeTense.PRESENT ? TimeTense.PAST : TimeTense.PRESENT;
         lauchDirection = (Vector3) drawInfo[0];
         rayLength = (float) drawInfo[1];
         lauchStartPoint = (Vector3) drawInfo[2];
@@ -83,8 +94,7 @@ public class TimePortalController : MonoBehaviour, IChangeable
 
     public void OnPresent()
     {
-        Debug.Log("OnPresent");
-        if (laserTime == TimeTense.PRESENT && rayLength > 0)
+        if (isActive && laserTimeTense == TimeTense.PRESENT && rayLength > 0)
         {
             DrawLaser();
             HitDetect();
@@ -97,8 +107,7 @@ public class TimePortalController : MonoBehaviour, IChangeable
 
     public void OnPast()
     {
-        Debug.Log("OnPast");
-        if (laserTime == TimeTense.PAST && rayLength > 0)
+        if (isActive && laserTimeTense == TimeTense.PAST && rayLength > 0)
         {
             DrawLaser();
             HitDetect();
@@ -109,9 +118,31 @@ public class TimePortalController : MonoBehaviour, IChangeable
         }
     }
 
+    private void PeriodActive()
+    {
+        if (currentTime < sleepDuration)
+        {
+            currentTime += Time.deltaTime;  
+        }
+        else {
+            portalUI.GetComponent<SpriteRenderer>().color = Color.green;
+            isActive = true;
+            if (currentTime < sleepDuration + activeDuration)
+            {
+                currentTime += Time.deltaTime;  
+            }
+            else 
+            {
+                isActive = false;
+                portalUI.GetComponent<SpriteRenderer>().color = Color.black;
+                currentTime = 0.0f;
+            }
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-
+        PeriodActive();
     }
 }
