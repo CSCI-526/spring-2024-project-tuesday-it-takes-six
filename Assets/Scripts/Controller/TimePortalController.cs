@@ -28,12 +28,22 @@ public class TimePortalController : MonoBehaviour, IChangeable
         if (other.CompareTag("Corpse"))
         {
             GameObject enemyObj = other.transform.parent.gameObject;
-            if (enemyObj.transform.parent.name == "Present")
+            float xDistance = (enemyObj.transform.position.x - transform.position.x)*2.5f;
+            if (enemyObj.transform.parent.name != "Common")
             {
                 Debug.Log(enemyObj.transform.parent.name);
-                enemyObj.transform.position = new Vector3(enemyObj.transform.position.x+1.0f, enemyObj.transform.position.y, 0.0f);
+                enemyObj.transform.position = new Vector3(enemyObj.transform.position.x-xDistance, enemyObj.transform.position.y, 0.0f);
+                
                 enemyObj.gameObject.SetActive(false);
-                enemyObj.transform.parent = GameObject.Find("Past").transform;
+                if (enemyObj.transform.parent.name == "Present")
+                {
+                    
+                    enemyObj.transform.parent = GameObject.Find("Past").transform;
+                }
+                else 
+                {
+                     enemyObj.transform.parent = GameObject.Find("Present").transform;
+                }
             }
         }
     }
