@@ -35,7 +35,7 @@ public class EnemyPatrol : MonoBehaviour
         }
         else
         {
-            rigidBody.bodyType = RigidbodyType2D.Static;
+            rigidBody.velocity = new Vector2(0, 0);
             this.enabled = false;
         }
     }
