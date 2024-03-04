@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
         // prevent it from rotating when hitting other objects
         rb.freezeRotation = true;
         // start at desired position when debugging
-        if (!isDebug) transform.position = defaultStartPos;
         if (!Env.isDebug) transform.position = defaultStartPos;
         else transform.position = startPos;
 
