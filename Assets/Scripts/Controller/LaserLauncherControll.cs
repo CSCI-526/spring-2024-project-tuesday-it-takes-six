@@ -9,7 +9,7 @@ public class LaserLauncherControll : MonoBehaviour
     [SerializeField] private Vector3 lauchDirection = new Vector3(1,0,0);
     [SerializeField] private float rayLength = 15.0f;
     [SerializeField] private GameObject[] timePortals;
-    private float rotateAngle = 45.0f;
+    [SerializeField] private float rotateAngle = 45.0f;
 
     private LineDrawer lineDrawer;
 
