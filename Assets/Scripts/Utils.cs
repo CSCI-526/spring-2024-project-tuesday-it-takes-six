@@ -70,5 +70,14 @@ namespace Game
             return Quaternion.AngleAxis(angle, axis) * (position - center) + center;
         }
 
+        /// <summary>
+        /// check if a rigidbody has velocity in y axis
+        /// </summary>
+        /// <returns>
+        /// bool
+        public static bool OnGround(Rigidbody2D rb)
+        {
+            return Mathf.Abs(rb.velocity.y) <= 1e-4;
+        }
     }
 }
