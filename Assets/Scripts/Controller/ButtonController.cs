@@ -10,11 +10,13 @@ public class ButtonController : MonoBehaviour
     [SerializeField]
     private Vector3 size = new Vector3(0.8120f, 0.1636081f);
     [SerializeField]
-    private Vector3 Pressedsize = new Vector3(0.8120f, 0.036081f);
+    private Vector3 pressedSize = new Vector3(0.8120f, 0.036081f);
     [SerializeField]
     private GameObject nextLevelDoor;
     private bool isPressed = false;
-    private 
+    private const float forceMag = 130;
+    
+  
     void Start()
     {
 
@@ -30,17 +32,22 @@ public class ButtonController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Collider2D collider = collision.collider;
-        if(collider.CompareTag("Corpse") && !isPressed)
+        if(collider.CompareTag("Corpse"))
         {
-            GameObject Enemy = collider.gameObject.transform.parent.gameObject;
-            Enemy.GetComponent<Rigidbody2D>().AddForce(Vector2.up, ForceMode2D.Impulse);
+            if(!isPressed)
+            {
+                Debug.Log("Button: Add force to the corpse");
+                GameObject Enemy = collider.transform.parent.gameObject;
+                Enemy.GetComponent<Rigidbody2D>().AddForce(Vector2.up * forceMag, ForceMode2D.Impulse);
+            }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
         isPressed = true;
-        transform.localScale = Pressedsize;
+        transform.localScale = pressedSize;
+        Debug.Log("Button: Button is pressed");
         if (GlobalData.TimeTenseData.IsPresent())
             nextLevelDoor.SendMessage("setDoorOpen");
         
@@ -50,21 +57,28 @@ public class ButtonController : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collider)
     {
 
-        transform.localScale = Pressedsize;
+        /*transform.localScale = pressedSize;
+        Debug.Log("Button: Button is being pressed");
         if (GlobalData.TimeTenseData.IsPresent())
-            nextLevelDoor.SendMessage("setDoorOpen");
+            nextLevelDoor.SendMessage("setDoorOpen");*/
 
     }
 
 
     private void OnTriggerExit2D(Collider2D collider)
     {
-        // isPressed = false;
         isPressed = false;
         transform.localScale = size;
+        Debug.Log("Button: Button is unpressed.");
         if (GlobalData.TimeTenseData.IsPresent())
             nextLevelDoor.SendMessage("setDoorClosed");
         
         
+    }
+
+
+    private void FixedUpdate()
+    {
+      
     }
 }
