@@ -78,5 +78,6 @@ public class TimeSwitch : MonoBehaviour
         eventData["LastCheckpointBeforeTimeSwitch"] = GlobalData.LastCheckpointPosition;
 
         Analytics.CustomEvent("TimeSwitched", eventData);
+        Analytics.FlushEvents();
     }
 }

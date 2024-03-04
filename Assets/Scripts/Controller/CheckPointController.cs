@@ -34,6 +34,7 @@ public class CheckPointController : MonoBehaviour
             eventData["CheckpointPosition"] = GlobalData.LastCheckpointPosition;
 
             Analytics.CustomEvent("CheckpointPassed", eventData);
+            Analytics.FlushEvents();
         }
     }
 }
