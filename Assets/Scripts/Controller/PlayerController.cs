@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public const float GRAVITY_SCALE = 8;
     public const float FALLING_GRAVITY_SCALE = 12;
     public const double EPS = 1e-4;
+
     private Vector3 defaultStartPos = new(0.253f, 0.011f, 0.0f);
 
     public float horizontalInput;
@@ -22,15 +23,14 @@ public class PlayerController : MonoBehaviour
     // private start position, for debugging
     [SerializeField]
     private Vector3 startPos = new Vector3();
-    // if the we are going to debug
-    [SerializeField]
-    private bool isDebug = false;
+
     void Start()
     {
         // prevent it from rotating when hitting other objects
         rb.freezeRotation = true;
         // start at desired position when debugging
         if (!isDebug) transform.position = defaultStartPos;
+        if (!Env.isDebug) transform.position = defaultStartPos;
         else transform.position = startPos;
 
         GlobalData.playerDied = false;
