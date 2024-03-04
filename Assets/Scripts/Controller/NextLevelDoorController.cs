@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class Door : MonoBehaviour
@@ -27,12 +28,23 @@ public class Door : MonoBehaviour
         isOpen = false;
         GetComponent<SpriteRenderer>().color = Color.black;
     }
-    private void nextLevel()
-    {
-        // TODO: proceed to next level, can only proceed if the door is open
-        if(isOpen)
-        {
 
-        }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // if it is not open, ignore any entering
+        if (!isOpen) return;
+        Collider2D collider = collision.collider;
+
+        // if the collider is not player, ignore them
+        if (!collider.CompareTag("Player")) return;
+
+        NextLevel();
+    }
+
+    private void NextLevel()
+    {
+        // TODO: proceed to next level
+        SceneManager.LoadScene("YouWin");
     }
 }
