@@ -5,7 +5,7 @@
 ## Links
 - Trello: https://trello.com/b/RbDbHsST/it-takes-six-task-board-csci-526
 - Deployment Repo: https://github.com/keyi6/it-takes-six-deployment/
-- Deployment List: https://keyi6.github.io/it-takes-six-deployment/
+- Deployment List: http://keyi6.github.io/it-takes-six-deployment/
 
 
 ## Code Structures
