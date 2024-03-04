@@ -31,4 +31,21 @@ public class TimeTenseDataManager
     {
         return IsPresent() ? "Present" : "Past";
     }
+
+    public Color GetBackgroundColor()
+    {
+        if (IsPresent())
+        {
+            // Change background color
+            Color newColor = new Color();
+            ColorUtility.TryParseHtmlString("#314D79", out newColor);
+            return newColor;
+        } else
+        {
+            // Change background color
+            Color newColor = new Color();
+            ColorUtility.TryParseHtmlString("#327936", out newColor);
+            return newColor;
+        }
+    }
 }

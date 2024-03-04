@@ -370,7 +370,7 @@ MonoBehaviour:
   horizontalInput: 0
   rb: {fileID: 1872540778}
   startPos: {x: 33, y: 4.5, z: 0}
-  isDebug: 1
+  isDebug: 0
 --- !u!4 &40806927
 Transform:
   m_ObjectHideFlags: 0

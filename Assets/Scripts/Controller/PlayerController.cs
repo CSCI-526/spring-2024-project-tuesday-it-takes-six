@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Game;
 using UnityEngine.SceneManagement;
+using UnityEngine.Analytics;
 
 public class PlayerController : MonoBehaviour
 {
@@ -90,6 +91,14 @@ public class PlayerController : MonoBehaviour
             GlobalData.CurrentSceneName = SceneManager.GetActiveScene().name;
             Invoke("LoadEndScene", 0.6f);
             Debug.Log("Player Died! Player stop move! Load End scene in 0.6 seconds.");
+
+            // Analytics
+            var eventData = new Dictionary<string, object>();
+            eventData["LastCheckpointBeforeDeath"] = GlobalData.LastCheckpointPosition;
+            eventData["NumberEnemiesKilledInLife"] = GlobalData.numberEnemiesKilled;
+            eventData["NumberTimeSwitchesInLife"] = GlobalData.numberOfTimeSwitches;
+
+            Analytics.CustomEvent("PlayerDied", eventData);
 
             // OnPlayerDied?.Invoke(this, EventArgs.Empty);  // leave for future in-game game over screen
         }

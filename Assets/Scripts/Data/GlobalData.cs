@@ -20,6 +20,10 @@ namespace Game
 
 		public static bool playerDied = false;
 
+        // Analytics
+        public static int numberEnemiesKilled = 0;
+        public static int numberOfTimeSwitches = 0;
+
 		private static bool _hasReachedCheckpoint = false;
 		private static Vector2 _lastCheckpointPosition;
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Game;
 using UnityEngine.UIElements;
+using UnityEngine.Analytics;
 
 public class EnemyController : MonoBehaviour
 {
@@ -78,6 +79,10 @@ public class EnemyController : MonoBehaviour
         // if enemy die in the past, its corpse can be used in the present
         if (transform.parent.name == "Past")
             transform.parent = GameObject.Find("Common").transform;
+
+        // Analytics
+        GlobalData.numberEnemiesKilled += 1;
+
     }
 
     public bool IsAlive()

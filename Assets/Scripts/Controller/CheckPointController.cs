@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game;
+using Unity.Services.Core;
+using Unity.Services.Analytics;
+using UnityEngine.Analytics;
+
 public class CheckPointController : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -25,6 +29,11 @@ public class CheckPointController : MonoBehaviour
             GlobalData.LastCheckpointPosition = transform.position;
 
             Debug.Log($"Just past a check point with position {GlobalData.LastCheckpointPosition}");
+
+            var eventData = new Dictionary<string, object>();
+            eventData["CheckpointPosition"] = GlobalData.LastCheckpointPosition;
+
+            Analytics.CustomEvent("CheckpointPassed", eventData);
         }
     }
 }

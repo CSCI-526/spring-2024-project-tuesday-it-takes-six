@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using Game;
+using UnityEngine.Analytics;
 
 
 public class TimeSwitch : MonoBehaviour
@@ -59,11 +60,23 @@ public class TimeSwitch : MonoBehaviour
         {
             GameObject presentObj = presentTransform.gameObject;
             presentObj.SetActive(GlobalData.TimeTenseData.IsPresent());
+
+            
         }
 
         ChangeableObjects.BroadcastMessage(ChangeableCalls[GlobalData.TimeTenseData.GetTimeTense()]);
 
-        // update text
+        // update text and background color 
         label.text = GlobalData.TimeTenseData.GetDisplayText();
+        Camera.main.backgroundColor = GlobalData.TimeTenseData.GetBackgroundColor();
+
+
+
+        // Analytics
+        GlobalData.numberOfTimeSwitches += 1;
+        var eventData = new Dictionary<string, object>();
+        eventData["LastCheckpointBeforeTimeSwitch"] = GlobalData.LastCheckpointPosition;
+
+        Analytics.CustomEvent("TimeSwitched", eventData);
     }
 }
