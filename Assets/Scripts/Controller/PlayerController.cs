@@ -43,16 +43,15 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        // collect move control input here to avoid camera jitter
         horizontalInput = Input.GetAxis("Horizontal");
+
+        if (!GlobalData.playerDied) JumpControl();
     }
 
     void FixedUpdate()
     {
-        if (!GlobalData.playerDied)
-        {
-            MoveControl();
-            JumpControl();
-        }
+        if (!GlobalData.playerDied) MoveControl();
 
         DeathCheck();
     }
@@ -64,14 +63,12 @@ public class PlayerController : MonoBehaviour
 
     private void JumpControl()
     {
-        if (!Input.GetButtonDown("Jump")) return;
-
         bool isPlayerGrounded = Utils.OnGround(rb);
 
         Debug.Log($"Player grounded status: {isPlayerGrounded}");
 
         // jump only when player is on the ground
-        if (isPlayerGrounded)
+        if (Input.GetButtonDown("Jump") && isPlayerGrounded)
         {
             rb.AddForce(Vector2.up * JUMP_SPEED, ForceMode2D.Impulse);
         }
