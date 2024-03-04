@@ -8,9 +8,9 @@ using UnityEngine.Analytics;
 public class PlayerController : MonoBehaviour
 {
     public const float MOVE_SPEED = 8;
-    public const float JUMP_SPEED = 45;
-    public const float GRAVITY_SCALE = 8;
-    public const float FALLING_GRAVITY_SCALE = 12;
+    public const float JUMP_SPEED = 25;
+    public const float GRAVITY_SCALE = 3;
+    public const float FALLING_GRAVITY_SCALE = 3.5f;
     public const double EPS = 1e-4;
 
     private Vector3 defaultStartPos = new(0.253f, 0.011f, 0.0f);
