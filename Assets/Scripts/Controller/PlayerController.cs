@@ -64,8 +64,14 @@ public class PlayerController : MonoBehaviour
 
     private void JumpControl()
     {
+        if (!Input.GetButtonDown("Jump")) return;
+
+        bool isPlayerGrounded = Utils.OnGround(rb);
+
+        Debug.Log($"Player grounded status: {isPlayerGrounded}");
+
         // jump only when player is on the ground
-        if (Input.GetButtonDown("Jump") && Utils.OnGround(rb))
+        if (isPlayerGrounded)
         {
             rb.AddForce(Vector2.up * JUMP_SPEED, ForceMode2D.Impulse);
         }
