@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
 
     private readonly Vector3 defaultStartPos = new(1.0f, 0.0f, 0.0f);
 
-    public float horizontalInput;
     public Rigidbody2D rb;
 
     // public event EventHandler OnPlayerDied;  // leave for future in-scene game over screen
@@ -23,6 +22,8 @@ public class PlayerController : MonoBehaviour
     // private start position, for debugging
     [SerializeField]
     private Vector3 startPos = new Vector3();
+
+    private float horizontalInput;
 
     void Start()
     {
@@ -42,6 +43,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        horizontalInput = Input.GetAxis("Horizontal");
+    }
+
+    void FixedUpdate()
+    {
         if (!GlobalData.playerDied)
         {
             MoveControl();
@@ -53,14 +59,13 @@ public class PlayerController : MonoBehaviour
 
     private void MoveControl()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector3(horizontalInput * MOVE_SPEED, rb.velocity.y, 0);
     }
 
     private void JumpControl()
     {
         // jump only when player is on the ground
-        if (Input.GetButtonDown("Jump") && Mathf.Abs(rb.velocity.y) <= EPS)
+        if (Input.GetButtonDown("Jump") && Utils.OnGround(rb))
         {
             rb.AddForce(Vector2.up * JUMP_SPEED, ForceMode2D.Impulse);
         }
