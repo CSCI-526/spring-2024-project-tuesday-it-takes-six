@@ -11,7 +11,7 @@ public class TutorialInstruction : MonoBehaviour
     private TMP_Text t;
 
     [SerializeField]
-    private GameObject player;
+    private GameObject playerRB;
 
     [SerializeField]
     private GameObject[] objects;
@@ -47,7 +47,7 @@ public class TutorialInstruction : MonoBehaviour
         {
             CheckEvent();
         }
-        else if (player.transform.position.x >= pos)
+        else if (playerRB.transform.position.x >= pos)
         {
             ShowNext();
         }
