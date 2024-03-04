@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public const float FALLING_GRAVITY_SCALE = 3.5f;
     public const double EPS = 1e-4;
 
-    private Vector3 defaultStartPos = new(0.253f, 0.011f, 0.0f);
+    private readonly Vector3 defaultStartPos = new(1.0f, 0.0f, 0.0f);
 
     public float horizontalInput;
     public Rigidbody2D rb;

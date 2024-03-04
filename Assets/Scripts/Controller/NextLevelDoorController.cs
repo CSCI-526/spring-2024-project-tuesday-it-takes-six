@@ -30,14 +30,11 @@ public class Door : MonoBehaviour
     }
 
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collider)
     {
-        // if it is not open, ignore any entering
-        if (!isOpen) return;
-        Collider2D collider = collision.collider;
-
-        // if the collider is not player, ignore them
-        if (!collider.CompareTag("Player")) return;
+        Debug.Log("Collision enter");
+        // if it is not open or the collider is not player, ignore any entering
+        if (!isOpen || !collider.CompareTag("Player")) return;
 
         NextLevel();
     }
