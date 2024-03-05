@@ -32,8 +32,8 @@ public class TutorialInstruction : MonoBehaviour
         (46, "Push the corpse through the time portal.\nWhen the portal is open, it turns green", true),
         // idx = 5
         (50, "Push the corpse towards the spikes and jump on it to pass the spikes", true),
-        (52, "Switch to present, you can see a laser launcher.\nThe laser can kill EVERYONE.", false),
-        (58, $"Go close and press {KeyMapping.LASER_ROTATE} to rotate the laser.", false),
+        (48, "Switch to present, you can see a laser launcher.\nGo close to operate it.", false),
+        (58, $"The laser can kill EVERYONE.\nPress {KeyMapping.LASER_ROTATE} near it to rotate the laser.", false),
         (63, "Push the yellow button to open the door", false),
         // idx = 9
         (80, "Pass the green door to reach next level", true)
