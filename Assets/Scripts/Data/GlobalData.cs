@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 
 // wrap in game namespace to prevent naming pollution
@@ -21,6 +22,7 @@ namespace Game
         public static bool playerDied = false;
 
         // Analytics
+        public static long _sessionID = DateTime.Now.Ticks;
         public static int numberEnemiesKilled = 0;
         public static int numberOfTimeSwitches = 0;
 
