@@ -74,7 +74,8 @@ public class EnemyController : MonoBehaviour
         alive = false;
         body.SetActive(alive);
         corpse.SetActive(!alive);
-
+        // Enable rotation
+        gameObject.GetComponent<Rigidbody2D>().freezeRotation = false;
         // corpse is already pushable since it is an rigid body
         // if enemy die in the past, its corpse can be used in the present
         if (transform.parent.name == "Past")

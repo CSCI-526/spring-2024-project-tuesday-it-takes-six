@@ -29,7 +29,7 @@ public class ButtonController : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    /*private void OnCollisionEnter2D(Collision2D collision)
     {
 
         Debug.Log("Button: Corpse enter collision detection area");
@@ -43,25 +43,9 @@ public class ButtonController : MonoBehaviour
             isPressed = true;
             transform.localScale = pressedSize;
         }
-    }
-
-    /*private void OnCollisionExit2D(Collision2D collision)
-    {
-        isPressed = false;
-        transform.localScale = size;
-        Debug.Log("Button: Button is unpressed.");
-        if (GlobalData.TimeTenseData.IsPresent())
-            nextLevelDoor.SendMessage("setDoorClosed");
     }*/
 
-    /*private void OnCollisionStay2D(Collision2D collision)
-    {
-        isPressed = true;
-        transform.localScale = pressedSize;
-        Debug.Log("Button: Button is pressed");
-        if (GlobalData.TimeTenseData.IsPresent())
-            nextLevelDoor.SendMessage("setDoorOpen");
-    }*/
+   
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
