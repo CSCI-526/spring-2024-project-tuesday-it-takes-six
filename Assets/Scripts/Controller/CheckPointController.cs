@@ -6,9 +6,10 @@ using Unity.Services.Core;
 using Unity.Services.Analytics;
 using UnityEngine.Analytics;
 
+
 public class CheckPointController : MonoBehaviour
 {
-    // Start is called before the first frame update
+
     void Start()
     {
 
@@ -25,6 +26,9 @@ public class CheckPointController : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
+ 
+        
+
             GlobalData.HasReachedCheckpoint = true;
             GlobalData.LastCheckpointPosition = transform.position;
 
@@ -37,4 +41,5 @@ public class CheckPointController : MonoBehaviour
             Analytics.FlushEvents();
         }
     }
+
 }
