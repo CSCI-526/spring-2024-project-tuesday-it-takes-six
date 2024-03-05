@@ -19,18 +19,21 @@ public class TutorialInstruction : MonoBehaviour
 
     private int instructionIndex = 0;
 
-    // (x position, text)[]
-    // if distance == -1, it is not triggered by movement but by event
-    private (int, string)[] INSTRUCTIONS = {
-        (0, $"Press {KeyMapping.LEFT}/{KeyMapping.RIGHT} to move"),
-        (6, $"Press {KeyMapping.JUMP} to jump"),
-        (20, $"Press {KeyMapping.TIME_SWITCH} to switch time"),
-        (28, "Jump on enemies to kill them"),
+    // (x position, text, double check by event)[]
+    // if `double check by event` is ensured
+    //     - if the player haven't reached the x position, it will check the event first
+    //     - if player have reached the x position, it will move to next instruction
+    private (int, string, bool)[] INSTRUCTIONS = {
+        (0, $"Press {KeyMapping.LEFT}/{KeyMapping.RIGHT} to move", false),
+        (6, $"Press {KeyMapping.JUMP} to jump", false),
+        (20, $"Press {KeyMapping.TIME_SWITCH} to switch time", false),
+        (28, "Jump on enemies to kill them", false),
         // idx = 4
-        (-1, "Push the corpse through the time portal.\nWhen the portal is open, it turns green"),
-        (40, "Push the corpse towards the spikes and jump on it to pass the spikes"),
-        (58, $"Switch to present, you can see a laser launcher.\nThe laser can kill EVERYONE. \nGo close and press {KeyMapping.LASER_ROTATE} to rotate the laser."),
-        (68, "Pass the green door to reach next level")
+        (45, "Push the corpse through the time portal.\nWhen the portal is open, it turns green", true),
+        (40, "Push the corpse towards the spikes and jump on it to pass the spikes", false),
+        (50, "Switch to present, you can see a laser launcher.", false),
+        (58, $"The laser can kill EVERYONE. \nGo close and press {KeyMapping.LASER_ROTATE} to rotate the laser.", false),
+        (68, "Pass the green door to reach next level", false)
     };
 
     void Start()
@@ -42,15 +45,15 @@ public class TutorialInstruction : MonoBehaviour
     {
         if (instructionIndex >= INSTRUCTIONS.Count()) return;
 
-        int pos = INSTRUCTIONS[instructionIndex].Item1;
-        if (pos == -1)
-        {
-            CheckEvent();
-        }
-        else if (playerRB.transform.position.x >= pos)
+        var (pos, _, triggerByEvent) = INSTRUCTIONS[instructionIndex];
+
+        if (playerRB.transform.position.x >= pos)
         {
             ShowNext();
+            return;
         }
+
+        if (triggerByEvent) CheckEvent();
     }
 
     private void ShowNext()

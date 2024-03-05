@@ -368,7 +368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1872540778}
-  startPos: {x: 58, y: 4, z: 0}
+  startPos: {x: 1, y: 0, z: 0}
 --- !u!4 &40806927
 Transform:
   m_ObjectHideFlags: 0
