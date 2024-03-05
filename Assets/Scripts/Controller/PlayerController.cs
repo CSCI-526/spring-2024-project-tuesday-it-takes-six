@@ -4,6 +4,9 @@ using UnityEngine;
 using Game;
 using UnityEngine.SceneManagement;
 using UnityEngine.Analytics;
+using Unity.Services.Analytics;
+using Unity.Services.Core;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -25,7 +28,7 @@ public class PlayerController : MonoBehaviour
 
     private float horizontalInput;
 
-    void Start()
+    async void Start()
     {
         // prevent it from rotating when hitting other objects
         rb.freezeRotation = true;
@@ -38,6 +41,19 @@ public class PlayerController : MonoBehaviour
 
         if(GlobalData.HasReachedCheckpoint){
             transform.position = GlobalData.LastCheckpointPosition;
+        }
+
+        // Analytics initialization
+        Debug.Log("pre Analytics set up!");
+        try
+        {
+            await UnityServices.InitializeAsync();
+            AnalyticsService.Instance.StartDataCollection();
+            Debug.Log("Analytics set up!");
+        }
+        catch (Exception e)
+        {
+            Debug.LogException(e);
         }
     }
 
@@ -106,6 +122,7 @@ public class PlayerController : MonoBehaviour
             eventData["NumberTimeSwitchesInLife"] = GlobalData.numberOfTimeSwitches;
 
             Analytics.CustomEvent("PlayerDied", eventData);
+            Analytics.FlushEvents();
 
             // OnPlayerDied?.Invoke(this, EventArgs.Empty);  // leave for future in-game game over screen
         }

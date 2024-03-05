@@ -11,16 +11,6 @@ public class AnalyticsUtils : MonoBehaviour
     // Start is called before the first frame update
     async void Start()
     {
-        try
-        {
-            await UnityServices.InitializeAsync();
-            AnalyticsService.Instance.StartDataCollection();
-            Analytics.FlushEvents();
-        }
-        catch (Exception e)
-        {
-            Debug.LogException(e);
-        }
 
     }
 

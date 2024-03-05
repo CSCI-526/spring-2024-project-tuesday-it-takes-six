@@ -39,6 +39,8 @@ public class CheckPointController : MonoBehaviour
 
             Analytics.CustomEvent("CheckpointPassed", eventData);
             Analytics.FlushEvents();
+
+            Debug.Log("checkpoint event submitted");
         }
     }
 

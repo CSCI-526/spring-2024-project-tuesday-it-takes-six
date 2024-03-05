@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using Game;
 using UnityEngine.Analytics;
+using Unity.Services.Analytics;
 
 
 public class TimeSwitch : MonoBehaviour
@@ -79,5 +80,6 @@ public class TimeSwitch : MonoBehaviour
 
         Analytics.CustomEvent("TimeSwitched", eventData);
         Analytics.FlushEvents();
+        Debug.Log("Analytics time wtich event submitted");
     }
 }
