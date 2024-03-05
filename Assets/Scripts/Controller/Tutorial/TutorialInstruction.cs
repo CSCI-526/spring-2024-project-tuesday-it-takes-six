@@ -29,11 +29,14 @@ public class TutorialInstruction : MonoBehaviour
         (20, $"Press {KeyMapping.TIME_SWITCH} to switch time", false),
         (28, "Jump on enemies to kill them", false),
         // idx = 4
-        (45, "Push the corpse through the time portal.\nWhen the portal is open, it turns green", true),
-        (40, "Push the corpse towards the spikes and jump on it to pass the spikes", false),
-        (50, "Switch to present, you can see a laser launcher.", false),
-        (58, $"The laser can kill EVERYONE. \nGo close and press {KeyMapping.LASER_ROTATE} to rotate the laser.", false),
-        (68, "Pass the green door to reach next level", false)
+        (46, "Push the corpse through the time portal.\nWhen the portal is open, it turns green", true),
+        // idx = 5
+        (50, "Push the corpse towards the spikes and jump on it to pass the spikes", true),
+        (52, "Switch to present, you can see a laser launcher.\nThe laser can kill EVERYONE.", false),
+        (58, $"Go close and press {KeyMapping.LASER_ROTATE} to rotate the laser.", false),
+        (63, "Push the yellow button to open the door", false),
+        // idx = 9
+        (80, "Pass the green door to reach next level", true)
     };
 
     void Start()
@@ -73,10 +76,13 @@ public class TutorialInstruction : MonoBehaviour
         switch (instructionIndex)
         {
             case 4:
-                if (!objects[0].GetComponent<EnemyController>().IsAlive())
-                {
-                    ShowNext();
-                }
+                if (!objects[0].GetComponent<EnemyController>().IsAlive()) ShowNext();
+                break;
+            case 5:
+                if (objects[0].GetComponent<EnemyController>().GetTimeTense() == TimeTense.PAST) ShowNext();
+                break;
+            case 9:
+                if (objects[1].GetComponent<ButtonController>().IsPressed()) ShowNext();
                 break;
         }
     }

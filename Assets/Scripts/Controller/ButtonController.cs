@@ -86,4 +86,9 @@ public class ButtonController : MonoBehaviour
     {
       
     }
+
+    public bool IsPressed()
+    {
+        return isPressed;
+    }
 }

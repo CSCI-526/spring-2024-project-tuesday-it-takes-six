@@ -90,4 +90,11 @@ public class EnemyController : MonoBehaviour
     {
         return alive;
     }
+
+    public TimeTense? GetTimeTense()
+    {
+        if (transform.parent.name == "Past") return TimeTense.PAST;
+        if (transform.parent.name == "Present") return TimeTense.PRESENT;
+        return null;
+    }
 }

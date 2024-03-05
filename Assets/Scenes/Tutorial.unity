@@ -572,8 +572,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 52
-  m_fontSizeBase: 52
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -638,6 +638,7 @@ MonoBehaviour:
   playerRB: {fileID: 1872540777}
   objects:
   - {fileID: 395305513}
+  - {fileID: 2042731299}
 --- !u!1 &117948781
 GameObject:
   m_ObjectHideFlags: 0
