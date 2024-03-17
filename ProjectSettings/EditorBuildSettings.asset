@@ -9,15 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/StartMenu.unity
+    path: Assets/Scenes/UI/StartMenu.unity
     guid: d4dff94f7209944c6a15d1ac892c6c35
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: e2221aec132c34108a7141e2b1db4ef9
   - enabled: 1
-    path: Assets/Scenes/EndScene.unity
+    path: Assets/Scenes/UI/EndScene.unity
     guid: 063a1c0925d8b4110bfe86b63c136b3d
   - enabled: 1
-    path: Assets/Scenes/YouWin.unity
+    path: Assets/Scenes/UI/YouWin.unity
     guid: 816e46724a2c1450ca8939d5490c5ca7
   m_configObjects: {}
