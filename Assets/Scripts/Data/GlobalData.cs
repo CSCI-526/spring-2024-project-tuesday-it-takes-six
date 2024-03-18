@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.PlayerLoop;
 
 
 // wrap in game namespace to prevent naming pollution
@@ -16,10 +17,15 @@ namespace Game
 
         // please use RECOGNIZABLE NAME for variables in this class
 
-
         public static TimeTenseDataManager TimeTenseData = new();
 
         public static PlayerStatusDataManager PlayerStatusData = new();
+
+        public static void Init()
+        {
+            TimeTenseData.Init();
+            PlayerStatusData.Init();
+        }
 
         // Analytics
         public static long _sessionID = DateTime.Now.Ticks;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Game;
 using UnityEngine;
 
-public class PlayerStatusDataManager
+public class PlayerStatusDataManager : IDataManager
 {
     private readonly Publisher<bool> alive = new(true);
 

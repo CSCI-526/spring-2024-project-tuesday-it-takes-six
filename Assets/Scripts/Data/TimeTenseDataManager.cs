@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Game;
 
-public class TimeTenseDataManager
+public class TimeTenseDataManager : IDataManager
 {
     private TimeTense timeTense = TimeTense.PRESENT;
 
