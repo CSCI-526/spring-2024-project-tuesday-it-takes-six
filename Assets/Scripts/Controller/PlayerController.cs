@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 startPos = new Vector3();
 
     private float horizontalInput;
+    
+    private Subscriber<bool> playerStatusSubscriber;
 
     async void Start()
     {
@@ -36,8 +38,8 @@ public class PlayerController : MonoBehaviour
         if (!Env.isDebug) transform.position = defaultStartPos;
         else transform.position = startPos;
 
-        GlobalData.playerDied = false;
-        OnPlayerDiedEventTriggered = false;
+        playerStatusSubscriber = GlobalData.PlayerStatusData.CreatePlayerStatusSubscriber();
+        playerStatusSubscriber.Subscribe(OnPlayerDead);
 
         if(GlobalData.HasReachedCheckpoint){
             transform.position = GlobalData.LastCheckpointPosition;
@@ -57,19 +59,49 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnPlayerDead(bool alive)
+    {
+        if (alive) return;
+
+        Debug.Log("Player died");
+
+        // Store the Scene Name to allow Restart to re-load the scene
+        GlobalData.CurrentSceneName = SceneManager.GetActiveScene().name;
+        Invoke("LoadEndScene", 0.6f);
+        Debug.Log("Player Died! Player stop move! Load End scene in 0.6 seconds.");
+
+        // Analytics
+        var eventData = new Dictionary<string, object>();
+        eventData["LastCheckpointBeforeDeath"] = GlobalData.LastCheckpointPosition;
+        eventData["NumberEnemiesKilledInLife"] = GlobalData.numberEnemiesKilled;
+        eventData["NumberTimeSwitchesInLife"] = GlobalData.numberOfTimeSwitches;
+
+        Analytics.CustomEvent("PlayerDied", eventData);
+        Analytics.FlushEvents();
+
+        // OnPlayerDied?.Invoke(this, EventArgs.Empty);  // leave for future in-game game over screen
+    }
+
+    private void OnDestroy()
+    {
+        playerStatusSubscriber.Unsubscribe(OnPlayerDead);
+    }
+
     void Update()
     {
         // collect move control input here to avoid camera jitter
         horizontalInput = Input.GetAxis("Horizontal");
 
-        if (!GlobalData.playerDied) JumpControl();
+        if (GlobalData.PlayerStatusData.IsPlayerAlive()) JumpControl();
     }
 
     void FixedUpdate()
     {
-        if (!GlobalData.playerDied) MoveControl();
-
-        DeathCheck();
+        if (GlobalData.PlayerStatusData.IsPlayerAlive())
+        {
+            MoveControl();
+            DeathCheck();
+        }
     }
 
     private void MoveControl()
@@ -80,8 +112,6 @@ public class PlayerController : MonoBehaviour
     private void JumpControl()
     {
         bool isPlayerGrounded = Utils.OnGround(rb);
-
-        Debug.Log($"Player grounded status: {isPlayerGrounded}");
 
         // jump only when player is on the ground
         if (Input.GetButtonDown("Jump") && isPlayerGrounded)
@@ -104,27 +134,7 @@ public class PlayerController : MonoBehaviour
     {
         if (rb.position.y < -10.0f)
         {
-            GlobalData.playerDied = true;
-        }
-
-        if (GlobalData.playerDied && !OnPlayerDiedEventTriggered)
-        {
-            OnPlayerDiedEventTriggered = true;
-            //Store the Scene Name to allow Restart to re-load the scene
-            GlobalData.CurrentSceneName = SceneManager.GetActiveScene().name;
-            Invoke("LoadEndScene", 0.6f);
-            Debug.Log("Player Died! Player stop move! Load End scene in 0.6 seconds.");
-
-            // Analytics
-            var eventData = new Dictionary<string, object>();
-            eventData["LastCheckpointBeforeDeath"] = GlobalData.LastCheckpointPosition;
-            eventData["NumberEnemiesKilledInLife"] = GlobalData.numberEnemiesKilled;
-            eventData["NumberTimeSwitchesInLife"] = GlobalData.numberOfTimeSwitches;
-
-            Analytics.CustomEvent("PlayerDied", eventData);
-            Analytics.FlushEvents();
-
-            // OnPlayerDied?.Invoke(this, EventArgs.Empty);  // leave for future in-game game over screen
+            GlobalData.PlayerStatusData.KillPlayer();
         }
     }
 
@@ -132,15 +142,5 @@ public class PlayerController : MonoBehaviour
     private void LoadEndScene()
     {
         SceneManager.LoadScene("EndScene");
-    }
-
-    public void SetDeath(bool died)
-    {
-        GlobalData.playerDied = died;
-    }
-
-    public bool GetDeath()
-    {
-        return GlobalData.playerDied;
     }
 }

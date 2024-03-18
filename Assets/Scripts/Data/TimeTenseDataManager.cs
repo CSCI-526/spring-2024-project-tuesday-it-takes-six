@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Game;
 
-public class TimeTenseDataManager
+public class TimeTenseDataManager : IDataManager
 {
     private TimeTense timeTense = TimeTense.PRESENT;
 
@@ -30,6 +30,14 @@ public class TimeTenseDataManager
     public string GetDisplayText()
     {
         return IsPresent() ? "Present" : "Past";
+    }
+
+    /// <summary>
+    /// Set time tense to present
+    /// </summary>
+    public void Init()
+    {
+        timeTense = TimeTense.PRESENT;
     }
 
     public Color GetBackgroundColor()

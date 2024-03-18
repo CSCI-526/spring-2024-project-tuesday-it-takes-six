@@ -8,6 +8,8 @@ public class EndMenu : MonoBehaviour
 {
     public void ClickRestartFromCheckpointButton ()
     {
+        GlobalData.Init();
+
         //Reload the playing scene
         SceneManager.LoadScene(GlobalData.CurrentSceneName);
 
@@ -27,6 +29,8 @@ public class EndMenu : MonoBehaviour
 
     public void ClickRestartButton ()
     {
+        GlobalData.Init();
+
         //Reset the HasReachedCheckpoint value for the current playing scene
         GlobalData.HasReachedCheckpoint = false;
 
