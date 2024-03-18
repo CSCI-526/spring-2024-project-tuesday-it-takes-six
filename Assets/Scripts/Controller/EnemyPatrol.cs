@@ -29,7 +29,7 @@ public class EnemyPatrol : MonoBehaviour
 
     private void Update()
     {
-        if (enemyController.IsAlive() && !GlobalData.playerDied)
+        if (enemyController.IsAlive() && GlobalData.PlayerStatusData.IsPlayerAlive())
         {
             PatrolUpdate();
         }

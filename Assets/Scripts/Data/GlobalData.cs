@@ -17,9 +17,9 @@ namespace Game
         // please use RECOGNIZABLE NAME for variables in this class
 
 
-        public static TimeTenseDataManager TimeTenseData = new TimeTenseDataManager();
+        public static TimeTenseDataManager TimeTenseData = new();
 
-        public static bool playerDied = false;
+        public static PlayerStatusDataManager PlayerStatusData = new();
 
         // Analytics
         public static long _sessionID = DateTime.Now.Ticks;

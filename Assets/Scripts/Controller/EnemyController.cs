@@ -50,15 +50,7 @@ public class EnemyController : MonoBehaviour
             // otherwise the player die
             else
             {
-                // check if collider(PlayerRB)'s parent has a PlayerController script
-                if (collider.transform.parent.TryGetComponent<PlayerController>(out PlayerController playerController))
-                {
-                    playerController.SetDeath(true);
-                }
-                else
-                {
-                    Debug.LogError("collider's parent do not have a PlayerController script attached!");
-                }
+                GlobalData.PlayerStatusData.KillPlayer();
             }
         }
     }
