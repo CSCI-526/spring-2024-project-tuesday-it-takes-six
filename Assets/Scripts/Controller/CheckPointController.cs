@@ -1,41 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Game;
-using Unity.Services.Core;
-using Unity.Services.Analytics;
 using UnityEngine.Analytics;
-
+using System.Collections.Generic;
+using Game;
 
 public class CheckPointController : MonoBehaviour
 {
 
-    void Start()
+    public void Start()
     {
 
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
 
     }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-
         if (other.CompareTag("Player"))
         {
- 
-        
+            Vector3 position = transform.position;
+            GlobalData.CheckPointData.SetLastCheckPointPosition(position);
 
-            GlobalData.HasReachedCheckpoint = true;
-            GlobalData.LastCheckpointPosition = transform.position;
-
-            Debug.Log($"Just past a check point with position {GlobalData.LastCheckpointPosition}");
+            Debug.Log($"Just past a check point with position {position}");
 
             var eventData = new Dictionary<string, object>();
-            eventData["CheckpointPosition"] = GlobalData.LastCheckpointPosition;
+            eventData["CheckpointPosition"] = position;
 
             Analytics.CustomEvent("CheckpointPassed", eventData);
             Analytics.FlushEvents();

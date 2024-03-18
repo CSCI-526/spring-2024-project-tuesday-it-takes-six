@@ -9,8 +9,7 @@ public class YouWinMenu: MonoBehaviour
     public void ClickMainMenuButton()
     {   
         //Reset the stored Scene Name and the Checkpoint status
-        GlobalData.CurrentSceneName = "";
-        GlobalData.HasReachedCheckpoint = false;
+        GlobalData.CheckPointData.ResetCheckPoint();
         SceneManager.LoadScene("StartMenu");
     }
 }

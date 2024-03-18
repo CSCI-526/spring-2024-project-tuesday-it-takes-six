@@ -17,7 +17,7 @@ public class SendToGoogle : MonoBehaviour
     public void Send()
     {
         _sessionID = GlobalData._sessionID;
-        _mostRecentCheckpoint = GlobalData.LastCheckpointPosition.ToString();
+        _mostRecentCheckpoint = GlobalData.CheckPointData.GetLastCheckPointPosition().ToString();
         _numTimeSwitches = GlobalData.numberOfTimeSwitches.ToString();
 
         StartCoroutine(Post(_sessionID.ToString(), _numTimeSwitches,_mostRecentCheckpoint));

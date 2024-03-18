@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro; // Import the TMPro namespace
 using System.Collections;
+using Game;
 
 public class CheckpointMessage : MonoBehaviour
 {
@@ -11,26 +12,34 @@ public class CheckpointMessage : MonoBehaviour
     public float displayDuration = 2f; // Duration to display the "Saving progress..." text
 
     private Camera mainCamera; // Reference to the main camera
+    private Subscriber<Vector3?> subscriber;
 
     private void Start()
     {
         checkpointText.gameObject.SetActive(false); // Hide checkpoint text initially
         savingProgressText.gameObject.SetActive(false); // Hide saving progress text initially
         mainCamera = Camera.main; // Get the main camera
+
+        subscriber = GlobalData.CheckPointData.CreateLastCheckPointPositionSubscriber();
+        subscriber.Subscribe(OnCheckPointEnter);
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void OnDestroy()
     {
-        if (other.CompareTag("Player")) // Ensure your player GameObject has the "Player" tag
-        {
-            PositionTextAboveCheckpoint();
-            checkpointText.gameObject.SetActive(true); // Show the checkpoint text
-            StartCoroutine(FadeOutText(checkpointText)); // Start fading out the checkpoint text
+        subscriber.Unsubscribe(OnCheckPointEnter);
+    }
 
-            // Display the saving progress text without fading
-            savingProgressText.gameObject.SetActive(true);
-            Invoke("HideSavingProgressText", displayDuration); // Hide the saving progress text after the duration
-        }
+    private void OnCheckPointEnter(Vector3? position)
+    {
+        if (position is null) return;
+
+        PositionTextAboveCheckpoint();
+        checkpointText.gameObject.SetActive(true); // Show the checkpoint text
+        StartCoroutine(FadeOutText(checkpointText)); // Start fading out the checkpoint text
+
+        // Display the saving progress text without fading
+        savingProgressText.gameObject.SetActive(true);
+        Invoke("HideSavingProgressText", displayDuration); // Hide the saving progress text after the duration
     }
 
     void PositionTextAboveCheckpoint()

@@ -9,39 +9,20 @@ public class EndMenu : MonoBehaviour
     public void ClickRestartFromCheckpointButton ()
     {
         GlobalData.Init();
-
-        //Reload the playing scene
-        SceneManager.LoadScene(GlobalData.CurrentSceneName);
-
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-
-        //If the player reached a checkpoint before, restart the level with player at the latest checkpoint
-        if (GlobalData.HasReachedCheckpoint && player != null)
-        {
-            player.transform.position = GlobalData.LastCheckpointPosition;
-        }
-        else
-        {
-            Debug.LogWarning("Player not found in scene.");
-        }
-
+        SceneManager.LoadScene(GlobalData.CheckPointData.GetCurrentSceneName());
     }
 
     public void ClickRestartButton ()
     {
         GlobalData.Init();
-
-        //Reset the HasReachedCheckpoint value for the current playing scene
-        GlobalData.HasReachedCheckpoint = false;
-
-        SceneManager.LoadScene(GlobalData.CurrentSceneName);
+        SceneManager.LoadScene(GlobalData.CheckPointData.GetCurrentSceneName());
+        GlobalData.CheckPointData.ResetCheckPoint();
     }
 
     public void ClickMainMenuButton ()
     {   
         //Reset the stored Scene Name and the Checkpoint status
-        GlobalData.CurrentSceneName = "";
-        GlobalData.HasReachedCheckpoint = false;
+        GlobalData.CheckPointData.ResetCheckPoint();
         SceneManager.LoadScene("StartMenu");
     }
 }

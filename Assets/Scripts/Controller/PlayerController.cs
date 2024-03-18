@@ -41,8 +41,11 @@ public class PlayerController : MonoBehaviour
         playerStatusSubscriber = GlobalData.PlayerStatusData.CreatePlayerStatusSubscriber();
         playerStatusSubscriber.Subscribe(OnPlayerDead);
 
-        if(GlobalData.HasReachedCheckpoint){
-            transform.position = GlobalData.LastCheckpointPosition;
+        Vector3? lastPos = GlobalData.CheckPointData.GetLastCheckPointPosition();
+        if (lastPos != null)
+        {
+            Debug.Log("Reset player to check point");
+            transform.position = (Vector3)lastPos;
         }
 
         // Analytics initialization
@@ -66,13 +69,13 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Player died");
 
         // Store the Scene Name to allow Restart to re-load the scene
-        GlobalData.CurrentSceneName = SceneManager.GetActiveScene().name;
+        GlobalData.CheckPointData.SetCurrentSceneName(SceneManager.GetActiveScene().name);
         Invoke("LoadEndScene", 0.6f);
         Debug.Log("Player Died! Player stop move! Load End scene in 0.6 seconds.");
 
         // Analytics
         var eventData = new Dictionary<string, object>();
-        eventData["LastCheckpointBeforeDeath"] = GlobalData.LastCheckpointPosition;
+        eventData["LastCheckpointBeforeDeath"] = GlobalData.CheckPointData.GetLastCheckPointPosition();
         eventData["NumberEnemiesKilledInLife"] = GlobalData.numberEnemiesKilled;
         eventData["NumberTimeSwitchesInLife"] = GlobalData.numberOfTimeSwitches;
 
