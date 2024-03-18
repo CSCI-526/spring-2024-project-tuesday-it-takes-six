@@ -32,6 +32,14 @@ public class TimeTenseDataManager
         return IsPresent() ? "Present" : "Past";
     }
 
+    /// <summary>
+    /// Set time tense to present
+    /// </summary>
+    public void Init()
+    {
+        timeTense = TimeTense.PRESENT;
+    }
+
     public Color GetBackgroundColor()
     {
         if (IsPresent())

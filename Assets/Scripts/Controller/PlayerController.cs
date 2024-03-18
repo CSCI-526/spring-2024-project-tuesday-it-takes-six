@@ -81,8 +81,6 @@ public class PlayerController : MonoBehaviour
     {
         bool isPlayerGrounded = Utils.OnGround(rb);
 
-        Debug.Log($"Player grounded status: {isPlayerGrounded}");
-
         // jump only when player is on the ground
         if (Input.GetButtonDown("Jump") && isPlayerGrounded)
         {
