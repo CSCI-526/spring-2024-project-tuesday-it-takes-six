@@ -117,7 +117,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0037765503, y: 0.16509444}
+  m_Offset: {x: -0.0037765503, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -311,7 +311,6 @@ MonoBehaviour:
   body: {fileID: 3906471299073957242}
   corpse: {fileID: 6345431371846567346}
   timePortal: {fileID: 0}
-  withHelmet: 0
 --- !u!50 &2903795894770874389
 Rigidbody2D:
   serializedVersion: 4
