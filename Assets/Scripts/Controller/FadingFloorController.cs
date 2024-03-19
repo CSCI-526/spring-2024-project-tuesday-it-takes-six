@@ -11,6 +11,12 @@ public class FadingFloorController : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
+    private const float SHAKE_AMOUNT = 1.0f;
+    private const float SHAKE_DURATION = 0.5f;
+    private bool isShaking = false;
+    private Vector3 originalPosition;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,10 +39,43 @@ public class FadingFloorController : MonoBehaviour
         Side side = Utils.DetectCollisionSide(collision, transform);
         if (side == Side.TOP)
         {
-            StartCoroutine(FadeOut());
+            StartShake();
         }
     }
 
+
+    public void StartShake()
+    {
+        if (!isShaking)
+        {
+            StartCoroutine(Shake());
+        }
+    }
+
+    private IEnumerator Shake()
+    {
+        isShaking = true;
+        originalPosition = transform.localPosition;
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < SHAKE_DURATION)
+        {
+            float x = originalPosition.x + Random.Range(-SHAKE_AMOUNT, SHAKE_AMOUNT) * Time.deltaTime;
+            float y = originalPosition.y + Random.Range(-SHAKE_AMOUNT, SHAKE_AMOUNT) * Time.deltaTime;
+
+            transform.localPosition = new Vector3(x, y, originalPosition.z);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localPosition = originalPosition;
+        isShaking = false;
+
+        // Call FadeOut after shaking
+        StartCoroutine(FadeOut());
+    }
 
     IEnumerator FadeOut()
     {
