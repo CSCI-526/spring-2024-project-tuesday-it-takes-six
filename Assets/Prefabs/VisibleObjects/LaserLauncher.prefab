@@ -260,8 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lauchDirection: {x: -1, y: 1, z: 0}
   rayLength: 10
-  timePortals:
-  - {fileID: 0}
+  timePortals: []
   rotateAngle: 45
 --- !u!120 &9199905454462155099
 LineRenderer:
