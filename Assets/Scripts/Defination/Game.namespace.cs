@@ -21,4 +21,10 @@ namespace Game
         public const string TIME_SWITCH = "Q";
         public const string LASER_ROTATE = "F";
     }
+
+    public enum Axis
+    {
+        HORIZONTAL,
+        VERTICAL
+    }
 }
