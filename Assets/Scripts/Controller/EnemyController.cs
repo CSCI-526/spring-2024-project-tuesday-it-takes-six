@@ -18,6 +18,12 @@ public class EnemyController : MonoBehaviour
     // time portal that may interat with the enemy
     [SerializeField] private GameObject timePortal;
 
+    private bool withHelmet;
+
+    private void Awake()
+    {
+    }
+
     void Start()
     {
         alive = true;
@@ -25,11 +31,8 @@ public class EnemyController : MonoBehaviour
         corpse.SetActive(!alive);
 
         GetComponent<Rigidbody2D>().freezeRotation = true;
-    }
 
-    void Update()
-    {
-
+        withHelmet = gameObject.name.Contains("Helmet");
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -37,21 +40,17 @@ public class EnemyController : MonoBehaviour
         Debug.Log("Detect collision with enemy body");
         Collider2D collider = collision.collider;
 
-        if (alive && collider.CompareTag("Player"))
-        {
-            string side = Utils.DetectCollisionSide(gameObject, collider);
-            Debug.Log($"Collide on side: {side}");
+        if (!alive || !collider.CompareTag("Player")) return;
 
-            // jump on top will kill the enemy
-            if (side == "Top")
-            {
-                Die();
-            }
-            // otherwise the player die
-            else
-            {
-                GlobalData.PlayerStatusData.KillPlayer();
-            }
+        string side = Utils.DetectCollisionSide(gameObject, collider);
+
+        if (withHelmet || side == "Left" || side == "Right")
+        {
+            GlobalData.PlayerStatusData.KillPlayer();
+        }
+        else
+        {
+            Die();
         }
     }
 

@@ -51,6 +51,7 @@ public class EnemyPatrol : MonoBehaviour
         }
         else
         {
+            enabled = false;
             rigidBody.velocity = new Vector2(0, 0);
         }
     }
