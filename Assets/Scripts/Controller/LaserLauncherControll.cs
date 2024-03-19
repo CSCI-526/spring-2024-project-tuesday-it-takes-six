@@ -67,9 +67,12 @@ public class LaserLauncherControll : MonoBehaviour
 
     private void ClearPortalLaser()
     {
-        foreach (GameObject portalObj in timePortals)
+        if (timePortals.Length > 0)
         {
-            portalObj.SendMessage("LaserGone");
+            foreach (GameObject portalObj in timePortals)
+            {
+                portalObj.SendMessage("LaserGone");
+            }
         }
     }
 
@@ -104,7 +107,8 @@ public class LaserLauncherControll : MonoBehaviour
                 case "Player":
                 {
                     // kill player, it is the PlayerRB be hit
-                    hitPhysicalInfo.hitObj.transform.parent.gameObject.SendMessage("SetDeath", true);
+                    // hitPhysicalInfo.hitObj.transform.parent.gameObject.SendMessage("SetDeath", true);
+                    GlobalData.PlayerStatusData.KillPlayer();
                     ClearPortalLaser();
                     break;
                 }
