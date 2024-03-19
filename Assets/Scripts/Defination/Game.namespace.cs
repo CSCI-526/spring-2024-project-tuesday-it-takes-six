@@ -27,4 +27,12 @@ namespace Game
         HORIZONTAL,
         VERTICAL
     }
+
+    public enum Side
+    {
+        LEFT,
+        RIGHT,
+        TOP,
+        BOTTOM
+    }
 }

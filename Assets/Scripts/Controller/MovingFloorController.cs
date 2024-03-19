@@ -41,7 +41,6 @@ public class MovingFloorController : MonoBehaviour
         else directionVector = direction ? Vector3.up : Vector3.down;
 
         transform.Translate(directionVector * Time.deltaTime * speed);
-        Debug.Log(Vector3.Distance(endPosition, transform.position));
 
         if ((!direction && Vector3.Distance(startPosition, transform.position) < 0.5f)
             || (direction && Vector3.Distance(endPosition, transform.position) < 0.5f))

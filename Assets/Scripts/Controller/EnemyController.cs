@@ -37,14 +37,14 @@ public class EnemyController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Detect collision with enemy body");
         Collider2D collider = collision.collider;
 
         if (!alive || !collider.CompareTag("Player")) return;
 
-        string side = Utils.DetectCollisionSide(gameObject, collider);
+        Side side = Utils.DetectCollisionSide(collision, transform);
+        Debug.Log($"Detect collision with enemy body: {side}");
 
-        if (withHelmet || side == "Left" || side == "Right")
+        if (withHelmet || side == Side.LEFT || side == Side.RIGHT)
         {
             GlobalData.PlayerStatusData.KillPlayer();
         }

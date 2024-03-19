@@ -11,17 +11,18 @@ namespace Game
         /// detect which side the collision happened
         /// </summary>
         /// <returns>
-        /// "Left" | "Right" | "Top" | "Bottom"
+        /// Side
         /// </returns>
-        public static string DetectCollisionSide(GameObject obj, Collider2D collider)
+        public static Side DetectCollisionSide(Collision2D collision, Transform transform)
         {
-            Vector3 dir = (collider.gameObject.transform.position - obj.transform.position).normalized;
-            var angle = Vector2.SignedAngle(obj.transform.right, dir);
+            Vector2 normal = collision.contacts[0].normal;
+            Vector2 localNormal = transform.InverseTransformDirection(normal);
+            float angle = Mathf.Atan2(localNormal.y, localNormal.x) * Mathf.Rad2Deg;
 
-            if (Mathf.Abs(angle) <= 45) return "Right";
-            if (angle > 45 && angle <= 135) return "Top";
-            if (angle < 45 && angle >= -135) return "Bottom";
-            return "Left";
+            if (Mathf.Abs(angle) <= 45) return Side.LEFT;
+            if (angle > 45 && angle <= 135) return Side.BOTTOM;
+            if (angle < -45 && angle >= -135) return Side.TOP;
+            return Side.RIGHT;
         }
 
         public static bool IsSegmentsIntersect(Vector3 a, Vector3 b, Vector3 c, Vector3 d, out Vector3 intersectPos)
