@@ -13,6 +13,8 @@ public class LaserLauncherControll : MonoBehaviour
 
     private LineDrawer lineDrawer;
 
+    private GameObject activeUI;
+
     private struct HitInfo
     {
         public GameObject hitObj;
@@ -24,6 +26,8 @@ public class LaserLauncherControll : MonoBehaviour
     void Start()
     {
         Physics2D.queriesStartInColliders = false;
+        activeUI = this.transform.GetChild(0).gameObject;
+        activeUI.SetActive(false);
         lineDrawer = GetComponent<LineDrawer>();
         if (lineDrawer == null)
         {
@@ -135,9 +139,17 @@ public class LaserLauncherControll : MonoBehaviour
 
     private void DetectRotate()
     {
-        if (PlayerIsClose() && Input.GetButtonDown("LaserRotate"))
+        if (PlayerIsClose())
         {
-            lauchDirection = Utils.RotateRound(lauchDirection, new Vector3(0, 0, 0), Vector3.forward, rotateAngle);
+            activeUI.SetActive(true);
+            if (Input.GetButtonDown("LaserRotate"))
+            {
+                lauchDirection = Utils.RotateRound(lauchDirection, new Vector3(0, 0, 0), Vector3.forward, rotateAngle);
+            }
+        }
+        else
+        {
+            activeUI.SetActive(false);
         }
     }
 
