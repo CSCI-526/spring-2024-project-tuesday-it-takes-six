@@ -18,6 +18,7 @@ namespace Game
 
         public static PlayerStatusDataManager PlayerStatusData = new();
         public static CheckPointDataManager CheckPointData = new();
+        public static LevelDataManager LevelData = new();
 
         public static void Init()
         {
