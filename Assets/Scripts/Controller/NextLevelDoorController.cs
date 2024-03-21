@@ -7,10 +7,12 @@ using UnityEngine.SceneManagement;
 public class Door : MonoBehaviour
 {
     // Start is called before the first frame update
-    public bool isOpen;
+    [SerializeField]
+    private bool isOpen = false;
     void Start()
     {
-        isOpen = false;
+        if(isOpen) GetComponent<SpriteRenderer>().color = Color.green;
+        else GetComponent<SpriteRenderer>().color = Color.black;
     }
 
     // Update is called once per frame
