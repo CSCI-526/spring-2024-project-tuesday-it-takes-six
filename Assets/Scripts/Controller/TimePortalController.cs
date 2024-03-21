@@ -21,6 +21,13 @@ public class TimePortalController : MonoBehaviour, IChangeable
     private bool isActive = false;
     private GameObject portalUI;
 
+    private struct HitInfo
+    {
+        public GameObject hitObj;
+        public Vector3 hitPoint;
+        public float hitDistance;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,29 +66,95 @@ public class TimePortalController : MonoBehaviour, IChangeable
         }
     }
 
-    private void DrawLaser()
+    private void DrawLaser(Vector3 destination)
     {
         lineDrawer.SetLineStyle(0.05f, 0.05f, Color.yellow);
-        lineDrawer.DrawLine(lauchStartPoint, lauchStartPoint+rayLength*lauchDirection);
+        lineDrawer.DrawLine(lauchStartPoint, destination);
+    }
+
+    private bool HitPhysicalObject(out HitInfo hitInfo)
+    {
+        hitInfo.hitDistance = 1000.0f;
+        hitInfo.hitObj = null;
+        hitInfo.hitPoint = new Vector3();
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, lauchDirection, rayLength, 1<<0);
+        if (hits.Length==0)
+        {
+            return false;
+        }
+        // Debug.Log(hit.collider.transform.name);
+        // Debug.Log(hit.point);
+        RaycastHit2D hit = hits[0];
+        if (hit.collider.tag == "Checkpoint")
+        {
+            if (hits.Length > 1)
+            {
+                hit = hits[1];
+            }
+            else
+            {
+                return false;
+            }
+        }
+        hitInfo.hitObj = hit.collider.gameObject;
+        hitInfo.hitPoint = new Vector3(hit.point.x, hit.point.y, 0);
+        hitInfo.hitDistance = Mathf.Sqrt((transform.position - hitInfo.hitPoint).sqrMagnitude);
+        return true; 
     }
 
     private void HitDetect()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, lauchDirection, rayLength, 1<<0);
-        if (hit.collider != null && hit.collider.tag == "Enemy")
+        HitInfo hitPhysicalInfo = new HitInfo();
+        bool hitWithPhysicalObj = HitPhysicalObject(out hitPhysicalInfo);
+
+        if (hitWithPhysicalObj)
         {
-            GameObject enemyObj = hit.transform.parent.gameObject;
-            enemyObj.SendMessage("Die");
+            DrawLaser(hitPhysicalInfo.hitPoint);
+            switch (hitPhysicalInfo.hitObj.tag)
+            {
+                case "Enemy":
+                {
+                    // Debug.Log("Laser hit Enemy");
+                    Debug.Log(hitPhysicalInfo.hitObj.name);
+                    hitPhysicalInfo.hitObj.transform.parent.gameObject.SendMessage("Die");
+                    break;
+                }
+                case "Player":
+                {
+                    // kill player, it is the PlayerRB be hit
+                    // hitPhysicalInfo.hitObj.transform.parent.gameObject.SendMessage("SetDeath", true);
+                    GlobalData.PlayerStatusData.KillPlayer();
+                    break;
+                }
+                default:
+                {
+                    break;
+                }
+            }
         }
+        else
+        {
+            DrawLaser(transform.position+rayLength*lauchDirection);
+        }
+
     }
 
     public void TransferLaser(object[] drawInfo)
     {
-        Debug.Log("transfer laser");
-        laserTimeTense = currentTimeTense == TimeTense.PRESENT ? TimeTense.PAST : TimeTense.PRESENT;
         lauchDirection = (Vector3) drawInfo[0];
         rayLength = (float) drawInfo[1];
         lauchStartPoint = (Vector3) drawInfo[2];
+        if (isActive)
+        {
+            Debug.Log("transfer laser");
+            laserTimeTense = currentTimeTense == TimeTense.PRESENT ? TimeTense.PAST : TimeTense.PRESENT;
+        }
+        else
+        {
+            Debug.Log("keep laser");
+            laserTimeTense = currentTimeTense;
+            HitDetect();
+        }
     }
 
     public void LaserGone()
@@ -96,7 +169,6 @@ public class TimePortalController : MonoBehaviour, IChangeable
     {
         if (isActive && laserTimeTense == TimeTense.PRESENT && rayLength > 0)
         {
-            DrawLaser();
             HitDetect();
         }
         else 
@@ -109,7 +181,6 @@ public class TimePortalController : MonoBehaviour, IChangeable
     {
         if (isActive && laserTimeTense == TimeTense.PAST && rayLength > 0)
         {
-            DrawLaser();
             HitDetect();
         }
         else 
@@ -127,6 +198,7 @@ public class TimePortalController : MonoBehaviour, IChangeable
         else {
             portalUI.GetComponent<SpriteRenderer>().color = Color.green;
             isActive = true;
+            lineDrawer.ClearLine();
             if (currentTime < sleepDuration + activeDuration)
             {
                 currentTime += Time.deltaTime;  
@@ -134,6 +206,7 @@ public class TimePortalController : MonoBehaviour, IChangeable
             else 
             {
                 isActive = false;
+                lineDrawer.ClearLine();
                 portalUI.GetComponent<SpriteRenderer>().color = Color.black;
                 currentTime = 0.0f;
             }

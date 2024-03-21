@@ -33,7 +33,7 @@ public class TimeSwitch : MonoBehaviour
     {
         GlobalData.TimeTenseData.Init();
         // TODO(keyi): refactor using pub-sub
-        OnTimeSwitch(reportToAnalytics: false);
+        // OnTimeSwitch(reportToAnalytics: false); // no need to do time switch on start, some components haven't been initailized
     }
 
     void Update()
