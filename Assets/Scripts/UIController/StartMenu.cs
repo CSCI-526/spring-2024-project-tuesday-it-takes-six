@@ -7,7 +7,7 @@ public class StartMenu : MonoBehaviour
 {
     public void ClickPlayButton ()
     {
-        SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadScene("LevelSelection");
     }
 
     public void ClickQuitButton()
