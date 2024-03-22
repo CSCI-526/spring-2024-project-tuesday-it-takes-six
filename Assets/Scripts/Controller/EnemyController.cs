@@ -20,6 +20,9 @@ public class EnemyController : MonoBehaviour
 
     private bool withHelmet;
 
+    // Can the corpse rotate after death
+    [SerializeField] bool corpseRotate = true;
+
     private void Awake()
     {
     }
@@ -66,7 +69,8 @@ public class EnemyController : MonoBehaviour
         body.SetActive(alive);
         corpse.SetActive(!alive);
         // Enable rotation
-        gameObject.GetComponent<Rigidbody2D>().freezeRotation = false;
+        if(corpseRotate)
+            gameObject.GetComponent<Rigidbody2D>().freezeRotation = false;
         // corpse is already pushable since it is an rigid body
         // if enemy die in the past, its corpse can be used in the present (removed)
         // if (transform.parent.name == "Past")
