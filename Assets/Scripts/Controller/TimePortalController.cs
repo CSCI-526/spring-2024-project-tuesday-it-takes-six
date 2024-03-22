@@ -77,7 +77,7 @@ public class TimePortalController : MonoBehaviour, IChangeable
         hitInfo.hitDistance = 1000.0f;
         hitInfo.hitObj = null;
         hitInfo.hitPoint = new Vector3();
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, lauchDirection, rayLength, 1<<0);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(lauchStartPoint, lauchDirection, rayLength, 1<<0);
         if (hits.Length==0)
         {
             return false;
@@ -98,7 +98,7 @@ public class TimePortalController : MonoBehaviour, IChangeable
         }
         hitInfo.hitObj = hit.collider.gameObject;
         hitInfo.hitPoint = new Vector3(hit.point.x, hit.point.y, 0);
-        hitInfo.hitDistance = Mathf.Sqrt((transform.position - hitInfo.hitPoint).sqrMagnitude);
+        hitInfo.hitDistance = Mathf.Sqrt((lauchStartPoint - hitInfo.hitPoint).sqrMagnitude);
         return true; 
     }
 
@@ -134,7 +134,7 @@ public class TimePortalController : MonoBehaviour, IChangeable
         }
         else
         {
-            DrawLaser(transform.position+rayLength*lauchDirection);
+            DrawLaser(lauchStartPoint+rayLength*lauchDirection);
         }
 
     }
