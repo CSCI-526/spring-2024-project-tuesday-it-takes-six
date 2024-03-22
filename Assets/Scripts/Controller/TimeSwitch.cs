@@ -32,6 +32,9 @@ public class TimeSwitch : MonoBehaviour
     void Start()
     {
         GlobalData.TimeTenseData.Init();
+        UpdatePastObjects();
+        UpdatePresentObjects();
+        UpdateChangeableObjects();
         // TODO(keyi): refactor using pub-sub
         // OnTimeSwitch(reportToAnalytics: false); // no need to do time switch on start, some components haven't been initailized
     }
