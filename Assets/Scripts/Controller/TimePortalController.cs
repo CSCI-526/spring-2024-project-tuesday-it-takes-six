@@ -20,6 +20,7 @@ public class TimePortalController : MonoBehaviour
 	private float activeDuration = 5.0f;
     private bool isActive = false;
     private GameObject portalUI;
+    private int laserType = 0; // 0: no laser; 1: transfer; 2:pass
 
     private struct HitInfo
     {
@@ -144,10 +145,12 @@ public class TimePortalController : MonoBehaviour
         if (isActive)
         {
             laserTimeTense = currentTimeTense == TimeTense.PRESENT ? TimeTense.PAST : TimeTense.PRESENT;
+            laserType = 1;
         }
         else
         {
             laserTimeTense = currentTimeTense;
+            laserType = 2;
             HitDetect();
         }
     }
@@ -185,7 +188,14 @@ public class TimePortalController : MonoBehaviour
     {
         if (laserTimeTense == GlobalData.TimeTenseData.GetTimeTense() && rayLength > 0)
         {
-            HitDetect();
+            if (laserType != 1 || isActive)
+            {
+                HitDetect();
+            }
+            else
+            {
+                lineDrawer.ClearLine();
+            }
         }
         else
         {
