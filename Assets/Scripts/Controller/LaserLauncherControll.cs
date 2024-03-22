@@ -8,7 +8,7 @@ public class LaserLauncherControll : MonoBehaviour
 
     [SerializeField] private Vector3 lauchDirection = new Vector3(1,0,0);
     [SerializeField] private float rayLength = 15.0f;
-    [SerializeField] private GameObject[] timePortals;
+    [SerializeField] private GameObject[] relatedTo;
     [SerializeField] private float rotateAngle = 45.0f;
 
     private LineDrawer lineDrawer;
@@ -20,6 +20,7 @@ public class LaserLauncherControll : MonoBehaviour
         public GameObject hitObj;
         public Vector3 hitPoint;
         public float hitDistance;
+        public Vector3 hitNormal;
     }
 
     // Start is called before the first frame update
@@ -40,6 +41,7 @@ public class LaserLauncherControll : MonoBehaviour
         hitInfo.hitDistance = 1000.0f;
         hitInfo.hitObj = null;
         hitInfo.hitPoint = new Vector3();
+        hitInfo.hitNormal = new Vector3();
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, lauchDirection, rayLength, 1<<0);
         if (hits.Length==0)
         {
@@ -62,16 +64,17 @@ public class LaserLauncherControll : MonoBehaviour
         hitInfo.hitObj = hit.collider.gameObject;
         hitInfo.hitPoint = new Vector3(hit.point.x, hit.point.y, 0);
         hitInfo.hitDistance = Mathf.Sqrt((transform.position - hitInfo.hitPoint).sqrMagnitude);
+        hitInfo.hitNormal = hit.normal;
         return true; 
     }
 
-    private void ClearPortalLaser()
+    private void ClearTransferredLaser()
     {
-        if (timePortals.Length > 0)
+        if (relatedTo.Length > 0)
         {
-            foreach (GameObject portalObj in timePortals)
+            foreach (GameObject relatedObj in relatedTo)
             {
-                portalObj.SendMessage("LaserGone");
+                relatedObj.SendMessage("LaserGone");
             }
         }
     }
@@ -101,7 +104,7 @@ public class LaserLauncherControll : MonoBehaviour
                     // Debug.Log("Laser hit Enemy");
                     Debug.Log(hitPhysicalInfo.hitObj.name);
                     hitPhysicalInfo.hitObj.transform.parent.gameObject.SendMessage("Die");
-                    ClearPortalLaser();
+                    ClearTransferredLaser();
                     break;
                 }
                 case "Player":
@@ -109,19 +112,29 @@ public class LaserLauncherControll : MonoBehaviour
                     // kill player, it is the PlayerRB be hit
                     // hitPhysicalInfo.hitObj.transform.parent.gameObject.SendMessage("SetDeath", true);
                     GlobalData.PlayerStatusData.KillPlayer();
-                    ClearPortalLaser();
+                    ClearTransferredLaser();
+                    break;
+                }
+                case "Mirror":
+                {
+                    Vector3 reflectDirection = Vector3.Reflect(lauchDirection, hitPhysicalInfo.hitNormal);
+                    object[] para = new object[3];
+                    para[0] = reflectDirection;
+                    para[1] = rayLength - hitPhysicalInfo.hitDistance;
+                    para[2] = hitPhysicalInfo.hitPoint;
+                    hitPhysicalInfo.hitObj.SendMessage("ReflectLaser", para, SendMessageOptions.RequireReceiver);
                     break;
                 }
                 default:
                 {
-                    ClearPortalLaser();
+                    ClearTransferredLaser();
                     break;
                 }
             }
         }
         else
         {
-            ClearPortalLaser();
+            ClearTransferredLaser();
             DrawLaser(transform.position+rayLength*lauchDirection);
         }
 

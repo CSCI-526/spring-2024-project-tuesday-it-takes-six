@@ -8,6 +8,7 @@ TagManager:
   - Corpse
   - Portal
   - Checkpoint
+  - Mirror
   layers:
   - Default
   - TransparentFX
