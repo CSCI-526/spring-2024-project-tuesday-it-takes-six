@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using Game;
 
-public class TimePortalController : MonoBehaviour, IChangeable
+public class TimePortalController : MonoBehaviour
 {
 
     private LineDrawer lineDrawer;
@@ -48,7 +48,6 @@ public class TimePortalController : MonoBehaviour, IChangeable
                 float xDistance = (enemyObj.transform.position.x - transform.position.x)*2.5f;
                 if (enemyObj.transform.parent.name != "Common")
                 {
-                    Debug.Log(enemyObj.transform.parent.name);
                     enemyObj.transform.position = new Vector3(enemyObj.transform.position.x-xDistance, enemyObj.transform.position.y, 0.0f);
                     
                     enemyObj.gameObject.SetActive(false);
@@ -77,13 +76,12 @@ public class TimePortalController : MonoBehaviour, IChangeable
         hitInfo.hitDistance = 1000.0f;
         hitInfo.hitObj = null;
         hitInfo.hitPoint = new Vector3();
-        RaycastHit2D[] hits = Physics2D.RaycastAll(lauchStartPoint, lauchDirection, rayLength, 1<<0);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(lauchStartPoint+0.1f*lauchDirection, lauchDirection, rayLength, 1<<0);
         if (hits.Length==0)
         {
             return false;
         }
-        // Debug.Log(hit.collider.transform.name);
-        // Debug.Log(hit.point);
+
         RaycastHit2D hit = hits[0];
         if (hit.collider.tag == "Checkpoint")
         {
@@ -110,12 +108,11 @@ public class TimePortalController : MonoBehaviour, IChangeable
         if (hitWithPhysicalObj)
         {
             DrawLaser(hitPhysicalInfo.hitPoint);
+            Debug.Log(hitPhysicalInfo.hitObj.name);
             switch (hitPhysicalInfo.hitObj.tag)
             {
                 case "Enemy":
                 {
-                    // Debug.Log("Laser hit Enemy");
-                    Debug.Log(hitPhysicalInfo.hitObj.name);
                     hitPhysicalInfo.hitObj.transform.parent.gameObject.SendMessage("Die");
                     break;
                 }
@@ -146,12 +143,10 @@ public class TimePortalController : MonoBehaviour, IChangeable
         lauchStartPoint = (Vector3) drawInfo[2];
         if (isActive)
         {
-            Debug.Log("transfer laser");
             laserTimeTense = currentTimeTense == TimeTense.PRESENT ? TimeTense.PAST : TimeTense.PRESENT;
         }
         else
         {
-            Debug.Log("keep laser");
             laserTimeTense = currentTimeTense;
             HitDetect();
         }
@@ -159,35 +154,10 @@ public class TimePortalController : MonoBehaviour, IChangeable
 
     public void LaserGone()
     {
-        Debug.Log("LaserGone");
         lineDrawer.ClearLine();
         rayLength = -1.0f;
     }
 
-
-    public void OnPresent()
-    {
-        if (isActive && laserTimeTense == TimeTense.PRESENT && rayLength > 0)
-        {
-            HitDetect();
-        }
-        else 
-        {
-            lineDrawer.ClearLine();
-        }
-    }
-
-    public void OnPast()
-    {
-        if (isActive && laserTimeTense == TimeTense.PAST && rayLength > 0)
-        {
-            HitDetect();
-        }
-        else 
-        {
-            lineDrawer.ClearLine();
-        }
-    }
 
     private void PeriodActive()
     {
@@ -198,7 +168,6 @@ public class TimePortalController : MonoBehaviour, IChangeable
         else {
             portalUI.GetComponent<SpriteRenderer>().color = Color.green;
             isActive = true;
-            lineDrawer.ClearLine();
             if (currentTime < sleepDuration + activeDuration)
             {
                 currentTime += Time.deltaTime;  
@@ -206,16 +175,27 @@ public class TimePortalController : MonoBehaviour, IChangeable
             else 
             {
                 isActive = false;
-                lineDrawer.ClearLine();
                 portalUI.GetComponent<SpriteRenderer>().color = Color.black;
                 currentTime = 0.0f;
             }
         }
     }
 
+    private void LaserCheck()
+    {
+        if (laserTimeTense == GlobalData.TimeTenseData.GetTimeTense() && rayLength > 0)
+        {
+            HitDetect();
+        }
+        else
+        {
+            lineDrawer.ClearLine();
+        }
+    }
     // Update is called once per frame
     void Update()
     {
         PeriodActive();
+        LaserCheck();
     }
 }
