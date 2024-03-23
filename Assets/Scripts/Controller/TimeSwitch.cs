@@ -27,6 +27,8 @@ public class TimeSwitch : MonoBehaviour
     [SerializeField]
     private GameObject ChangeableObjects;
 
+    private GameObject player;
+
     public SendToGoogle analytics;
 
     void Start()
@@ -35,8 +37,8 @@ public class TimeSwitch : MonoBehaviour
         UpdatePastObjects();
         UpdatePresentObjects();
         UpdateChangeableObjects();
-        // TODO(keyi): refactor using pub-sub
-        // OnTimeSwitch(reportToAnalytics: false); // no need to do time switch on start, some components haven't been initailized
+
+        player = GameObject.Find("Player");
     }
 
     void Update()
@@ -92,6 +94,9 @@ public class TimeSwitch : MonoBehaviour
 
         // update text and background color 
         UpdateUI();
+
+        // Reset Player
+        player.transform.SetParent(null);
 
         if (!reportToAnalytics || Env.isDebug) return;
 

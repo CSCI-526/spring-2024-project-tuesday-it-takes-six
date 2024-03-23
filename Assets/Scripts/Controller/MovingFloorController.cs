@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Game;
 
@@ -34,7 +32,7 @@ public class MovingFloorController : MonoBehaviour
         direction = true;
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
         Vector3 directionVector;
         if (movingAxis == Axis.HORIZONTAL) directionVector = direction ? Vector3.right : Vector3.left;
@@ -47,5 +45,19 @@ public class MovingFloorController : MonoBehaviour
         {
             direction = !direction;
         }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (!other.CompareTag("Player")) return;
+        var player = other.transform.parent;
+        player.transform.SetParent(transform);
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (!other.CompareTag("Player")) return;
+        var player = other.transform.parent;
+        player.transform.SetParent(null);
     }
 }
