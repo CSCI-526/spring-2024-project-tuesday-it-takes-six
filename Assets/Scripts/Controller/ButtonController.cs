@@ -52,8 +52,8 @@ public class ButtonController : MonoBehaviour
         isPressed = true;
         transform.localScale = pressedSize;
         Debug.Log("Button: Button is pressed");
-        if (GlobalData.TimeTenseData.IsPresent())
-            nextLevelDoor.SendMessage("setDoorOpen");
+        // Open the door at any time
+        nextLevelDoor.SendMessage("setDoorOpen");
 
 
     }
@@ -63,8 +63,7 @@ public class ButtonController : MonoBehaviour
         isPressed = true;
         transform.localScale = pressedSize;
         Debug.Log("Button: Button is being pressed");
-        if (GlobalData.TimeTenseData.IsPresent())
-            nextLevelDoor.SendMessage("setDoorOpen");
+        nextLevelDoor.SendMessage("setDoorOpen");
 
     }
 
@@ -75,7 +74,7 @@ public class ButtonController : MonoBehaviour
         transform.localScale = size;
         Debug.Log("Button: Button is unpressed.");
         if (GlobalData.TimeTenseData.IsPresent())
-            nextLevelDoor.SendMessage("setDoorClosed");
+        nextLevelDoor.SendMessage("setDoorClosed");
 
        
         
