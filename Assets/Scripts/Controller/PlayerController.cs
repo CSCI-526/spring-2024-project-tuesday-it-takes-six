@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDestroy()
     {
-        playerStatusSubscriber.Unsubscribe(OnPlayerDead);
+        playerStatusSubscriber?.Unsubscribe(OnPlayerDead);
     }
 
     void Update()
