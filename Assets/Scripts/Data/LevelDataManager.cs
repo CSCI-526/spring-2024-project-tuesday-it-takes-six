@@ -1,3 +1,5 @@
+using UnityEngine.SceneManagement;
+
 public class LevelDataManager
 {
     public readonly int LEVEL_COUNT = 6;
@@ -24,5 +26,16 @@ public class LevelDataManager
     public int GetMaxLevelReached()
     {
         return maxLevelReached;
+    }
+
+    public void StartLevel(int x)
+    {
+        SetCurrentLevel(x);
+        SceneManager.LoadScene($"Level{x}");
+    }
+
+    public bool IsLastLevel()
+    {
+        return currentLevel == LEVEL_COUNT;
     }
 }
