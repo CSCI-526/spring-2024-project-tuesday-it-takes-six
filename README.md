@@ -7,6 +7,11 @@
 - Deployment Repo: https://github.com/keyi6/it-takes-six-deployment/
 - Deployment List: http://keyi6.github.io/it-takes-six-deployment/
 
+## Level Design Suggestions
+- the vertical gap <= 2
+- the horizontal gap <= 4
+- the spiky floor length <= 7
+
 
 ## Code Structures
 ### Data Manage
