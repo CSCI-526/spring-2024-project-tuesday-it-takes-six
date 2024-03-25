@@ -7,9 +7,11 @@ public class CheckpointMessage : MonoBehaviour
 {
     public TMP_Text checkpointText; // Reference to the "Checkpoint Reached!" TMP_Text component
     public TMP_Text savingProgressText; // Reference to the "Saving progress..." TMP_Text component
-    public Vector3 screenOffset = new Vector3(0, 30, 0); // Offset of the checkpoint text in screen space
-    public float fadeDuration = 2f; // Duration of the fade effect in seconds for checkpoint text
-    public float displayDuration = 2f; // Duration to display the "Saving progress..." text
+
+    private readonly Vector3 screenOffset = new Vector3(0, -30, 0); // Offset of the checkpoint text in screen space
+
+    public const float fadeDuration = 2f; // Duration of the fade effect in seconds for checkpoint text
+    public const float displayDuration = 2f; // Duration to display the "Saving progress..." text
 
     private Camera mainCamera; // Reference to the main camera
     private Subscriber<Vector3?> subscriber;
@@ -24,16 +26,16 @@ public class CheckpointMessage : MonoBehaviour
         subscriber.Subscribe(OnCheckPointEnter);
     }
 
-    public void OnDestroy()
+    private void OnDestroy()
     {
-        subscriber.Unsubscribe(OnCheckPointEnter);
+        subscriber?.Unsubscribe(OnCheckPointEnter);
     }
 
     private void OnCheckPointEnter(Vector3? position)
     {
         if (position is null) return;
 
-        PositionTextAboveCheckpoint();
+        PositionTextAboveCheckpoint((Vector3)position!);
         checkpointText.gameObject.SetActive(true); // Show the checkpoint text
         StartCoroutine(FadeOutText(checkpointText)); // Start fading out the checkpoint text
 
@@ -42,10 +44,10 @@ public class CheckpointMessage : MonoBehaviour
         Invoke("HideSavingProgressText", displayDuration); // Hide the saving progress text after the duration
     }
 
-    void PositionTextAboveCheckpoint()
+    void PositionTextAboveCheckpoint(Vector3 position)
     {
         // Convert the world position of the checkpoint to a screen position for the checkpoint text
-        Vector2 screenPosition = mainCamera.WorldToScreenPoint(transform.position) + screenOffset;
+        Vector3 screenPosition = mainCamera.WorldToScreenPoint(position) + screenOffset;
         checkpointText.transform.position = screenPosition;
     }
 
