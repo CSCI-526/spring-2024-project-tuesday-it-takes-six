@@ -26,7 +26,7 @@ public class CheckpointMessage : MonoBehaviour
 
     public void OnDestroy()
     {
-        subscriber.Unsubscribe(OnCheckPointEnter);
+        subscriber?.Unsubscribe(OnCheckPointEnter);
     }
 
     private void OnCheckPointEnter(Vector3? position)
