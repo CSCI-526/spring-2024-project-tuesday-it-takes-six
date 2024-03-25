@@ -34,11 +34,9 @@ public class TimeSwitch : MonoBehaviour
     void Start()
     {
         GlobalData.TimeTenseData.Init();
-        UpdatePastObjects();
-        UpdatePresentObjects();
-        UpdateChangeableObjects();
-
         player = GameObject.Find("Player");
+
+        OnTimeSwitch(reportToAnalytics: false);
     }
 
     void Update()

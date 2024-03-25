@@ -7,6 +7,9 @@ public class TimeTenseDataManager : IDataManager
 {
     private TimeTense timeTense = TimeTense.PRESENT;
 
+    private readonly Color PRESENT_BACKGROUND = new (0.2235f, 0.2471f, 0.2941f);
+    private readonly Color PAST_BACKGROUND = new (0.0745f, 0.0824f, 0.0980f);
+
     public bool IsPresent()
     {
         return timeTense == TimeTense.PRESENT;
@@ -29,7 +32,7 @@ public class TimeTenseDataManager : IDataManager
 
     public string GetDisplayText()
     {
-        return IsPresent() ? "Present" : "Past";
+        return IsPresent() ? "Time: Present" : "Time: Past";
     }
 
     /// <summary>
@@ -44,16 +47,10 @@ public class TimeTenseDataManager : IDataManager
     {
         if (IsPresent())
         {
-            // Change background color
-            Color newColor = new Color();
-            ColorUtility.TryParseHtmlString("#314D79", out newColor);
-            return newColor;
+            return PRESENT_BACKGROUND;
         } else
         {
-            // Change background color
-            Color newColor = new Color();
-            ColorUtility.TryParseHtmlString("#327936", out newColor);
-            return newColor;
+            return PAST_BACKGROUND;
         }
     }
 }
