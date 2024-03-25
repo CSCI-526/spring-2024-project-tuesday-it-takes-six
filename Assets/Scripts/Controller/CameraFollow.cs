@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Game;
 using UnityEngine;
 
@@ -12,6 +10,8 @@ public class CameraFollow : MonoBehaviour
     private GameObject rightBoundary;
 
     private readonly float SMOOTH_MOVING_TIME = 0.2f;
+    private readonly Vector3 INIT_POSITION = new(3, 0.5f, 0);
+
     private Vector3 velocity = Vector3.zero;
 
     private float rightmostPosition;
@@ -20,6 +20,7 @@ public class CameraFollow : MonoBehaviour
 
     void Start()
     {
+        transform.position = INIT_POSITION;
         rightmostPosition = rightBoundary.transform.position.x - 8;
         rb = playerRB.GetComponent<Rigidbody2D>();
     }
@@ -50,7 +51,7 @@ public class CameraFollow : MonoBehaviour
 
         float y = playerRB.transform.position.y;
 
-        if (y > 3.5) return 6.0f;
-        return 3.0f;
+        float t = Mathf.RoundToInt(y / 3f) * 3f + 0.5f;
+        return Mathf.Max(t, -10.0f);
     }
 }
