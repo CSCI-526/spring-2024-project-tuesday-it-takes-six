@@ -9,7 +9,12 @@ public class LevelSelection : MonoBehaviour
     private GameObject levels;
     private readonly Color INACTIVE_COLOR = new(255, 255, 255, 0.3f);
 
-    private void Start() {
+    private void Start()
+    {
+    }
+
+    private void InitLevels()
+    {
         for (int i = 0; i < GlobalData.LevelData.LEVEL_COUNT; i ++)
         {
             var level = levels.transform.GetChild(i).gameObject;
@@ -31,6 +36,7 @@ public class LevelSelection : MonoBehaviour
             }
         }
     }
+
 
     public void StartLevel(int x)
     {
