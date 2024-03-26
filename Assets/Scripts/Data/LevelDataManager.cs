@@ -28,10 +28,12 @@ public class LevelDataManager
         return maxLevelReached;
     }
 
-    public void StartLevel(int x)
+    public string StartLevel(int x)
     {
         SetCurrentLevel(x);
-        SceneManager.LoadScene($"Level{x}");
+        string sceneName = $"Level{x}";
+        SceneManager.LoadScene(sceneName);
+        return sceneName;
     }
 
     public bool IsLastLevel()

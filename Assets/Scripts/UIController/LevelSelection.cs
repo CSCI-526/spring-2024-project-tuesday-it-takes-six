@@ -11,6 +11,7 @@ public class LevelSelection : MonoBehaviour
 
     private void Start()
     {
+        InitLevels();
     }
 
     private void InitLevels()

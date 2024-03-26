@@ -36,7 +36,11 @@ public class YouWinMenu: MonoBehaviour
         if (GlobalData.LevelData.IsLastLevel()) return;
 
         int nextLevel = GlobalData.LevelData.GetNextLevel();
-        GlobalData.LevelData.StartLevel(nextLevel);
+
+        GlobalData.Init();
+        GlobalData.CheckPointData.ResetCheckPoint();
+        var sceneName = GlobalData.LevelData.StartLevel(nextLevel);
+        GlobalData.CheckPointData.SetCurrentSceneName(sceneName);
     }
 
     public void ClickMainMenuButton()
