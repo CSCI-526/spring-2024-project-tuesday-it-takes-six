@@ -51,6 +51,8 @@ public class CameraFollow : MonoBehaviour
 
         float y = playerRB.transform.position.y;
 
+        if (y >= 3.5 && y < 8) return 6;
+
         float t = Mathf.RoundToInt(y / 3f) * 3f + 0.5f;
         return Mathf.Max(t, -10.0f);
     }
