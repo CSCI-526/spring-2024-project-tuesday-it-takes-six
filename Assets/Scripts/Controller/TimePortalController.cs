@@ -205,6 +205,7 @@ public class TimePortalController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        currentTimeTense = GlobalData.TimeTenseData.GetTimeTense();
         PeriodActive();
         LaserCheck();
     }
