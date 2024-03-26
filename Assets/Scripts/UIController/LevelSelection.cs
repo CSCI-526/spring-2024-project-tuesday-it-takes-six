@@ -1,6 +1,5 @@
 using Game;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelSelection : MonoBehaviour
@@ -41,6 +40,9 @@ public class LevelSelection : MonoBehaviour
 
     public void StartLevel(int x)
     {
-        GlobalData.LevelData.StartLevel(x);
+        GlobalData.Init();
+        GlobalData.CheckPointData.ResetCheckPoint();
+        var sceneName = GlobalData.LevelData.StartLevel(x);
+        GlobalData.CheckPointData.SetCurrentSceneName(sceneName);
     }
 }
