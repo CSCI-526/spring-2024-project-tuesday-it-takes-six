@@ -64,7 +64,7 @@ public class EnemyController : MonoBehaviour
         {
             Debug.LogWarning("Enemy.Die() not triggered because enemy already died");
         }
-
+        Debug.Log("Enemy: Die!");
         alive = false;
         body.SetActive(alive);
         corpse.SetActive(!alive);
