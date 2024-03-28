@@ -73,7 +73,6 @@ public class ButtonController : MonoBehaviour
         isPressed = false;
         transform.localScale = size;
         Debug.Log("Button: Button is unpressed.");
-        if (GlobalData.TimeTenseData.IsPresent())
         nextLevelDoor.SendMessage("setDoorClosed");
 
        
