@@ -10,7 +10,8 @@ public class LevelSelection : MonoBehaviour
 
     private void Start()
     {
-        InitLevels();
+        // TODO(keyi): Uncomment this when building official release
+        // InitLevels();
     }
 
     private void InitLevels()
