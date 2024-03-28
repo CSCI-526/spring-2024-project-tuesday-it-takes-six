@@ -8,9 +8,9 @@ public class ButtonController : MonoBehaviour
     // Start is called before the first frame update
     // private bool isPressed = false;
     [SerializeField]
-    private Vector3 size = new Vector3(0.8120f, 0.1636081f);
+    private Vector3 size = new Vector3(0.8f, 0.3f);
     [SerializeField]
-    private Vector3 pressedSize = new Vector3(0.8120f, 0.036081f);
+    private Vector3 pressedSize = new Vector3(0.8f, 0.1f);
     [SerializeField]
     private GameObject nextLevelDoor;
 
@@ -29,7 +29,7 @@ public class ButtonController : MonoBehaviour
 
     }
 
-    /*private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
 
         Debug.Log("Button: Corpse enter collision detection area");
@@ -43,9 +43,9 @@ public class ButtonController : MonoBehaviour
             isPressed = true;
             transform.localScale = pressedSize;
         }
-    }*/
+    }
 
-   
+
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -75,8 +75,8 @@ public class ButtonController : MonoBehaviour
         Debug.Log("Button: Button is unpressed.");
         nextLevelDoor.SendMessage("setDoorClosed");
 
-       
-        
+
+
     }
 
 

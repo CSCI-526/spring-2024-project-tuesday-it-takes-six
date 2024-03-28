@@ -21,7 +21,7 @@ public class EnemyController : MonoBehaviour
     private bool withHelmet;
 
     // Can the corpse rotate after death
-    [SerializeField] bool corpseRotate = true;
+    [SerializeField] bool corpseRotate = false;
 
     private void Awake()
     {

@@ -181,7 +181,7 @@ MonoBehaviour:
   body: {fileID: 4680293167799727589}
   corpse: {fileID: 8074110907735218456}
   timePortal: {fileID: 0}
-  corpseRotate: 1
+  corpseRotate: 0
 --- !u!50 &6737937611700936139
 Rigidbody2D:
   serializedVersion: 4
