@@ -1,38 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Game;
 
 public class TimeTenseDataManager : IDataManager
 {
-    private TimeTense timeTense = TimeTense.PRESENT;
+    private readonly Publisher<TimeTense> timeTense = new(TimeTense.PRESENT);
 
-    private readonly Color PRESENT_BACKGROUND = new (0.2235f, 0.2471f, 0.2941f);
-    private readonly Color PAST_BACKGROUND = new (0.0745f, 0.0824f, 0.0980f);
 
     public bool IsPresent()
     {
-        return timeTense == TimeTense.PRESENT;
+        return timeTense.currentValue == TimeTense.PRESENT;
     }
 
     public bool IsPast()
     {
-        return timeTense == TimeTense.PAST;
+        return timeTense.currentValue == TimeTense.PAST;
     }
 
     public void SwitchTimeTense()
     {
-        timeTense = IsPresent() ? TimeTense.PAST : TimeTense.PRESENT;
+        timeTense.Update(IsPresent() ? TimeTense.PAST : TimeTense.PRESENT);
     }
 
     public TimeTense GetTimeTense()
     {
-        return timeTense;
-    }
-
-    public string GetDisplayText()
-    {
-        return IsPresent() ? "Time: Present" : "Time: Past";
+        return timeTense.currentValue;
     }
 
     /// <summary>
@@ -40,17 +30,10 @@ public class TimeTenseDataManager : IDataManager
     /// </summary>
     public void Init()
     {
-        timeTense = TimeTense.PRESENT;
+        timeTense.Update(TimeTense.PRESENT);
     }
-
-    public Color GetBackgroundColor()
+    public Subscriber<TimeTense> CreateTimeTenseSubscriber()
     {
-        if (IsPresent())
-        {
-            return PRESENT_BACKGROUND;
-        } else
-        {
-            return PAST_BACKGROUND;
-        }
+        return timeTense.CreateSubscriber();
     }
 }

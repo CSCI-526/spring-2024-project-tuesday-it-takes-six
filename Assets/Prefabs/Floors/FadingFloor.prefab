@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2305925820561444090}
   - component: {fileID: 3288908196809056324}
   - component: {fileID: 6730475379371199067}
+  - component: {fileID: 827379659606153052}
   m_Layer: 0
   m_Name: FadingFloor
   m_TagString: Untagged
@@ -143,4 +144,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dd2a04e4b3934cba84d86c33ebe837f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 1
+  fadeDuration: 1
+--- !u!114 &827379659606153052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4248850478262126715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5945fcf1927e49c8aff9756bb5f768e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  presentColor: {r: 1, g: 1, b: 1, a: 1}
+  pastColor: {r: 0.2235, g: 0.2471, b: 0.2941, a: 1}

@@ -391,9 +391,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checkpointText: {fileID: 1982851797717059740}
   savingProgressText: {fileID: 5583911472952899865}
-  screenOffset: {x: 0, y: 30, z: 0}
-  fadeDuration: 2
-  displayDuration: 2
 --- !u!114 &3976093914685032478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -406,6 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6abcd8caf3f884aa1b2988ff062d390d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeTense: {fileID: 2339675956465859275}
   level: {fileID: 7592295065816365929}
 --- !u!1 &7364349809589379761
 GameObject:

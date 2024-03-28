@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3288908196809056324}
   - component: {fileID: 2046593520887123894}
   - component: {fileID: 6428174922169556451}
+  - component: {fileID: 6374684090139375666}
   m_Layer: 0
   m_Name: MovingFloor
   m_TagString: Untagged
@@ -192,3 +193,17 @@ MonoBehaviour:
   movingAxis: 0
   movingRange: 3
   speed: 2
+--- !u!114 &6374684090139375666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4248850478262126715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5945fcf1927e49c8aff9756bb5f768e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  presentColor: {r: 1, g: 1, b: 1, a: 1}
+  pastColor: {r: 0.2235, g: 0.2471, b: 0.2941, a: 1}

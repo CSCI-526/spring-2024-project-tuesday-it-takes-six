@@ -28,7 +28,7 @@ namespace Game
 
     public class Subscriber<T>
     {
-        private Publisher<T> _publisher;
+        private readonly Publisher<T> _publisher;
 
         public Subscriber(Publisher<T> publisher)
         {

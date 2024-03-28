@@ -1,29 +1,25 @@
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using Game;
 using UnityEngine.Analytics;
-using Unity.Services.Analytics;
-using System.Net.NetworkInformation;
-using System.Runtime.CompilerServices;
+using Game;
 
 
 public class TimeSwitch : MonoBehaviour
 {
-    [SerializeField]
-    private TMP_Text label;
-
-    private static readonly Dictionary<TimeTense, string> ChangeableCalls = new Dictionary<TimeTense, string>()
-    {
-        { TimeTense.PRESENT, "OnPresent" },
-        { TimeTense.PAST, "OnPast" }
-    };
+    // private static readonly Dictionary<TimeTense, string> ChangeableCalls = new Dictionary<TimeTense, string>()
+    // {
+    //     { TimeTense.PRESENT, "OnPresent" },
+    //     { TimeTense.PAST, "OnPast" }
+    // };
 
     [SerializeField]
     private GameObject presentObjects;
     [SerializeField]
     private GameObject pastObjects;
+
+    /// <summary>
+    /// ⚠️ DEPRECATED
+    /// </summary>
     [SerializeField]
     private GameObject ChangeableObjects;
 
@@ -31,72 +27,40 @@ public class TimeSwitch : MonoBehaviour
 
     public SendToGoogle analytics;
 
-    void Start()
+    private Subscriber<TimeTense> subscriber;
+
+    private void Start()
     {
-        GlobalData.TimeTenseData.Init();
         player = GameObject.Find("Player");
 
-        OnTimeSwitch(reportToAnalytics: false);
+        subscriber = GlobalData.TimeTenseData.CreateTimeTenseSubscriber();
+        subscriber.Subscribe(OnTimeSwitch);
     }
 
-    void Update()
+    private void OnDestroy()
+    {
+        subscriber?.Unsubscribe(OnTimeSwitch);
+    }
+
+    private void Update()
     {
         if (Input.GetButtonDown("TimeSwitch"))
         {
-            Switch();
+            GlobalData.TimeTenseData.SwitchTimeTense();
         }
     }
 
-    private void UpdatePresentObjects()
+    private void OnTimeSwitch(TimeTense tt)
     {
-        foreach (Transform presentTransform in presentObjects.transform)
-        {
-            GameObject presentObj = presentTransform.gameObject;
-            presentObj.SetActive(GlobalData.TimeTenseData.IsPresent());
-        }
-    }
-
-    private void UpdatePastObjects()
-    {
-        foreach (Transform pastTransform in pastObjects.transform)
-        {
-            GameObject pastObj = pastTransform.gameObject;
-            pastObj.SetActive(GlobalData.TimeTenseData.IsPast());
-        }
-    }
-
-    private void UpdateChangeableObjects()
-    {
-        ChangeableObjects.BroadcastMessage(
-            ChangeableCalls[GlobalData.TimeTenseData.GetTimeTense()],
-            SendMessageOptions.DontRequireReceiver
-        );
-    }
-
-    private void UpdateUI()
-    {
-        label.text = GlobalData.TimeTenseData.GetDisplayText();
-        Camera.main.backgroundColor = GlobalData.TimeTenseData.GetBackgroundColor();
-    }
-
-
-    /// <summary>
-    /// Will be triggered when time is switched
-    /// </summary>
-    private void OnTimeSwitch(bool reportToAnalytics = true)
-    {
+        Debug.Log("Time Switched listened");
         // update object groups
-        UpdatePastObjects();
-        UpdatePresentObjects();
-        UpdateChangeableObjects();
-
-        // update text and background color 
-        UpdateUI();
+        UpdatePastObjects(tt);
+        UpdatePresentObjects(tt);
 
         // Reset Player
         player.transform.SetParent(null);
 
-        if (!reportToAnalytics || Env.isDebug) return;
+        if (Env.isDebug) return;
 
         // Analytics
         GlobalData.numberOfTimeSwitches += 1;
@@ -109,10 +73,22 @@ public class TimeSwitch : MonoBehaviour
         Debug.Log("Analytics time switch event submitted");
     }
 
-    private void Switch()
+
+    private void UpdatePresentObjects(TimeTense tt)
     {
-        GlobalData.TimeTenseData.SwitchTimeTense();
-        // TODO(keyi): refactor using pub-sub
-        OnTimeSwitch();
+        foreach (Transform presentTransform in presentObjects.transform)
+        {
+            GameObject presentObj = presentTransform.gameObject;
+            presentObj.SetActive(tt == TimeTense.PRESENT);
+        }
+    }
+
+    private void UpdatePastObjects(TimeTense tt)
+    {
+        foreach (Transform pastTransform in pastObjects.transform)
+        {
+            GameObject pastObj = pastTransform.gameObject;
+            pastObj.SetActive(tt == TimeTense.PAST);
+        }
     }
 }
