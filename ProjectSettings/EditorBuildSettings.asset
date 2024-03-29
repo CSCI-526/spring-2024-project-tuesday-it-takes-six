@@ -33,7 +33,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Level/Deprecated/Level4.unity
     guid: 4584370c4da7c1149afaabe0e910cb8d
   - enabled: 1
-    path: Assets/Scenes/Level/Level3.unity
+    path: Assets/Scenes/Level/Level4.unity
     guid: 60644f0c962e04b07ade51857c39af75
   - enabled: 1
     path: Assets/Scenes/Level/Level2.unity
