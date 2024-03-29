@@ -78,7 +78,7 @@ namespace Game
         /// bool
         public static bool OnGround(Rigidbody2D rb)
         {
-            return Mathf.Abs(rb.velocity.y) <= 1e-3;
+            return Mathf.Abs(rb.velocity.y) <= 1e-2;
         }
     }
 }

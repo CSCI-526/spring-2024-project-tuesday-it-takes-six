@@ -89,18 +89,16 @@ public class PlayerController : MonoBehaviour
     {
         // collect move control input here to avoid camera jitter
         horizontalInput = Input.GetAxis("Horizontal");
-        jumpInput = Input.GetButtonDown("Jump");
-
-        if (GlobalData.PlayerStatusData.IsPlayerAlive()) JumpControl();
+        if (!jumpInput) jumpInput = Input.GetButtonDown("Jump");
     }
 
     void FixedUpdate()
     {
         if (GlobalData.PlayerStatusData.IsPlayerAlive())
         {
+            JumpControl();
             MoveControl();
             DeathCheck();
-            JumpControl();
         }
     }
 
@@ -111,10 +109,10 @@ public class PlayerController : MonoBehaviour
 
     private void JumpControl()
     {
-        // jump only when player is on the ground
         if (jumpInput && Utils.OnGround(rb))
         {
             rb.AddForce(Vector2.up * JUMP_SPEED, ForceMode2D.Impulse);
+            jumpInput = false;
         }
 
         // make it fall faster
