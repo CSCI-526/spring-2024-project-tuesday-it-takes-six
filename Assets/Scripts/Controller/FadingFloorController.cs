@@ -11,9 +11,7 @@ public class FadingFloorController : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
-    private const float SHAKE_AMOUNT = 1.0f;
-    private const float SHAKE_DURATION = 0.5f;
-    private bool isShaking = false;
+    private const float SHAKE_AMOUNT = 0.02f;
     private Vector3 originalPosition;
 
 
@@ -21,12 +19,7 @@ public class FadingFloorController : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        StartCoroutine(Shake());
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -39,42 +32,25 @@ public class FadingFloorController : MonoBehaviour
         Side side = Utils.DetectCollisionSide(collision, transform);
         if (side == Side.TOP)
         {
-            StartShake();
+            StopCoroutine(Shake());
+            StartCoroutine(FadeOut());
         }
     }
 
-
-    public void StartShake()
-    {
-        if (!isShaking)
-        {
-            StartCoroutine(Shake());
-        }
-    }
 
     private IEnumerator Shake()
     {
-        isShaking = true;
         originalPosition = transform.localPosition;
 
-        float elapsedTime = 0f;
-
-        while (elapsedTime < SHAKE_DURATION)
+        while (true)
         {
-            float x = originalPosition.x + Random.Range(-SHAKE_AMOUNT, SHAKE_AMOUNT) * Time.deltaTime;
-            float y = originalPosition.y + Random.Range(-SHAKE_AMOUNT, SHAKE_AMOUNT) * Time.deltaTime;
+            float x = originalPosition.x + Random.Range(-SHAKE_AMOUNT, SHAKE_AMOUNT);
+            float y = originalPosition.y + Random.Range(-SHAKE_AMOUNT, SHAKE_AMOUNT);
 
             transform.localPosition = new Vector3(x, y, originalPosition.z);
 
-            elapsedTime += Time.deltaTime;
             yield return null;
         }
-
-        transform.localPosition = originalPosition;
-        isShaking = false;
-
-        // Call FadeOut after shaking
-        StartCoroutine(FadeOut());
     }
 
     IEnumerator FadeOut()
