@@ -5,7 +5,6 @@ using Game;
 
 public class CheckPointController : MonoBehaviour
 {
-    public SendToGoogle analytics;
 
     public void Start()
     {
@@ -27,8 +26,9 @@ public class CheckPointController : MonoBehaviour
 
             Debug.Log($"Just past a check point with position {position}");
 
-            analytics.Send("passedCheckpoint");
 
+            GlobalData.AnalyticsManager.Send("passedCheckpoint");
+    
             Debug.Log("checkpoint event submitted");
         }
     }
