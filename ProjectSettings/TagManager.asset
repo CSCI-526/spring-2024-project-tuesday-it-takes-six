@@ -9,6 +9,7 @@ TagManager:
   - Portal
   - Checkpoint
   - Mirror
+  - Floor
   layers:
   - Default
   - TransparentFX
