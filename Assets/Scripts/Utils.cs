@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -79,6 +78,40 @@ namespace Game
         public static bool OnGround(Rigidbody2D rb)
         {
             return Mathf.Abs(rb.velocity.y) <= 1e-2;
+        }
+
+
+        public static List<GameObject> FindChildrenWithTag(GameObject parent, string tag)
+        {
+            List<GameObject> taggedChildren = new();
+
+            if (!parent) return taggedChildren;
+
+            // Check if parent itself has the tag
+            if (parent.CompareTag(tag))
+            {
+                taggedChildren.Add(parent);
+            }
+
+            // Recursively find and add all children with the tag
+            foreach (Transform child in parent.transform)
+            {
+                taggedChildren.AddRange(FindChildrenWithTag(child.gameObject, tag));
+            }
+
+            return taggedChildren;
+        }
+
+
+        public static List<T> GetAllComponents<T>(List<GameObject> objects) where T: Component
+        {
+            List<T> components = new();
+            foreach (var obj in objects)
+            {
+                components.AddRange(obj.GetComponentsInChildren<T>());
+            }
+
+            return components;
         }
     }
 }

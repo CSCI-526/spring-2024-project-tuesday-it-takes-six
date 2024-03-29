@@ -29,11 +29,31 @@ public class TimeSwitch : MonoBehaviour
 
         subscriber = GlobalData.TimeTenseData.CreateTimeTenseSubscriber();
         subscriber.Subscribe(OnTimeSwitch, true);
+
+        ColorFloors();
     }
 
     private void OnDestroy()
     {
         subscriber?.Unsubscribe(OnTimeSwitch);
+    }
+
+    private void ColorFloors()
+    {
+        var presentFloors = Utils.FindChildrenWithTag(presentObjects, "Floor");
+        var presentFloorsRender = Utils.GetAllComponents<SpriteRenderer>(presentFloors);
+        var pastFloors = Utils.FindChildrenWithTag(pastObjects, "Floor");
+        var pastFloorsRender = Utils.GetAllComponents<SpriteRenderer>(pastFloors);
+
+        foreach (var r in presentFloorsRender)
+        {
+            r.color = Color.grey;
+        }
+
+        foreach (var r in pastFloorsRender)
+        {
+            r.color = Color.grey;
+        }
     }
 
     private void Update()
