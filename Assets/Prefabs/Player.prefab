@@ -195,6 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1473025085223941406}
+  blood: {fileID: 6863328743093033339, guid: ab391ece3ffe8412bae117f4d59167f3, type: 3}
   analytics: {fileID: 2090487710302974108}
   startPos: {x: 1, y: 0, z: 0}
 --- !u!114 &2090487710302974108
