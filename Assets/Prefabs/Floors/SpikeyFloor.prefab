@@ -43,6 +43,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5564555719230687568}
   - component: {fileID: 5593360874231727231}
+  - component: {fileID: 2122928967151980196}
   m_Layer: 0
   m_Name: Triangle (4)
   m_TagString: Untagged
@@ -117,6 +118,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2122928967151980196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 365112578392513572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5945fcf1927e49c8aff9756bb5f768e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  presentColor: {r: 1, g: 1, b: 1, a: 1}
+  pastColor: {r: 0.0745, g: 0.0824, b: 0.098, a: 1}
 --- !u!1 &1024373647353643384
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,6 +142,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1623361475265379706}
   - component: {fileID: 2256032989024750172}
+  - component: {fileID: 8798714669012582591}
   m_Layer: 0
   m_Name: Triangle (5)
   m_TagString: Untagged
@@ -201,6 +217,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8798714669012582591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024373647353643384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5945fcf1927e49c8aff9756bb5f768e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  presentColor: {r: 1, g: 1, b: 1, a: 1}
+  pastColor: {r: 0.0745, g: 0.0824, b: 0.098, a: 1}
 --- !u!1 &1165704248762916394
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,6 +241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2085580977141585623}
   - component: {fileID: 4021333223688958367}
+  - component: {fileID: 4082993508301229348}
   m_Layer: 0
   m_Name: Triangle (7)
   m_TagString: Untagged
@@ -285,6 +316,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4082993508301229348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165704248762916394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5945fcf1927e49c8aff9756bb5f768e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  presentColor: {r: 1, g: 1, b: 1, a: 1}
+  pastColor: {r: 0.0745, g: 0.0824, b: 0.098, a: 1}
 --- !u!1 &1368108341102884884
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,6 +340,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2833589456949706167}
   - component: {fileID: 7867875759225251323}
+  - component: {fileID: 5489199312217430968}
   m_Layer: 0
   m_Name: Triangle (3)
   m_TagString: Untagged
@@ -369,6 +415,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5489199312217430968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368108341102884884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5945fcf1927e49c8aff9756bb5f768e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  presentColor: {r: 1, g: 1, b: 1, a: 1}
+  pastColor: {r: 0.0745, g: 0.0824, b: 0.098, a: 1}
 --- !u!1 &1739202612692674469
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,6 +439,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3246707167810854365}
   - component: {fileID: 3217026622824686037}
+  - component: {fileID: 4920493876856749497}
   m_Layer: 0
   m_Name: Triangle (1)
   m_TagString: Untagged
@@ -453,6 +514,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4920493876856749497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739202612692674469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5945fcf1927e49c8aff9756bb5f768e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  presentColor: {r: 1, g: 1, b: 1, a: 1}
+  pastColor: {r: 0.0745, g: 0.0824, b: 0.098, a: 1}
 --- !u!1 &2673949152399815066
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,6 +668,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7602760436757473744}
   - component: {fileID: 3806829341726693914}
+  - component: {fileID: 1881561031739737603}
   m_Layer: 0
   m_Name: Triangle (6)
   m_TagString: Untagged
@@ -667,6 +743,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1881561031739737603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6700292912807807727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5945fcf1927e49c8aff9756bb5f768e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  presentColor: {r: 1, g: 1, b: 1, a: 1}
+  pastColor: {r: 0.0745, g: 0.0824, b: 0.098, a: 1}
 --- !u!1 &7480612891166374552
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,6 +767,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7343192047390374179}
   - component: {fileID: 4239880686303039997}
+  - component: {fileID: 7511700503876661056}
   m_Layer: 0
   m_Name: Triangle (2)
   m_TagString: Untagged
@@ -751,6 +842,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7511700503876661056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7480612891166374552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5945fcf1927e49c8aff9756bb5f768e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  presentColor: {r: 1, g: 1, b: 1, a: 1}
+  pastColor: {r: 0.0745, g: 0.0824, b: 0.098, a: 1}
 --- !u!1 &8362595461563013563
 GameObject:
   m_ObjectHideFlags: 0
