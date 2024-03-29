@@ -3,14 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Game;
+using System;
 
 public class EndMenu : MonoBehaviour
 {
     public SendToGoogle analytics;
+
     public void ClickRestartFromCheckpointButton ()
     {
         GlobalData.Init();
-        analytics.Send("checkpointUsed");
+
+        try
+        {
+            analytics.Send("checkpointUsed");
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+        }
+
         SceneManager.LoadScene(GlobalData.CheckPointData.GetCurrentSceneName());
     }
 
