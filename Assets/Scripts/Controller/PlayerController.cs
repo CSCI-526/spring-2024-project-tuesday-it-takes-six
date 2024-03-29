@@ -10,24 +10,26 @@ using System;
 
 public class PlayerController : MonoBehaviour
 {
-    public const float MOVE_SPEED = 6;
-    public const float JUMP_SPEED = 25;
-    public const float GRAVITY_SCALE = 3;
-    public const float FALLING_GRAVITY_SCALE = 4f;
-    public const double EPS = 1e-4;
+    [SerializeField]
+    private Rigidbody2D rb;
 
-    private readonly Vector3 defaultStartPos = new(1.0f, 0.0f, 0.0f);
-
-    public Rigidbody2D rb;
-    public SendToGoogle analytics;
+    [SerializeField]
+    private SendToGoogle analytics;
 
     // public event EventHandler OnPlayerDied;  // leave for future in-scene game over screen
-    private bool OnPlayerDiedEventTriggered;
-    // private start position, for debugging
     [SerializeField]
     private Vector3 startPos = new Vector3();
 
+
+    private const float MOVE_SPEED = 6;
+    private const float JUMP_SPEED = 25;
+    private const float GRAVITY_SCALE = 3;
+    private const float FALLING_GRAVITY_SCALE = 4f;
+    private readonly Vector3 DEFAULT_START_POS = new(1.0f, 0.0f, 0.0f);
+
+
     private float horizontalInput;
+    private bool jumpInput;
     
     private Subscriber<bool> playerStatusSubscriber;
 
@@ -36,7 +38,7 @@ public class PlayerController : MonoBehaviour
         // prevent it from rotating when hitting other objects
         rb.freezeRotation = true;
         // start at desired position when debugging
-        if (!Env.isDebug) transform.position = defaultStartPos;
+        if (!Env.isDebug) transform.position = DEFAULT_START_POS;
         else transform.position = startPos;
 
         playerStatusSubscriber = GlobalData.PlayerStatusData.CreatePlayerStatusSubscriber();
@@ -76,8 +78,6 @@ public class PlayerController : MonoBehaviour
 
         // Analytics
         analytics.Send("playerDied");
-
-        // OnPlayerDied?.Invoke(this, EventArgs.Empty);  // leave for future in-game game over screen
     }
 
     private void OnDestroy()
@@ -89,6 +89,7 @@ public class PlayerController : MonoBehaviour
     {
         // collect move control input here to avoid camera jitter
         horizontalInput = Input.GetAxis("Horizontal");
+        jumpInput = Input.GetButtonDown("Jump");
 
         if (GlobalData.PlayerStatusData.IsPlayerAlive()) JumpControl();
     }
@@ -99,6 +100,7 @@ public class PlayerController : MonoBehaviour
         {
             MoveControl();
             DeathCheck();
+            JumpControl();
         }
     }
 
@@ -109,10 +111,8 @@ public class PlayerController : MonoBehaviour
 
     private void JumpControl()
     {
-        bool isPlayerGrounded = Utils.OnGround(rb);
-
         // jump only when player is on the ground
-        if (Input.GetButtonDown("Jump") && isPlayerGrounded)
+        if (jumpInput && Utils.OnGround(rb))
         {
             rb.AddForce(Vector2.up * JUMP_SPEED, ForceMode2D.Impulse);
         }
