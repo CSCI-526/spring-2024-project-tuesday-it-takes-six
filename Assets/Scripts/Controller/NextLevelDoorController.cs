@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Game;
 
 
 public class Door : MonoBehaviour
@@ -9,7 +10,6 @@ public class Door : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField]
     private bool isOpen = false;
-    public SendToGoogle analytics;
     void Start()
     {
         if(isOpen) GetComponent<SpriteRenderer>().color = Color.green;
@@ -45,7 +45,7 @@ public class Door : MonoBehaviour
     private void NextLevel()
     {
         // TODO: proceed to next level
-        analytics.Send("levelCompleted");
+        GlobalData.AnalyticsManager.Send("levelCompleted");
         SceneManager.LoadScene("YouWin");
     }
 }

@@ -7,7 +7,7 @@ using System;
 
 public class EndMenu : MonoBehaviour
 {
-    public SendToGoogle analytics;
+    
 
     public void ClickRestartFromCheckpointButton ()
     {
@@ -15,7 +15,7 @@ public class EndMenu : MonoBehaviour
 
         try
         {
-            analytics.Send("checkpointUsed");
+            GlobalData.AnalyticsManager.Send("checkpointUsed");
         }
         catch (Exception e)
         {

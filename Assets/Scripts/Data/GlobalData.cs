@@ -17,6 +17,8 @@ namespace Game
         public static CheckPointDataManager CheckPointData = new();
         public static LevelDataManager LevelData = new();
 
+        public static SendToGoogle AnalyticsManager;
+
         public static void Init()
         {
             TimeTenseData.Init();

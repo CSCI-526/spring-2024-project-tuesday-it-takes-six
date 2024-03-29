@@ -19,8 +19,6 @@ public class TimeSwitch : MonoBehaviour
 
     private GameObject player;
 
-    public SendToGoogle analytics;
-
     private Subscriber<TimeTense> subscriber;
 
     private void Start()
@@ -82,7 +80,7 @@ public class TimeSwitch : MonoBehaviour
     {
         // Analytics
         GlobalData.numberOfTimeSwitches += 1;
-        analytics.Send("timeSwitch");
+        GlobalData.AnalyticsManager.Send("timeSwitch");
         var eventData = new Dictionary<string, object>();
         eventData["LastCheckpointBeforeTimeSwitch"] = GlobalData.CheckPointData.GetLastCheckPointPosition();
 

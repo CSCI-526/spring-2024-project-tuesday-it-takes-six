@@ -713,6 +713,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6059352644816994618, guid: 7ea6451e43fcc4d2b9c763c837bb5428, type: 3}
+      propertyPath: analytics
+      value: 
+      objectReference: {fileID: 1441671297}
     - target: {fileID: 8373250506656182970, guid: 7ea6451e43fcc4d2b9c763c837bb5428, type: 3}
       propertyPath: m_Name
       value: CheckPoint
@@ -1256,6 +1260,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6059352644816994618, guid: 7ea6451e43fcc4d2b9c763c837bb5428, type: 3}
+      propertyPath: analytics
+      value: 
+      objectReference: {fileID: 1441671297}
     - target: {fileID: 8373250506656182970, guid: 7ea6451e43fcc4d2b9c763c837bb5428, type: 3}
       propertyPath: m_Name
       value: CheckPoint (2)
@@ -1332,6 +1340,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6059352644816994618, guid: 7ea6451e43fcc4d2b9c763c837bb5428, type: 3}
+      propertyPath: analytics
+      value: 
+      objectReference: {fileID: 1441671297}
     - target: {fileID: 8373250506656182970, guid: 7ea6451e43fcc4d2b9c763c837bb5428, type: 3}
       propertyPath: m_Name
       value: CheckPoint
@@ -1556,6 +1568,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6059352644816994618, guid: 7ea6451e43fcc4d2b9c763c837bb5428, type: 3}
+      propertyPath: analytics
+      value: 
+      objectReference: {fileID: 1441671297}
     - target: {fileID: 8373250506656182970, guid: 7ea6451e43fcc4d2b9c763c837bb5428, type: 3}
       propertyPath: m_Name
       value: CheckPoint (1)
