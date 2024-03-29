@@ -34,7 +34,7 @@ public class TimeSwitch : MonoBehaviour
         player = GameObject.Find("Player");
 
         subscriber = GlobalData.TimeTenseData.CreateTimeTenseSubscriber();
-        subscriber.Subscribe(OnTimeSwitch);
+        subscriber.Subscribe(OnTimeSwitch, true);
     }
 
     private void OnDestroy()
