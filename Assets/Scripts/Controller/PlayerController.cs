@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
 
     [SerializeField]
+    private GameObject blood;
+
+    [SerializeField]
     private SendToGoogle analytics;
 
     // public event EventHandler OnPlayerDied;  // leave for future in-scene game over screen
@@ -26,6 +29,7 @@ public class PlayerController : MonoBehaviour
     private const float GRAVITY_SCALE = 3;
     private const float FALLING_GRAVITY_SCALE = 4f;
     private readonly Vector3 DEFAULT_START_POS = new(1.0f, 0.0f, 0.0f);
+    private const float GAME_OVER_SCENE_SHOWING_DELAY = .6f;
 
 
     private float horizontalInput;
@@ -71,12 +75,13 @@ public class PlayerController : MonoBehaviour
     {
         if (alive) return;
 
-        Debug.Log("Player died");
+        Instantiate(blood, rb.transform.position, Quaternion.identity);
 
         // Store the Scene Name to allow Restart to re-load the scene
         GlobalData.CheckPointData.SetCurrentSceneName(SceneManager.GetActiveScene().name);
-        Invoke("LoadEndScene", 0.6f);
-        Debug.Log("Player Died! Player stop move! Load End scene in 0.6 seconds.");
+
+        Invoke("LoadEndScene", GAME_OVER_SCENE_SHOWING_DELAY);
+        Debug.Log($"Player Died! Player stop move! Load End scene in {GAME_OVER_SCENE_SHOWING_DELAY} seconds.");
 
         // Analytics
         analytics.Send("playerDied");
