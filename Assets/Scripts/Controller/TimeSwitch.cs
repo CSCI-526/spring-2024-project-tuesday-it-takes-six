@@ -6,12 +6,6 @@ using Game;
 
 public class TimeSwitch : MonoBehaviour
 {
-    // private static readonly Dictionary<TimeTense, string> ChangeableCalls = new Dictionary<TimeTense, string>()
-    // {
-    //     { TimeTense.PRESENT, "OnPresent" },
-    //     { TimeTense.PAST, "OnPast" }
-    // };
-
     [SerializeField]
     private GameObject presentObjects;
     [SerializeField]
@@ -47,6 +41,9 @@ public class TimeSwitch : MonoBehaviour
         if (Input.GetButtonDown("TimeSwitch"))
         {
             GlobalData.TimeTenseData.SwitchTimeTense();
+            // reported it by user keystrokes
+            // if put in `OnTimeSwitch`, it will record non-user triggered time switch
+            ReportAnalytics();
         }
     }
 
@@ -59,9 +56,10 @@ public class TimeSwitch : MonoBehaviour
 
         // Reset Player
         player.transform.SetParent(null);
+    }
 
-        if (Env.isDebug) return;
-
+    private void ReportAnalytics()
+    {
         // Analytics
         GlobalData.numberOfTimeSwitches += 1;
         analytics.Send("timeSwitch");
