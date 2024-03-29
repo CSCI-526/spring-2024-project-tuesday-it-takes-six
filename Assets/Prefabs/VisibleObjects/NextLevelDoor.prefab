@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isOpen: 0
+  analytics: {fileID: 2090487710302974108, guid: df3754f5d793743dfb0905af5d19e06d, type: 3}
 --- !u!61 &6768513611102743290
 BoxCollider2D:
   m_ObjectHideFlags: 0

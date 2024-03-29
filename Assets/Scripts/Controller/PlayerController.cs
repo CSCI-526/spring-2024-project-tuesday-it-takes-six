@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private readonly Vector3 defaultStartPos = new(1.0f, 0.0f, 0.0f);
 
     public Rigidbody2D rb;
+    public SendToGoogle analytics;
 
     // public event EventHandler OnPlayerDied;  // leave for future in-scene game over screen
     private bool OnPlayerDiedEventTriggered;
@@ -74,13 +75,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Player Died! Player stop move! Load End scene in 0.6 seconds.");
 
         // Analytics
-        var eventData = new Dictionary<string, object>();
-        eventData["LastCheckpointBeforeDeath"] = GlobalData.CheckPointData.GetLastCheckPointPosition();
-        eventData["NumberEnemiesKilledInLife"] = GlobalData.numberEnemiesKilled;
-        eventData["NumberTimeSwitchesInLife"] = GlobalData.numberOfTimeSwitches;
-
-        Analytics.CustomEvent("PlayerDied", eventData);
-        Analytics.FlushEvents();
+        analytics.Send("playerDied");
 
         // OnPlayerDied?.Invoke(this, EventArgs.Empty);  // leave for future in-game game over screen
     }

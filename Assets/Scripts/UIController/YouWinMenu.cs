@@ -9,6 +9,8 @@ public class YouWinMenu: MonoBehaviour
     [SerializeField]
     private GameObject AllFinishDisplay;
 
+
+
     private void Start()
     {
         bool isLastLevel = GlobalData.LevelData.IsLastLevel();

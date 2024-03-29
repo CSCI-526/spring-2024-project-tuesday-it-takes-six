@@ -64,7 +64,7 @@ public class TimeSwitch : MonoBehaviour
 
         // Analytics
         GlobalData.numberOfTimeSwitches += 1;
-        analytics.Send();
+        analytics.Send("timeSwitch");
         var eventData = new Dictionary<string, object>();
         eventData["LastCheckpointBeforeTimeSwitch"] = GlobalData.CheckPointData.GetLastCheckPointPosition();
 

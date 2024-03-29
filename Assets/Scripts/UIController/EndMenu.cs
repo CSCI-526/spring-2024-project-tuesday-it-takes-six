@@ -6,9 +6,11 @@ using Game;
 
 public class EndMenu : MonoBehaviour
 {
+    public SendToGoogle analytics;
     public void ClickRestartFromCheckpointButton ()
     {
         GlobalData.Init();
+        analytics.Send("checkpointUsed");
         SceneManager.LoadScene(GlobalData.CheckPointData.GetCurrentSceneName());
     }
 
