@@ -1,5 +1,6 @@
 using UnityEngine;
 using Game;
+using System;
 
 public class MovingFloorController : MonoBehaviour
 {
@@ -12,7 +13,11 @@ public class MovingFloorController : MonoBehaviour
 
     [SerializeField]
     [Range(0, 5)]
-    private float speed = 2;
+    private float speed = 1.5f;
+
+    [SerializeField]
+    [Range(0, 40)]
+    private float initialPositionOffset = 0;
 
     private bool direction; // true: start -> end, false: end -> start
 
@@ -21,15 +26,24 @@ public class MovingFloorController : MonoBehaviour
 
     public void Start()
     {
-        Vector3 offset = movingAxis == Axis.HORIZONTAL
+        if (initialPositionOffset > movingRange * 2)
+        {
+            throw new Exception("initial position offset should be less than 2 * moving range");
+        }
+
+        Vector3 range = movingAxis == Axis.HORIZONTAL
             ? new Vector3(movingRange, 0, 0)
             : new Vector3(0, movingRange, 0);
-        
-        startPosition = transform.position - offset;
-        endPosition = transform.position + offset;
 
-        transform.position = startPosition;
-        direction = true;
+        Vector3 initOffset = movingAxis == Axis.HORIZONTAL
+            ? new Vector3(initialPositionOffset, 0, 0)
+            : new Vector3(0, initialPositionOffset, 0);
+        
+        startPosition = transform.position - range;
+        endPosition = transform.position + range;
+
+        transform.position = startPosition + initOffset;
+        direction = Vector3.Distance(endPosition, transform.position) > 0.01f;
     }
 
     public void FixedUpdate()
@@ -40,8 +54,8 @@ public class MovingFloorController : MonoBehaviour
 
         transform.Translate(directionVector * Time.deltaTime * speed);
 
-        if ((!direction && Vector3.Distance(startPosition, transform.position) < 0.5f)
-            || (direction && Vector3.Distance(endPosition, transform.position) < 0.5f))
+        if ((!direction && Vector3.Distance(startPosition, transform.position) < 0.01f)
+            || (direction && Vector3.Distance(endPosition, transform.position) < 0.01f))
         {
             direction = !direction;
         }
