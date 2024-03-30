@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Game;
 using UnityEngine;
 
@@ -14,15 +15,31 @@ public class FadingFloorController : MonoBehaviour
     private const float SHAKE_AMOUNT = 0.02f;
     private Vector3 originalPosition;
 
+    private bool isStepped = false;
+
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         StartCoroutine(Shake());
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnEnable()
+    {
+        StartCoroutine(Shake());
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+        if (isStepped)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         Collider2D collider = collision.collider;
 
@@ -33,6 +50,7 @@ public class FadingFloorController : MonoBehaviour
         if (side == Side.TOP)
         {
             StopCoroutine(Shake());
+            isStepped = true;
             StartCoroutine(FadeOut());
         }
     }
@@ -64,6 +82,7 @@ public class FadingFloorController : MonoBehaviour
             currentTime += Time.deltaTime;
             yield return null;
         }
-        spriteRenderer.gameObject.SetActive(false);
+
+        gameObject.SetActive(false);
     }
 }
