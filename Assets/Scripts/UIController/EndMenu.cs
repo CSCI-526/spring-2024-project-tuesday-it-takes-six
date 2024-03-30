@@ -13,16 +13,9 @@ public class EndMenu : MonoBehaviour
     {
         GlobalData.Init();
 
-        try
-        {
-            GlobalData.AnalyticsManager.Send("checkpointUsed");
-        }
-        catch (Exception e)
-        {
-            Debug.LogError(e);
-        }
-
         SceneManager.LoadScene(GlobalData.CheckPointData.GetCurrentSceneName());
+
+        
     }
 
     public void ClickRestartButton ()

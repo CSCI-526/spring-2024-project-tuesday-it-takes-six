@@ -45,6 +45,9 @@ public class PlayerController : MonoBehaviour
         if (!Env.isDebug) transform.position = DEFAULT_START_POS;
         else transform.position = startPos;
 
+        // Analytics initialization
+        GlobalData.AnalyticsManager = analytics;
+
         playerStatusSubscriber = GlobalData.PlayerStatusData.CreatePlayerStatusSubscriber();
         playerStatusSubscriber.Subscribe(OnPlayerDead);
 
@@ -53,10 +56,17 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Reset player to check point");
             transform.position = (Vector3)lastPos;
+            try
+            {
+                GlobalData.AnalyticsManager.Send("checkpointUsed");
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+            }
         }
 
-        // Analytics initialization
-        GlobalData.AnalyticsManager = analytics;
+        
 
         Debug.Log("pre Analytics set up!");
         try
@@ -84,7 +94,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log($"Player Died! Player stop move! Load End scene in {GAME_OVER_SCENE_SHOWING_DELAY} seconds.");
 
         // Analytics
-        analytics.Send("playerDied");
+        GlobalData.AnalyticsManager.Send("playerDied");
     }
 
     private void OnDestroy()
