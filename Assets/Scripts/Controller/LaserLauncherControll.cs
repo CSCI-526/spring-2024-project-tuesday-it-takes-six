@@ -162,6 +162,7 @@ public class LaserLauncherControll : MonoBehaviour
             if (Input.GetButtonDown("LaserRotate"))
             {
                 lauchDirection = Utils.RotateRound(lauchDirection, new Vector3(0, 0, 0), Vector3.forward, rotateAngle);
+                ClearTransferredLaser();
             }
         }
         else
