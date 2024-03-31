@@ -82,6 +82,16 @@ public class MirrorController : MonoBehaviour
                     GlobalData.PlayerStatusData.KillPlayer();
                     break;
                 }
+                case "Portal":
+                {
+                    // Debug.Log("Laser hit Time Portal");
+                    object[] para = new object[3];
+                    para[0] = lauchDirection;
+                    para[1] = rayLength - hitPhysicalInfo.hitDistance;
+                    para[2] = hitPhysicalInfo.hitPoint;
+                    hitPhysicalInfo.hitObj.SendMessage("TransferLaser", para, SendMessageOptions.RequireReceiver);
+                    break;
+                }
                 default:
                 {
                     break;
