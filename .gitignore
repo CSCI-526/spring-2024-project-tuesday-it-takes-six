@@ -79,4 +79,5 @@ crashlytics-build.properties
 
 
 Assets/Scenes/Test.unity
+Assets/Scenes/Test.unity.*
 
