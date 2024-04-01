@@ -19,7 +19,7 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "buildOutputDirList",
-                "value": "{\"m_Value\":\"/Users/keyi/Workspace/it-takes-six-deployment/0328;C:/Course_Material/CSCI526/build;/Users/keyi/Workspace/it-takes-six-deployment/0325-debug;/Users/keyi/Workspace/it-takes-six-deployment/0322;/Users/keyi/Workspace/it-takes-six-deployment/0321;/Users/keyi/Workspace/it-takes-six-deployment/03:21;/Users/aryanshukla/Documents/USC/Academics/cs526/spring-2024-project-tuesday-it-takes-six/WebGL Builds;;;\"}"
+                "value": "{\"m_Value\":\"/Users/keyi/Workspace/it-takes-six-deployment/0330;/Users/keyi/Workspace/it-takes-six-deployment/0328;C:/Course_Material/CSCI526/build;/Users/keyi/Workspace/it-takes-six-deployment/0325-debug;/Users/keyi/Workspace/it-takes-six-deployment/0322;/Users/keyi/Workspace/it-takes-six-deployment/0321;/Users/keyi/Workspace/it-takes-six-deployment/03:21;/Users/aryanshukla/Documents/USC/Academics/cs526/spring-2024-project-tuesday-it-takes-six/WebGL Builds;;\"}"
             }
         ]
     }
