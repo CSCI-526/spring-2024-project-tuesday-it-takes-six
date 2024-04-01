@@ -1,20 +1,18 @@
 using UnityEngine;
-using UnityEngine.Analytics;
-using System.Collections.Generic;
 using Game;
+using UnityEditor.Build;
+using System;
 
 public class CheckPointController : MonoBehaviour
 {
 
     public void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    public void Update()
-    {
-
+        string parentName = gameObject.transform.parent?.name ?? "Root";
+        if (parentName != "Present" && parentName != "Common")
+        {
+            throw new Exception($"Checkpoint should be put under `Present` or `Common` and cannot be placed at `{parentName}`");
+        }
     }
 
     public void OnTriggerEnter2D(Collider2D other)
