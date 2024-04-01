@@ -1,6 +1,5 @@
 using UnityEngine;
 using Game;
-using UnityEditor.Build;
 using System;
 
 public class CheckPointController : MonoBehaviour

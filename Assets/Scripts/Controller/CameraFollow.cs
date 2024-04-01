@@ -47,6 +47,7 @@ public class CameraFollow : MonoBehaviour
 
     private float GetYPos()
     {
+        // only move y axis when player is not in the air
         if (!Utils.OnGround(rb)) return prevY;
 
         float y = playerRB.transform.position.y;
