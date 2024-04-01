@@ -261,7 +261,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1973184848206216426, guid: 44373c1366e91194fbd516b802b0337f, type: 3}
       propertyPath: m_Name
-      value: VerticalGreenButton
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2255262600124502878, guid: 44373c1366e91194fbd516b802b0337f, type: 3}
       propertyPath: m_Text
@@ -422,7 +422,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9100150734294844958, guid: 452f2e8b7e5708f4e9551a097c23f3f2, type: 3}
       propertyPath: m_Name
-      value: VerticalBlueButton
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -579,7 +579,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2221953267560834577, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
       propertyPath: m_Name
-      value: VerticalOrangeButton
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6940135510103349214, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
       propertyPath: m_Sprite
@@ -653,7 +653,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.71800005}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.06933594, y: 251.12012}
+  m_AnchoredPosition: {x: -0.06933594, y: 218}
   m_SizeDelta: {x: 160.00801, y: 33.457687}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &391683371
@@ -935,7 +935,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2221953267560834577, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
       propertyPath: m_Name
-      value: VerticalOrangeButton (1)
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2221953267560834577, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8324160754942202934, guid: a98e38a09ea5a684fbe07e70cd65fa96, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -976,7 +980,7 @@ Transform:
   m_GameObject: {fileID: 793627395}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 311, y: -171.11774, z: -2.3988066}
+  m_LocalPosition: {x: 361, y: -191, z: -2.3988066}
   m_LocalScale: {x: 0.8153251, y: 0.81532514, z: 0.81532514}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1010,7 +1014,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5603037501133432756, guid: 2f74ecb441300fa468c20abcf70c6599, type: 3}
       propertyPath: m_Name
-      value: VerticalRedButton
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6175579132029237070, guid: 2f74ecb441300fa468c20abcf70c6599, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -1534,7 +1538,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5603037501133432756, guid: 2f74ecb441300fa468c20abcf70c6599, type: 3}
       propertyPath: m_Name
-      value: VerticalRedButton (1)
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6175579132029237070, guid: 2f74ecb441300fa468c20abcf70c6599, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
