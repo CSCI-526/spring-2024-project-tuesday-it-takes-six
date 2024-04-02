@@ -55,7 +55,7 @@ public class CameraFollow : MonoBehaviour
 
     private void SmoothFollowPlayer()
     {
-        float x = Mathf.Min(playerRB.transform.position.x + 2, rightmostPosition);
+        float x = Mathf.Min(playerRB.transform.position.x + 6, rightmostPosition);
         float y = GetYPos();
         float z = playerRB.transform.position.z - 1;
 
@@ -75,9 +75,7 @@ public class CameraFollow : MonoBehaviour
 
         float y = playerRB.transform.position.y;
 
-        if (y >= 3.5 && y < 8) return 6;
-
-        float t = Mathf.RoundToInt(y / 3f) * 3f + 0.5f;
+        float t = Mathf.RoundToInt(y / 4f) * 4f;
         return Mathf.Max(t, -10.0f);
     }
 
