@@ -15,6 +15,7 @@ public class SendToGoogle : MonoBehaviour
     private string _timePassedSinceGameStart;
     private string _currentLevel;
     private string _eventType;
+    private string _debug;
 
 
 
@@ -26,13 +27,14 @@ public class SendToGoogle : MonoBehaviour
         _currentLevel = GlobalData.LevelData.GetCurrentLevel().ToString();
         _timePassedSinceGameStart = TimeSpan.FromTicks(DateTime.Now.Ticks - GlobalData._sessionID).TotalMinutes.ToString();
         _eventType = eventType;
+        _debug = Env.isDebug.ToString();
 
 
-        StartCoroutine(Post(_sessionID.ToString(), _numTimeSwitches,_mostRecentCheckpoint, _timePassedSinceGameStart, _currentLevel, _eventType));
+        StartCoroutine(Post(_sessionID.ToString(), _numTimeSwitches,_mostRecentCheckpoint, _timePassedSinceGameStart, _currentLevel, _eventType, _debug));
 
     }
 
-    private IEnumerator Post(string sessionID, string numTimeSwitches, string mostRecentCheckpoint, string timePassedSinceGameStart, string currentLevel, string eventType)
+    private IEnumerator Post(string sessionID, string numTimeSwitches, string mostRecentCheckpoint, string timePassedSinceGameStart, string currentLevel, string eventType, string isDebug)
     {
         WWWForm form = new WWWForm();
         form.AddField("entry.1399250158", sessionID);
@@ -41,6 +43,7 @@ public class SendToGoogle : MonoBehaviour
         form.AddField("entry.1169508124", timePassedSinceGameStart);
         form.AddField("entry.869404102", currentLevel);
         form.AddField("entry.17129386", eventType);
+        form.AddField("entry.214115624", isDebug);
 
 
         using (UnityWebRequest www = UnityWebRequest.Post(URL, form))
