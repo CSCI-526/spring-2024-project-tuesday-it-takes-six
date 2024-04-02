@@ -12,8 +12,8 @@ public class MovingFloorController : MonoBehaviour
     private float movingRange = 3;
 
     [SerializeField]
-    [Range(0, 5)]
-    private float speed = 1.5f;
+    [Range(0, 2f)]
+    private float speed = 1f;
 
     [SerializeField]
     [Range(0, 40)]

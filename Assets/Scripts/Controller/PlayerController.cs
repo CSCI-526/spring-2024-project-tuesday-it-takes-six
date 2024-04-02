@@ -66,7 +66,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        
 
         Debug.Log("pre Analytics set up!");
         try

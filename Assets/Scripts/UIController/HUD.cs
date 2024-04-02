@@ -22,8 +22,8 @@ public class HUD : MonoBehaviour
 
     private readonly Dictionary<TimeTense, Color> COLOR_MAPPING = new()
     {
-        { TimeTense.PRESENT, new (0.0745f, 0.0824f, 0.0980f) },
-        { TimeTense.PAST, new (0.3725f, 0.4118f, 0.4902f) },
+        { TimeTense.PAST, new (0.249f, 0.260f, 0.2735f) },
+        { TimeTense.PRESENT, new (0.219f, 0.2809f, 0.304f) },
     };
 
 
