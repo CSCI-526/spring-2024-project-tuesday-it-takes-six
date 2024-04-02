@@ -10,12 +10,17 @@ public class LevelSelection : MonoBehaviour
 
     private void Start()
     {
-        // TODO(keyi): Uncomment this when building official release
-        // InitLevels();
+        InitLevels();
     }
 
     private void InitLevels()
     {
+        int maxLevelReached =  GlobalData.LevelData.GetMaxLevelReached();
+        // if the player finished the first two level, the player can start from any level
+        int maxEnabledLevels = maxLevelReached <= 2
+            ? maxLevelReached
+            : GlobalData.LevelData.LEVEL_COUNT;
+
         for (int i = 0; i < GlobalData.LevelData.LEVEL_COUNT; i ++)
         {
             var level = levels.transform.GetChild(i).gameObject;
@@ -23,7 +28,7 @@ public class LevelSelection : MonoBehaviour
             var btn = level.GetComponent<Button>();
             var text = level.transform.GetChild(0).GetComponent<Text>();
 
-            if (i >= GlobalData.LevelData.GetMaxLevelReached())
+            if (i >= maxEnabledLevels)
             {
                 img.color = INACTIVE_COLOR;
                 text.color = INACTIVE_COLOR;
