@@ -612,11 +612,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6591473972029877583, guid: b49b8b2831def44fa9717f5f74f15a73, type: 3}
       propertyPath: Velocity.x
-      value: 6.7
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7761828570847213833, guid: b49b8b2831def44fa9717f5f74f15a73, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 25.3
+      value: 24.94
       objectReference: {fileID: 0}
     - target: {fileID: 7761828570847213833, guid: b49b8b2831def44fa9717f5f74f15a73, type: 3}
       propertyPath: m_LocalPosition.y
@@ -677,7 +677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6730475379371199067, guid: 909e9a2ee04474ea9803cd4f3c5d11e5, type: 3}
       propertyPath: fadeDuration
-      value: 0.9
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 7937851947551040777, guid: 909e9a2ee04474ea9803cd4f3c5d11e5, type: 3}
       propertyPath: m_LocalScale.x
