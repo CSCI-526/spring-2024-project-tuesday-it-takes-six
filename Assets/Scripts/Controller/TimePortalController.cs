@@ -19,6 +19,9 @@ public class TimePortalController : MonoBehaviour
     private float sleepDuration = 5.0f;
 	private float activeDuration = 5.0f;
     private bool isActive = false;
+    private bool corpseInPortal = false;
+    private int corpseEnterDirection;
+    private GameObject enemyObj;
     private GameObject portalUI;
     private int laserType = 0; // 0: no laser; 1: transfer; 2:pass
 
@@ -39,29 +42,38 @@ public class TimePortalController : MonoBehaviour
         lineDrawer = GetComponent<LineDrawer>();
     }
 
-    public void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (isActive)
+        if (other.CompareTag("Corpse"))
         {
-            if (other.CompareTag("Corpse"))
+            enemyObj = other.transform.parent.gameObject;
+            corpseInPortal = true;
+            corpseEnterDirection = (transform.position.x - enemyObj.transform.position.x) > 0 ? 1 : -1;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Corpse"))
+        {
+            corpseInPortal = false;
+        }
+    }
+
+    private void TransferCorpse()
+    {
+        if (corpseInPortal && isActive)
+        {
+            float xDistance = enemyObj.transform.localScale.x/2.0f + 0.2f;
+            enemyObj.transform.position = new Vector3(transform.position.x + xDistance * corpseEnterDirection, enemyObj.transform.position.y, 0.0f);
+            enemyObj.gameObject.SetActive(false);
+            if (enemyObj.transform.parent.name == "Present")
             {
-                GameObject enemyObj = other.transform.parent.gameObject;
-                float xDistance = (enemyObj.transform.position.x - transform.position.x)*2.5f;
-                if (enemyObj.transform.parent.name != "Common")
-                {
-                    enemyObj.transform.position = new Vector3(enemyObj.transform.position.x-xDistance, enemyObj.transform.position.y, 0.0f);
-                    
-                    enemyObj.gameObject.SetActive(false);
-                    if (enemyObj.transform.parent.name == "Present")
-                    {
-                        
-                        enemyObj.transform.parent = GameObject.Find("Past").transform;
-                    }
-                    else 
-                    {
-                        enemyObj.transform.parent = GameObject.Find("Present").transform;
-                    }
-                }
+                enemyObj.transform.parent = GameObject.Find("Past").transform;
+            }
+            else 
+            {
+                enemyObj.transform.parent = GameObject.Find("Present").transform;
             }
         }
     }
@@ -109,7 +121,7 @@ public class TimePortalController : MonoBehaviour
         if (hitWithPhysicalObj)
         {
             DrawLaser(hitPhysicalInfo.hitPoint);
-            Debug.Log(hitPhysicalInfo.hitObj.name);
+            // Debug.Log(hitPhysicalInfo.hitObj.name);
             switch (hitPhysicalInfo.hitObj.tag)
             {
                 case "Enemy":
@@ -208,5 +220,6 @@ public class TimePortalController : MonoBehaviour
         currentTimeTense = GlobalData.TimeTenseData.GetTimeTense();
         PeriodActive();
         LaserCheck();
+        TransferCorpse();
     }
 }
