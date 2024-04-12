@@ -10,7 +10,7 @@ public class FadingFloorController : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
-    private const float SHAKE_AMOUNT = 0.02f;
+    private const float SHAKE_AMOUNT = 0.05f;
     private Vector3 originalPosition;
 
     private bool isStepped = false;
