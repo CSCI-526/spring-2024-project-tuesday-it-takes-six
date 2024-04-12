@@ -18,7 +18,8 @@ namespace Game
 
         // our customized keystrokes, in "edit" - "setting" - "input manager"
         public const string TIME_SWITCH = "Q";
-        public const string LASER_ROTATE = "F";
+        public const string LASER_ROTATE_ANTICLOCK = "F";
+        public const string LASER_ROTATE_CLOCK = "Q";
     }
 
     public enum Axis

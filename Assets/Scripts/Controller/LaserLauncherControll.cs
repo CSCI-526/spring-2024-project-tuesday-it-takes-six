@@ -159,9 +159,14 @@ public class LaserLauncherControll : MonoBehaviour
         if (PlayerIsClose())
         {
             activeUI.SetActive(true);
-            if (Input.GetButtonDown("LaserRotate"))
+            if (Input.GetButtonDown("LaserRotateAntiClock"))
             {
                 lauchDirection = Utils.RotateRound(lauchDirection, new Vector3(0, 0, 0), Vector3.forward, rotateAngle);
+                ClearTransferredLaser();
+            }
+            else if (Input.GetButtonDown("LaserRotateClock"))
+            {
+                lauchDirection = Utils.RotateRound(lauchDirection, new Vector3(0, 0, 0), -Vector3.forward, rotateAngle);
                 ClearTransferredLaser();
             }
         }
