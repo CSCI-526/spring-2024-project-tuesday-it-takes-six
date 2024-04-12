@@ -10,7 +10,6 @@ namespace Game
         PAST
     }
 
-    // TODO(keyi): read keys from unity, do not need hard code
     public static class KeyMapping 
     {
         public const string LEFT = "A";

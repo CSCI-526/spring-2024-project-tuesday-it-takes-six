@@ -39,12 +39,11 @@ public class Door : MonoBehaviour
         // if it is not open or the collider is not player, ignore any entering
         if (!isOpen || !collider.CompareTag("Player")) return;
 
-        NextLevel();
+        CompleteThisLevel();
     }
 
-    private void NextLevel()
+    private void CompleteThisLevel()
     {
-        // TODO: proceed to next level
         GlobalData.AnalyticsManager.Send("levelCompleted");
         SceneManager.LoadScene("YouWin");
     }
