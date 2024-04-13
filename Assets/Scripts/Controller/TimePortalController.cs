@@ -24,7 +24,7 @@ public class TimePortalController : MonoBehaviour
     private GameObject enemyObj;
     private GameObject portalUI;
     private int laserType = 0; // 0: no laser; 1: transfer; 2:pass
-
+    private bool hitPlayer = false;
     private struct HitInfo
     {
         public GameObject hitObj;
@@ -131,9 +131,11 @@ public class TimePortalController : MonoBehaviour
                 }
                 case "Player":
                 {
-                    // kill player, it is the PlayerRB be hit
-                    // hitPhysicalInfo.hitObj.transform.parent.gameObject.SendMessage("SetDeath", true);
-                    GlobalData.PlayerStatusData.KillPlayer();
+                    if (!hitPlayer)
+                    {
+                        GlobalData.PlayerStatusData.KillPlayer();
+                        hitPlayer = true;
+                    }
                     break;
                 }
                 default:

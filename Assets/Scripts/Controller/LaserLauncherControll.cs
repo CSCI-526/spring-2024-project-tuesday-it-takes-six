@@ -14,6 +14,7 @@ public class LaserLauncherControll : MonoBehaviour
     private LineDrawer lineDrawer;
 
     private GameObject activeUI;
+    private bool hitPlayer = false;
 
     private struct HitInfo
     {
@@ -111,8 +112,12 @@ public class LaserLauncherControll : MonoBehaviour
                 {
                     // kill player, it is the PlayerRB be hit
                     // hitPhysicalInfo.hitObj.transform.parent.gameObject.SendMessage("SetDeath", true);
-                    GlobalData.PlayerStatusData.KillPlayer();
-                    ClearTransferredLaser();
+                    if (!hitPlayer)
+                    {
+                        GlobalData.PlayerStatusData.KillPlayer();
+                        ClearTransferredLaser();
+                        hitPlayer = true;
+                    }
                     break;
                 }
                 case "Mirror":
