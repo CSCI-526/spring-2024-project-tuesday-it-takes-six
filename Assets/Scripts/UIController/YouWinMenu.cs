@@ -10,7 +10,6 @@ public class YouWinMenu: MonoBehaviour
     private GameObject AllFinishDisplay;
 
 
-
     private void Start()
     {
         bool isLastLevel = GlobalData.LevelData.IsLastLevel();
@@ -32,7 +31,7 @@ public class YouWinMenu: MonoBehaviour
 
     public void ClickMainMenuButton()
     {   
-        //Reset the stored Scene Name and the Checkpoint status
+        // Reset the stored Scene Name and the Checkpoint status
         GlobalData.CheckPointData.ResetCheckPoint();
         SceneManager.LoadScene("StartMenu");
     }
