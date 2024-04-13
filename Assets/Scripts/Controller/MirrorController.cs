@@ -13,7 +13,7 @@ public class MirrorController : MonoBehaviour
     private float rayLength = 0.0f;
     private Vector3 lauchStartPoint;
     private TimeTense laserTimeTense;
-    private bool hitPlayer = false;
+
     private struct HitInfo
     {
         public GameObject hitObj;
@@ -77,11 +77,9 @@ public class MirrorController : MonoBehaviour
                 }
                 case "Player":
                 {
-                    if (!hitPlayer)
-                    {
-                        GlobalData.PlayerStatusData.KillPlayer();
-                        hitPlayer = true;
-                    }
+                    // kill player, it is the PlayerRB be hit
+                    // hitPhysicalInfo.hitObj.transform.parent.gameObject.SendMessage("SetDeath", true);
+                    GlobalData.PlayerStatusData.KillPlayer();
                     break;
                 }
                 case "Portal":
