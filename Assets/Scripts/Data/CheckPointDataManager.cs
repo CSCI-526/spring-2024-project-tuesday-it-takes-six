@@ -1,10 +1,10 @@
-using System;
 using UnityEngine;
 using Game;
 
-public class CheckPointDataManager : IDataManager
+public class CheckPointDataManager
 {
     private readonly Publisher<Vector3?> lastCheckPointPosition = new(null);
+    private readonly Publisher<bool> resetSignal = new(false);
     private string currentSceneName = "";
 
 
@@ -39,9 +39,13 @@ public class CheckPointDataManager : IDataManager
         return lastCheckPointPosition.CreateSubscriber();
     }
 
-    public void Init()
+    public Subscriber<bool> CreateResetSignalSubscriber()
     {
-        // do nothing
-        // no need to reset check point information when reloading game
+        return resetSignal.CreateSubscriber();
+    }
+
+    public void Reset()
+    {
+        resetSignal.Update(true);
     }
 }

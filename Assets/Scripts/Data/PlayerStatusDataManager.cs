@@ -9,7 +9,7 @@ public class PlayerStatusDataManager : IDataManager
 
     public void Init()
     {
-        alive.Update(true);
+        RevivePlayer();
     }
 
     public void KillPlayer()
@@ -18,6 +18,11 @@ public class PlayerStatusDataManager : IDataManager
         {
             alive.Update(false);
         }
+    }
+
+    public void RevivePlayer()
+    {
+        alive.Update(true);
     }
 
     public bool IsPlayerAlive()

@@ -29,5 +29,4 @@ public class CheckPointController : MonoBehaviour
             Debug.Log("checkpoint event submitted");
         }
     }
-
 }

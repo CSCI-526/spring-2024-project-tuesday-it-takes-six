@@ -35,4 +35,10 @@ namespace Game
         TOP,
         BOTTOM
     }
+
+    public enum OverlayContent
+    {
+        NONE,
+        GAME_OVER
+    }
 }

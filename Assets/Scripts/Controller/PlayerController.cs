@@ -7,6 +7,7 @@ using UnityEngine.Analytics;
 using Unity.Services.Analytics;
 using Unity.Services.Core;
 using System;
+using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour
 {
@@ -19,7 +20,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private SendToGoogle analytics;
 
-    // public event EventHandler OnPlayerDied;  // leave for future in-scene game over screen
     [SerializeField]
     private Vector3 startPos = new();
 
@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     private bool jumpInput;
     
     private Subscriber<bool> playerStatusSubscriber;
+    private Subscriber<bool> resetSubSubscriber;
 
     async void Start()
     {
@@ -51,21 +52,8 @@ public class PlayerController : MonoBehaviour
         playerStatusSubscriber = GlobalData.PlayerStatusData.CreatePlayerStatusSubscriber();
         playerStatusSubscriber.Subscribe(OnPlayerDead);
 
-        Vector3? lastPos = GlobalData.CheckPointData.GetLastCheckPointPosition();
-        if (lastPos != null)
-        {
-            Debug.Log("Reset player to check point");
-            transform.position = (Vector3)lastPos;
-            try
-            {
-                GlobalData.AnalyticsManager.Send("checkpointUsed");
-            }
-            catch (Exception e)
-            {
-                Debug.LogError(e);
-            }
-        }
-
+        resetSubSubscriber = GlobalData.CheckPointData.CreateResetSignalSubscriber();
+        resetSubSubscriber.Subscribe(OnReset);
 
         Debug.Log("pre Analytics set up!");
         try
@@ -80,6 +68,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        playerStatusSubscriber?.Unsubscribe(OnPlayerDead);
+        resetSubSubscriber?.Unsubscribe(OnReset);
+    }
+
     private void OnPlayerDead(bool alive)
     {
         if (alive) return;
@@ -89,6 +83,7 @@ public class PlayerController : MonoBehaviour
         // Store the Scene Name to allow Restart to re-load the scene
         GlobalData.CheckPointData.SetCurrentSceneName(SceneManager.GetActiveScene().name);
 
+        
         Invoke("LoadEndScene", GAME_OVER_SCENE_SHOWING_DELAY);
         Debug.Log($"Player Died! Player stop move! Load End scene in {GAME_OVER_SCENE_SHOWING_DELAY} seconds.");
 
@@ -96,10 +91,6 @@ public class PlayerController : MonoBehaviour
         GlobalData.AnalyticsManager.Send("playerDied");
     }
 
-    private void OnDestroy()
-    {
-        playerStatusSubscriber?.Unsubscribe(OnPlayerDead);
-    }
 
     void Update()
     {
@@ -150,9 +141,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
     private void LoadEndScene()
     {
-        SceneManager.LoadScene("EndScene");
+        GlobalData.OverlayData.ShowGameOver();
+    }
+
+    private void OnReset(bool _)
+    {
+        Vector3 lastPos = GlobalData.CheckPointData.GetLastCheckPointPosition() ?? DEFAULT_START_POS;
+        Debug.Log($"Reset player to check point {lastPos}");
+        transform.position = lastPos;
+        rb.transform.position = new Vector3(0, 0.5f, 0);
+        GlobalData.PlayerStatusData.RevivePlayer();
+
+        try
+        {
+            GlobalData.AnalyticsManager.Send("checkpointUsed");
+        }
+        catch (Exception e)
+        {
+            Debug.LogError(e);
+        }
     }
 }

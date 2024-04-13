@@ -1,3 +1,4 @@
+using System.Numerics;
 using UnityEngine.SceneManagement;
 
 public class LevelDataManager
@@ -6,6 +7,7 @@ public class LevelDataManager
 
     private int currentLevel = 1;
     private int maxLevelReached = 1;
+
 
     public void SetCurrentLevel(int x)
     {
@@ -39,5 +41,10 @@ public class LevelDataManager
     public bool IsLastLevel()
     {
         return currentLevel == LEVEL_COUNT;
+    }
+
+    public void RestartCurrentLevel()
+    {
+        StartLevel(currentLevel);
     }
 }

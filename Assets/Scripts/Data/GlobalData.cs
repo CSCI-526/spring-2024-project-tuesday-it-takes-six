@@ -1,4 +1,5 @@
 using System;
+using UnityEngine.SceneManagement;
 
 
 // wrap in game namespace to prevent naming pollution
@@ -12,10 +13,11 @@ namespace Game
         // please use RECOGNIZABLE NAME for variables in this class
 
         public static TimeTenseDataManager TimeTenseData = new();
-
         public static PlayerStatusDataManager PlayerStatusData = new();
+
         public static CheckPointDataManager CheckPointData = new();
         public static LevelDataManager LevelData = new();
+        public static OverlayDataManager OverlayData = new();
 
         public static SendToGoogle AnalyticsManager;
 
@@ -23,7 +25,6 @@ namespace Game
         {
             TimeTenseData.Init();
             PlayerStatusData.Init();
-            CheckPointData.Init();
         }
 
         // Analytics
