@@ -16,8 +16,8 @@ public class TimePortalController : MonoBehaviour
     private Vector3 lauchStartPoint;
 
     private float currentTime = 0.0f;
-    private float sleepDuration = 5.0f;
-	private float activeDuration = 5.0f;
+    [SerializeField] private float sleepDuration = 2.0f;
+	[SerializeField] private float activeDuration = 2.0f;
     private bool isActive = false;
     private bool corpseInPortal = false;
     private int corpseEnterDirection;
