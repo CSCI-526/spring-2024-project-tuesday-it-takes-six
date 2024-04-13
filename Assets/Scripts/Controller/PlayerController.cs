@@ -149,10 +149,10 @@ public class PlayerController : MonoBehaviour
     private void OnReset(bool _)
     {
         Vector3 lastPos = GlobalData.CheckPointData.GetLastCheckPointPosition() ?? DEFAULT_START_POS;
-        Debug.Log($"Reset player to check point {lastPos}");
         transform.position = lastPos;
-        rb.transform.position = new Vector3(0, 0.5f, 0);
+        rb.transform.localPosition = Vector3.zero;
         GlobalData.PlayerStatusData.RevivePlayer();
+        Debug.Log($"Reset player to check point {lastPos}");
 
         try
         {
