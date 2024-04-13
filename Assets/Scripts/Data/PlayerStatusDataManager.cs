@@ -14,7 +14,10 @@ public class PlayerStatusDataManager : IDataManager
 
     public void KillPlayer()
     {
-        alive.Update(false);
+        if (alive.currentValue)
+        {
+            alive.Update(false);
+        }
     }
 
     public bool IsPlayerAlive()
