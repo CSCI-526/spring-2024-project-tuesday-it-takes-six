@@ -9,7 +9,7 @@ using Unity.Services.Core;
 using System;
 using Unity.VisualScripting;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : ResetableMonoBehaviour
 {
     [SerializeField]
     private Rigidbody2D rb;
@@ -36,10 +36,11 @@ public class PlayerController : MonoBehaviour
     private bool jumpInput;
     
     private Subscriber<bool> playerStatusSubscriber;
-    private Subscriber<bool> resetSubSubscriber;
 
-    async void Start()
+    override public async void Start()
     {
+        base.Start();
+
         // prevent it from rotating when hitting other objects
         rb.freezeRotation = true;
         // start at desired position when debugging
@@ -52,8 +53,6 @@ public class PlayerController : MonoBehaviour
         playerStatusSubscriber = GlobalData.PlayerStatusData.CreatePlayerStatusSubscriber();
         playerStatusSubscriber.Subscribe(OnPlayerDead);
 
-        resetSubSubscriber = GlobalData.CheckPointData.CreateResetSignalSubscriber();
-        resetSubSubscriber.Subscribe(OnReset);
 
         Debug.Log("pre Analytics set up!");
         try
@@ -68,10 +67,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    override public void OnDestroy()
     {
+        base.OnDestroy();
         playerStatusSubscriber?.Unsubscribe(OnPlayerDead);
-        resetSubSubscriber?.Unsubscribe(OnReset);
     }
 
     private void OnPlayerDead(bool alive)
@@ -146,7 +145,7 @@ public class PlayerController : MonoBehaviour
         GlobalData.OverlayData.ShowGameOver();
     }
 
-    private void OnReset(bool _)
+    override public void OnReset(bool _)
     {
         Vector3 lastPos = GlobalData.CheckPointData.GetLastCheckPointPosition() ?? DEFAULT_START_POS;
         transform.position = lastPos;
