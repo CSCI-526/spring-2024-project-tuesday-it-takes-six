@@ -181,7 +181,7 @@ public class TimePortalController : MonoBehaviour
             currentTime += Time.deltaTime;  
         }
         else {
-            portalUI.GetComponent<SpriteRenderer>().color = Color.green;
+            portalUI.GetComponent<SpriteRenderer>().color = new Color(0f , 1f, 0f, 1f);
             isActive = true;
             if (currentTime < sleepDuration + activeDuration)
             {
@@ -190,7 +190,7 @@ public class TimePortalController : MonoBehaviour
             else 
             {
                 isActive = false;
-                portalUI.GetComponent<SpriteRenderer>().color = Color.black;
+                portalUI.GetComponent<SpriteRenderer>().color = new Color(0f , 1f, 0f, 0f);
                 currentTime = 0.0f;
             }
         }
