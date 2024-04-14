@@ -42,6 +42,17 @@ public class Door : MonoBehaviour
         CompleteThisLevel();
     }
 
+
+    private void OnTriggerStay2D(Collider2D collider)
+    {
+        Debug.Log("Collision enter");
+        // if it is not open or the collider is not player, ignore any entering
+        if (!isOpen || !collider.CompareTag("Player")) return;
+
+        CompleteThisLevel();
+
+    }
+
     private void CompleteThisLevel()
     {
         GlobalData.AnalyticsManager.Send("levelCompleted");

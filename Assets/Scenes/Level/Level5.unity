@@ -1814,7 +1814,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3755842170173926339, guid: 6f955b39f33e94fc6a5668ed9d21abf0, type: 3}
       propertyPath: rotateAngle
-      value: -5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3755842170173926339, guid: 6f955b39f33e94fc6a5668ed9d21abf0, type: 3}
       propertyPath: lauchDirection.x
@@ -1851,7 +1851,7 @@ PrefabInstance:
     - target: {fileID: 6341000876429655906, guid: 6f955b39f33e94fc6a5668ed9d21abf0, type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 6200000, guid: e8613718f32aec741a7dbbc9c667fa7a, type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 6493824255004229662, guid: 6f955b39f33e94fc6a5668ed9d21abf0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.24
