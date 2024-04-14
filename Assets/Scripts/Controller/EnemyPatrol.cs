@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPatrol : MonoBehaviour
+public class EnemyPatrol : ResetableMonoBehaviour
 {
     [SerializeField]
     private bool enablePatrol = true;
@@ -28,10 +28,10 @@ public class EnemyPatrol : MonoBehaviour
     private Vector3 patrolRightEnd;
 
     // Start is called before the first frame update
-    void Start()
+    override public void Start()
     {
         // ErrorChecking();
-
+        base.Start();
         enemyController = GetComponent<EnemyController>();
 
         rigidBody = GetComponent<Rigidbody2D>();
@@ -100,6 +100,12 @@ public class EnemyPatrol : MonoBehaviour
                 movingRight = true;
             }
         }
+    }
+
+
+    override public void OnReset(bool _)
+    {
+        if (enablePatrol) enabled = true;
     }
 
     // private void OnDrawGizmos()

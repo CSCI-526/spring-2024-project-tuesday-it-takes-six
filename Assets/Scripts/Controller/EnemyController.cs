@@ -27,7 +27,7 @@ public class EnemyController : MonoBehaviour
     {
     }
 
-    void Start()
+    private void Start()
     {
         alive = true;
         body.SetActive(alive);
@@ -92,4 +92,7 @@ public class EnemyController : MonoBehaviour
         if (transform.parent.name == "Present") return TimeTense.PRESENT;
         return null;
     }
+
+
+   
 }
