@@ -4,7 +4,7 @@ using UnityEngine.Analytics;
 using Game;
 
 
-public class TimeSwitch : MonoBehaviour
+public class TimeSwitch : ResetableMonoBehaviour
 {
     [SerializeField]
     private GameObject presentObjects;
@@ -21,9 +21,11 @@ public class TimeSwitch : MonoBehaviour
 
     private Subscriber<TimeTense> subscriber;
 
-    private void Start()
+    override public void Start()
     {
         player = GameObject.Find("Player");
+
+        base.Start();
 
         subscriber = GlobalData.TimeTenseData.CreateTimeTenseSubscriber();
         subscriber.Subscribe(OnTimeSwitch, true);
@@ -31,9 +33,18 @@ public class TimeSwitch : MonoBehaviour
         ColorFloors();
     }
 
-    private void OnDestroy()
+    override public void OnDestroy()
     {
+        base.OnDestroy();
         subscriber?.Unsubscribe(OnTimeSwitch);
+    }
+
+    override public void OnReset(bool _)
+    {
+        if (GlobalData.TimeTenseData.IsPast())
+        {
+            GlobalData.TimeTenseData.SwitchTimeTense();
+        }       
     }
 
     private void ColorFloors()
