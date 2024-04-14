@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Game;
 
-public class LaserLauncherControll : MonoBehaviour
+public class LaserLauncherControll : ResetableMonoBehaviour
 {
 
     [SerializeField] private Vector3 lauchDirection = new Vector3(1,0,0);
@@ -11,9 +11,11 @@ public class LaserLauncherControll : MonoBehaviour
     [SerializeField] private GameObject[] relatedTo;
     [SerializeField] private float rotateAngle = 45.0f;
 
+    private Vector3 initialDirection;
     private LineDrawer lineDrawer;
 
     private GameObject activeUI;
+    private bool hitPlayer = false;
 
     private struct HitInfo
     {
@@ -24,16 +26,25 @@ public class LaserLauncherControll : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        // StartSubscirber();
+        base.Start();
         Physics2D.queriesStartInColliders = false;
         activeUI = this.transform.GetChild(0).gameObject;
         activeUI.SetActive(false);
+        initialDirection = lauchDirection;
         lineDrawer = GetComponent<LineDrawer>();
         if (lineDrawer == null)
         {
             Debug.LogError("LineDrawer component not found on this GameObject.");
         }
+    }
+
+    public override void OnReset(bool r)
+    {
+        lauchDirection = initialDirection;
+        hitPlayer = false;
     }
 
     private bool HitPhysicalObject(out HitInfo hitInfo)
@@ -111,8 +122,12 @@ public class LaserLauncherControll : MonoBehaviour
                 {
                     // kill player, it is the PlayerRB be hit
                     // hitPhysicalInfo.hitObj.transform.parent.gameObject.SendMessage("SetDeath", true);
-                    GlobalData.PlayerStatusData.KillPlayer();
-                    ClearTransferredLaser();
+                    if (!hitPlayer)
+                    {
+                        GlobalData.PlayerStatusData.KillPlayer();
+                        ClearTransferredLaser();
+                        hitPlayer = true;
+                    }
                     break;
                 }
                 case "Mirror":

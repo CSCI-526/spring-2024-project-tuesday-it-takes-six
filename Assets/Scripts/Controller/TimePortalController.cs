@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using Game;
 
-public class TimePortalController : MonoBehaviour
+public class TimePortalController : ResetableMonoBehaviour
 {
 
     private LineDrawer lineDrawer;
@@ -24,6 +24,7 @@ public class TimePortalController : MonoBehaviour
     private GameObject enemyObj;
     private GameObject portalUI;
     private int laserType = 0; // 0: no laser; 1: transfer; 2:pass
+    private bool hitPlayer = false;
 
     private struct HitInfo
     {
@@ -33,13 +34,20 @@ public class TimePortalController : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
         portalUI = this.transform.GetChild(0).gameObject;
         currentTimeTense = TimeTense.PRESENT;
         portalUI.GetComponent<SpriteRenderer>().color = Color.black;
         Physics2D.queriesStartInColliders = false;
         lineDrawer = GetComponent<LineDrawer>();
+    }
+
+    public override void OnReset(bool r)
+    {
+        hitPlayer = false;
+        LaserGone();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -131,9 +139,11 @@ public class TimePortalController : MonoBehaviour
                 }
                 case "Player":
                 {
-                    // kill player, it is the PlayerRB be hit
-                    // hitPhysicalInfo.hitObj.transform.parent.gameObject.SendMessage("SetDeath", true);
-                    GlobalData.PlayerStatusData.KillPlayer();
+                    if (!hitPlayer)
+                    {
+                        GlobalData.PlayerStatusData.KillPlayer();
+                        hitPlayer = true;
+                    }
                     break;
                 }
                 default:
