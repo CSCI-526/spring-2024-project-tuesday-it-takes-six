@@ -43,9 +43,10 @@ public class PlayerController : ResetableMonoBehaviour
 
         // prevent it from rotating when hitting other objects
         rb.freezeRotation = true;
+
+        MovePlayer2Checkpoint();
         // start at desired position when debugging
-        if (!Env.isDebug) transform.position = DEFAULT_START_POS;
-        else transform.position = startPos;
+        if (Env.isDebug)transform.position = startPos;
 
         // Analytics initialization
         GlobalData.AnalyticsManager = analytics;
@@ -147,11 +148,9 @@ public class PlayerController : ResetableMonoBehaviour
 
     override public void OnReset(bool _)
     {
-        Vector3 lastPos = GlobalData.CheckPointData.GetLastCheckPointPosition() ?? DEFAULT_START_POS;
-        transform.position = lastPos;
-        rb.transform.localPosition = Vector3.zero;
+        MovePlayer2Checkpoint();
         GlobalData.PlayerStatusData.RevivePlayer();
-        Debug.Log($"Reset player to check point {lastPos}");
+        Debug.Log($"Reset player from check point");
 
         try
         {
@@ -161,5 +160,12 @@ public class PlayerController : ResetableMonoBehaviour
         {
             Debug.LogError(e);
         }
+    }
+
+    private void MovePlayer2Checkpoint()
+    {
+        Vector3 lastPos = GlobalData.CheckPointData.GetLastCheckPointPosition() ?? DEFAULT_START_POS;
+        transform.position = lastPos;
+        rb.transform.localPosition = Vector3.zero;
     }
 }

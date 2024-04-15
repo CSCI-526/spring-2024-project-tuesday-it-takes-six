@@ -46,4 +46,19 @@ public class HUD : MonoBehaviour
         timeTense.text = TEXT_MAPPING[tt];
         Camera.main.backgroundColor = COLOR_MAPPING[tt];
     }
+
+    private void Update()
+    {
+        var current = GlobalData.OverlayData.GetActiveOverlay();
+        if (current == OverlayContent.GAME_OVER) return;
+
+        if (current == OverlayContent.NONE && Input.GetButtonDown("Pause"))
+        {
+            GlobalData.OverlayData.ShowInGameMenu();
+        }
+        else if (current == OverlayContent.IN_GAME_MENU && Input.GetButtonUp("Pause"))
+        {
+            GlobalData.OverlayData.HideOverlay();
+        }
+    }
 }

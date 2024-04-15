@@ -39,6 +39,7 @@ namespace Game
     public enum OverlayContent
     {
         NONE,
-        GAME_OVER
+        GAME_OVER,
+        IN_GAME_MENU
     }
 }

@@ -7,14 +7,19 @@ public class OverlayController : MonoBehaviour
     [SerializeField]
     private GameObject GameOverDialog;
 
+    [SerializeField]
+    private GameObject InGameMenuDialog;
+
     private Subscriber<OverlayContent> OverlayContentSubscriber;
+    private GameObject HUD;
 
     private void Start()
     {
-        gameObject.SetActive(false);
+        GlobalData.OverlayData.HideOverlay();
+        HUD = GameObject.Find("HUD");
 
         OverlayContentSubscriber = GlobalData.OverlayData.CreateLastCheckPointPositionSubscriber();
-        OverlayContentSubscriber.Subscribe(OnOverlayContentChange);
+        OverlayContentSubscriber.Subscribe(OnOverlayContentChange, true);
     }
 
     private void OnDestroy()
@@ -24,23 +29,17 @@ public class OverlayController : MonoBehaviour
 
     private void OnOverlayContentChange(OverlayContent t)
     {
-        Debug.Log($"[OverlayController] Status Change to {t}");
-        if (t == OverlayContent.NONE)
-        {
-            gameObject.SetActive(false);
-        }
-        else if (t == OverlayContent.GAME_OVER)
-        {
-            ShowGameOver();
-        }
+        Time.timeScale = t == OverlayContent.NONE ? 1 : 0;
+
+        HUD.SetActive(t == OverlayContent.NONE);
+        UpdateOverlays(t);
     }
 
-    private void ShowGameOver()
+    private void UpdateOverlays(OverlayContent t)
     {
-        GameOverDialog.SetActive(true);
-        gameObject.SetActive(true);
+        GameOverDialog.SetActive(t == OverlayContent.GAME_OVER);
+        InGameMenuDialog.SetActive(t == OverlayContent.IN_GAME_MENU);
     }
-
 
     public void RestartFromCheckpoint()
     {
@@ -48,16 +47,23 @@ public class OverlayController : MonoBehaviour
         GlobalData.OverlayData.HideOverlay();
     }
 
-    public void RestartLevel()
+    public void BackToMainMenu()
+    {
+        GlobalData.CheckPointData.ResetCheckPoint();
+        SceneManager.LoadScene("StartMenu");
+    }
+
+    public void ReloadFromCheckpoint()
     {
         GlobalData.Init();
         GlobalData.LevelData.RestartCurrentLevel();
         GlobalData.CheckPointData.ResetCheckPoint();
     }
 
-    public void BackToMainMenu()
+    public void RestartLevel()
     {
+        GlobalData.Init();
+        GlobalData.LevelData.RestartCurrentLevel();
         GlobalData.CheckPointData.ResetCheckPoint();
-        SceneManager.LoadScene("StartMenu");
     }
 }
