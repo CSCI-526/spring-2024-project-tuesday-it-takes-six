@@ -5,7 +5,7 @@ using TMPro;
 using Game;
 
 
-public class MirrorController : ResetableMonoBehaviour
+public class MirrorController : MonoBehaviour
 {   
     private LineDrawer lineDrawer;
 
@@ -123,17 +123,17 @@ public class MirrorController : ResetableMonoBehaviour
     }
 
     // Start is called before the first frame update
-    public override void Start()
+    public void Start()
     {
-        base.Start();
+        // base.Start();
         lineDrawer = GetComponent<LineDrawer>();
     }
 
-    public override void OnReset(bool r)
-    {
-        // hitPlayer = false;
-        LaserGone();
-    }
+    // public override void OnReset(bool r)
+    // {
+    //     // hitPlayer = false;
+    //     LaserGone();
+    // }
 
     private void LaserCheck()
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using Game;
 
-public class TimePortalController : ResetableMonoBehaviour
+public class TimePortalController : MonoBehaviour
 {
 
     private LineDrawer lineDrawer;
@@ -34,9 +34,9 @@ public class TimePortalController : ResetableMonoBehaviour
     }
 
     // Start is called before the first frame update
-    public override void Start()
+    public void Start()
     {
-        base.Start();
+        // base.Start();
         portalUI = this.transform.GetChild(0).gameObject;
         currentTimeTense = TimeTense.PRESENT;
         portalUI.GetComponent<SpriteRenderer>().color = Color.black;
@@ -44,7 +44,7 @@ public class TimePortalController : ResetableMonoBehaviour
         lineDrawer = GetComponent<LineDrawer>();
     }
 
-    public override void OnReset(bool r)
+    public void OnReset(bool r)
     {
         // hitPlayer = false;
         LaserGone();

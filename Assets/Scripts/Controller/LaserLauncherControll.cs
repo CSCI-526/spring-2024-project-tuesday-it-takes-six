@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Game;
 
-public class LaserLauncherControll : ResetableMonoBehaviour
+public class LaserLauncherControll : MonoBehaviour
 {
 
     [SerializeField] private Vector3 lauchDirection = new Vector3(1,0,0);
@@ -26,10 +26,9 @@ public class LaserLauncherControll : ResetableMonoBehaviour
     }
 
     // Start is called before the first frame update
-    public override void Start()
+    public void Start()
     {
-        // StartSubscirber();
-        base.Start();
+        // base.Start();
         Physics2D.queriesStartInColliders = false;
         activeUI = this.transform.GetChild(0).gameObject;
         activeUI.SetActive(false);
@@ -41,11 +40,11 @@ public class LaserLauncherControll : ResetableMonoBehaviour
         }
     }
 
-    public override void OnReset(bool r)
-    {
-        lauchDirection = initialDirection;
+    // public override void OnReset(bool r)
+    // {
+    //     lauchDirection = initialDirection;
         // hitPlayer = false;
-    }
+    // }
 
     private bool HitPhysicalObject(out HitInfo hitInfo)
     {
