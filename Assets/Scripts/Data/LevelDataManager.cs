@@ -45,6 +45,6 @@ public class LevelDataManager
 
     public void RestartCurrentLevel()
     {
-        StartLevel(currentLevel);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
