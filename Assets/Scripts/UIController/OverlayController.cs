@@ -11,28 +11,24 @@ public class OverlayController : MonoBehaviour
     private GameObject InGameMenuDialog;
 
 
-    private Subscriber<OverlayContent> OverlayContentSubscriber;
-    private GameObject HUD;
+    private Subscriber<OverlayContent> overlayContentSubscriber;
 
 
     private void Start()
     {
-        HUD = GameObject.Find("HUD");
-
-        OverlayContentSubscriber = GlobalData.OverlayData.CreateLastCheckPointPositionSubscriber();
-        OverlayContentSubscriber.Subscribe(OnOverlayContentChange);
+        overlayContentSubscriber = GlobalData.OverlayData.CreateLastCheckPointPositionSubscriber();
+        overlayContentSubscriber.Subscribe(OnOverlayContentChange);
     }
 
     private void OnDestroy()
     {
-        OverlayContentSubscriber?.Unsubscribe(OnOverlayContentChange);
+        overlayContentSubscriber?.Unsubscribe(OnOverlayContentChange);
     }
 
     private void OnOverlayContentChange(OverlayContent t)
     {
         Time.timeScale = t == OverlayContent.NONE ? 1 : 0;
 
-        HUD.SetActive(t == OverlayContent.NONE);
         UpdateOverlays(t);
     }
 
@@ -62,5 +58,22 @@ public class OverlayController : MonoBehaviour
         SceneManager.LoadScene("StartMenu");
 
         GlobalData.OverlayData.HideOverlay();
+    }
+
+
+    private void Update()
+    {
+        var current = GlobalData.OverlayData.GetActiveOverlay();
+
+        if (current == OverlayContent.GAME_OVER) return;
+
+        if (current == OverlayContent.NONE && Input.GetButtonDown("Pause"))
+        {
+            GlobalData.OverlayData.ShowInGameMenu();
+        }
+        else if (current == OverlayContent.IN_GAME_MENU && Input.GetButtonDown("Pause"))
+        {
+            GlobalData.OverlayData.HideOverlay();
+        }
     }
 }

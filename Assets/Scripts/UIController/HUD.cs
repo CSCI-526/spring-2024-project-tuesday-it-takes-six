@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Game;
 using TMPro;
@@ -13,10 +14,8 @@ public class HUD : MonoBehaviour
     private TMP_Text level;
 
     private Subscriber<TimeTense> subscriber;
+    private Subscriber<OverlayContent> overlayContentSubscriber;
 
-
-	private const float fireDelay = 1.0f;
-    private float fireTimestamp;
 
     private readonly Dictionary<TimeTense, string> TEXT_MAPPING = new()
     {
@@ -34,39 +33,29 @@ public class HUD : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        fireTimestamp = Time.realtimeSinceStartup + fireDelay;
-
         level.text = SceneManager.GetActiveScene().name;
 
         subscriber = GlobalData.TimeTenseData.CreateTimeTenseSubscriber();
         subscriber.Subscribe(OnTimeSwitch, true);
+
+        overlayContentSubscriber = GlobalData.OverlayData.CreateLastCheckPointPositionSubscriber();
+        overlayContentSubscriber.Subscribe(OnOverlayContentChange);
     }
 
     private void OnDestroy()
     {
         subscriber?.Unsubscribe(OnTimeSwitch);
+        overlayContentSubscriber?.Unsubscribe(OnOverlayContentChange);
+    }
+
+    private void OnOverlayContentChange(OverlayContent t)
+    {
+        gameObject.SetActive(t == OverlayContent.NONE);
     }
 
     private void OnTimeSwitch(TimeTense tt)
     {
         timeTense.text = TEXT_MAPPING[tt];
         Camera.main.backgroundColor = COLOR_MAPPING[tt];
-    }
-
-    private void Update()
-    {
-        if (Time.realtimeSinceStartup <= fireTimestamp) return;
-
-        var current = GlobalData.OverlayData.GetActiveOverlay();
-        if (current == OverlayContent.GAME_OVER) return;
-
-        if (current == OverlayContent.NONE && Input.GetButtonDown("Pause"))
-        {
-            GlobalData.OverlayData.ShowInGameMenu();
-        }
-        else if (current == OverlayContent.IN_GAME_MENU && Input.GetButtonUp("Pause"))
-        {
-            GlobalData.OverlayData.HideOverlay();
-        }
     }
 }
