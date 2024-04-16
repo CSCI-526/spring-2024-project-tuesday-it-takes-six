@@ -6,7 +6,7 @@ public class PlayerStatusDataManager : IDataManager
 {
     private readonly Publisher<bool> alive = new(true);
 
-    private readonly int IMMORTAL_TIME = 500; // in milliseconds
+    private readonly int IMMORTAL_TIME = 200; // in milliseconds
     private DateTime respawnTime = DateTime.Now;
 
     public void Init()
