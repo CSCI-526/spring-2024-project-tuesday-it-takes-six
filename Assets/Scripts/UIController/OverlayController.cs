@@ -63,12 +63,4 @@ public class OverlayController : MonoBehaviour
 
         GlobalData.OverlayData.HideOverlay();
     }
-
-    public void ReloadFromCheckpoint()
-    {
-        GlobalData.Init();
-        GlobalData.LevelData.RestartCurrentLevel();
-
-        GlobalData.OverlayData.HideOverlay();
-    }
 }

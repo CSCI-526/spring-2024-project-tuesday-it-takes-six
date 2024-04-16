@@ -5,11 +5,14 @@ namespace Game
     public class Publisher<T>
     {
         public event Action<T> OnUpdate;
+
         public T currentValue;
+        public DateTime lastUpdated = DateTime.Now;
 
         public Publisher(T initialValue)
         {
             currentValue = initialValue;
+            lastUpdated = DateTime.Now;
         }
 
         public void Update(T newValue)

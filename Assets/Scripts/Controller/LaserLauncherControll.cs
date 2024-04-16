@@ -122,6 +122,7 @@ public class LaserLauncherControll : ResetableMonoBehaviour
                 {
                     // kill player, it is the PlayerRB be hit
                     // hitPhysicalInfo.hitObj.transform.parent.gameObject.SendMessage("SetDeath", true);
+                    Debug.Log($"Hit player? {hitPlayer}");
                     if (!hitPlayer)
                     {
                         GlobalData.PlayerStatusData.KillPlayer();

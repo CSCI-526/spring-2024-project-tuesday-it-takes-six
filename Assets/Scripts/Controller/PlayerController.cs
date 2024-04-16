@@ -144,7 +144,7 @@ public class PlayerController : ResetableMonoBehaviour
     override public void OnReset(bool _)
     {
         MovePlayer2Checkpoint();
-        GlobalData.PlayerStatusData.RevivePlayer();
+        GlobalData.PlayerStatusData.Respawn();
         Debug.Log($"Reset player from check point");
 
         try
