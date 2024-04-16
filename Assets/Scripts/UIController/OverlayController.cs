@@ -10,16 +10,17 @@ public class OverlayController : MonoBehaviour
     [SerializeField]
     private GameObject InGameMenuDialog;
 
+
     private Subscriber<OverlayContent> OverlayContentSubscriber;
     private GameObject HUD;
 
+
     private void Start()
     {
-        GlobalData.OverlayData.HideOverlay();
         HUD = GameObject.Find("HUD");
 
         OverlayContentSubscriber = GlobalData.OverlayData.CreateLastCheckPointPositionSubscriber();
-        OverlayContentSubscriber.Subscribe(OnOverlayContentChange, true);
+        OverlayContentSubscriber.Subscribe(OnOverlayContentChange);
     }
 
     private void OnDestroy()
