@@ -21,7 +21,7 @@ public class TimePortalController : ResetableMonoBehaviour
     private bool isActive = false;
     private bool corpseInPortal = false;
     private int corpseEnterDirection;
-    private GameObject enemyObj;
+    private GameObject enemyObj, corpseObj;
     private GameObject portalUI;
     private int laserType = 0; // 0: no laser; 1: transfer; 2:pass
     private bool hitPlayer = false;
@@ -55,6 +55,7 @@ public class TimePortalController : ResetableMonoBehaviour
         if (other.CompareTag("Corpse"))
         {
             enemyObj = other.transform.parent.gameObject;
+            corpseObj = other.gameObject;
             corpseInPortal = true;
             corpseEnterDirection = (transform.position.x - enemyObj.transform.position.x) > 0 ? 1 : -1;
         }
@@ -72,7 +73,8 @@ public class TimePortalController : ResetableMonoBehaviour
     {
         if (corpseInPortal && isActive)
         {
-            float xDistance = enemyObj.transform.localScale.x/2.0f + 0.2f;
+            float xDistance = corpseObj.transform.localScale.x/2.0f + 0.2f;
+            Debug.Log(xDistance);
             enemyObj.transform.position = new Vector3(transform.position.x + xDistance * corpseEnterDirection, enemyObj.transform.position.y, 0.0f);
             enemyObj.gameObject.SetActive(false);
             if (enemyObj.transform.parent.name == "Present")

@@ -246,6 +246,14 @@ PrefabInstance:
       propertyPath: patrolRightRange
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3883430244046642466, guid: 3f5ab678431b94160ab914ed940c8ea3, type: 3}
+      propertyPath: m_Size.x
+      value: 1.0074642
+      objectReference: {fileID: 0}
+    - target: {fileID: 3883430244046642466, guid: 3f5ab678431b94160ab914ed940c8ea3, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.0012654364
+      objectReference: {fileID: 0}
     - target: {fileID: 5639490468087765601, guid: 3f5ab678431b94160ab914ed940c8ea3, type: 3}
       propertyPath: m_Name
       value: Enemy
