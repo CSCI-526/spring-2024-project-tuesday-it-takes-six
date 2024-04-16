@@ -13,7 +13,7 @@ public class MirrorController : ResetableMonoBehaviour
     private float rayLength = 0.0f;
     private Vector3 lauchStartPoint;
     private TimeTense laserTimeTense;
-    private bool hitPlayer = false;
+    // private bool hitPlayer = false;
 
     private struct HitInfo
     {
@@ -78,11 +78,11 @@ public class MirrorController : ResetableMonoBehaviour
                 }
                 case "Player":
                 {
-                    if (!hitPlayer)
-                    {
+                    // if (!hitPlayer)
+                    // {
                         GlobalData.PlayerStatusData.KillPlayer();
-                        hitPlayer = true;
-                    }
+                        // hitPlayer = true;
+                    // }
                     break;
                 }
                 case "Portal":
@@ -131,7 +131,7 @@ public class MirrorController : ResetableMonoBehaviour
 
     public override void OnReset(bool r)
     {
-        hitPlayer = false;
+        // hitPlayer = false;
         LaserGone();
     }
 

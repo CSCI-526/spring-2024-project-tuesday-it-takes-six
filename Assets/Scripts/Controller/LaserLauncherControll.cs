@@ -15,7 +15,7 @@ public class LaserLauncherControll : ResetableMonoBehaviour
     private LineDrawer lineDrawer;
 
     private GameObject activeUI;
-    private bool hitPlayer = false;
+    // private bool hitPlayer = false;
 
     private struct HitInfo
     {
@@ -44,7 +44,7 @@ public class LaserLauncherControll : ResetableMonoBehaviour
     public override void OnReset(bool r)
     {
         lauchDirection = initialDirection;
-        hitPlayer = false;
+        // hitPlayer = false;
     }
 
     private bool HitPhysicalObject(out HitInfo hitInfo)
@@ -122,13 +122,13 @@ public class LaserLauncherControll : ResetableMonoBehaviour
                 {
                     // kill player, it is the PlayerRB be hit
                     // hitPhysicalInfo.hitObj.transform.parent.gameObject.SendMessage("SetDeath", true);
-                    Debug.Log($"Hit player? {hitPlayer}");
-                    if (!hitPlayer)
-                    {
+                    // Debug.Log($"Hit player? {hitPlayer}");
+                    // if (!hitPlayer)
+                    // {
                         GlobalData.PlayerStatusData.KillPlayer();
                         ClearTransferredLaser();
-                        hitPlayer = true;
-                    }
+                        // hitPlayer = true;
+                    // }
                     break;
                 }
                 case "Mirror":

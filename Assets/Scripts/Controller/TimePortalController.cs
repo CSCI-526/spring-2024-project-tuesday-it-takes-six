@@ -24,7 +24,7 @@ public class TimePortalController : ResetableMonoBehaviour
     private GameObject enemyObj, corpseObj;
     private GameObject portalUI;
     private int laserType = 0; // 0: no laser; 1: transfer; 2:pass
-    private bool hitPlayer = false;
+    // private bool hitPlayer = false;
 
     private struct HitInfo
     {
@@ -46,7 +46,7 @@ public class TimePortalController : ResetableMonoBehaviour
 
     public override void OnReset(bool r)
     {
-        hitPlayer = false;
+        // hitPlayer = false;
         LaserGone();
     }
 
@@ -141,11 +141,11 @@ public class TimePortalController : ResetableMonoBehaviour
                 }
                 case "Player":
                 {
-                    if (!hitPlayer)
-                    {
+                    // if (!hitPlayer)
+                    // {
                         GlobalData.PlayerStatusData.KillPlayer();
-                        hitPlayer = true;
-                    }
+                       // hitPlayer = true;
+                    // }
                     break;
                 }
                 default:
