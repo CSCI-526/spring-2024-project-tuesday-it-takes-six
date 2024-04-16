@@ -1,13 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Game;
-using UnityEngine.SceneManagement;
-using UnityEngine.Analytics;
 using Unity.Services.Analytics;
 using Unity.Services.Core;
 using System;
-using Unity.VisualScripting;
+using Game;
 
 public class PlayerController : ResetableMonoBehaviour
 {
@@ -21,7 +16,7 @@ public class PlayerController : ResetableMonoBehaviour
     private SendToGoogle analytics;
 
     [SerializeField]
-    private Vector3 startPos = new();
+    private Vector3? startPos = null;
 
 
     private const float MOVE_SPEED = 5;
@@ -46,7 +41,11 @@ public class PlayerController : ResetableMonoBehaviour
 
         MovePlayer2Checkpoint();
         // start at desired position when debugging
-        if (Env.isDebug)transform.position = startPos;
+        if (Env.isDebug && startPos != null)
+        {
+            Debug.Log($"For debug reason, move player to {startPos}");
+            transform.position = (Vector3)startPos;
+        }
 
         // Analytics initialization
         GlobalData.AnalyticsManager = analytics;
@@ -80,10 +79,6 @@ public class PlayerController : ResetableMonoBehaviour
 
         Instantiate(blood, rb.transform.position, Quaternion.identity);
 
-        // Store the Scene Name to allow Restart to re-load the scene
-        GlobalData.CheckPointData.SetCurrentSceneName(SceneManager.GetActiveScene().name);
-
-        
         Invoke("LoadEndScene", GAME_OVER_SCENE_SHOWING_DELAY);
         Debug.Log($"Player Died! Player stop move! Load End scene in {GAME_OVER_SCENE_SHOWING_DELAY} seconds.");
 

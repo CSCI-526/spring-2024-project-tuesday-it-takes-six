@@ -51,19 +51,24 @@ public class OverlayController : MonoBehaviour
     {
         GlobalData.CheckPointData.ResetCheckPoint();
         SceneManager.LoadScene("StartMenu");
+
+        GlobalData.OverlayData.HideOverlay();
     }
 
     public void ReloadFromCheckpoint()
     {
         GlobalData.Init();
         GlobalData.LevelData.RestartCurrentLevel();
-        GlobalData.CheckPointData.ResetCheckPoint();
+
+        GlobalData.OverlayData.HideOverlay();
     }
 
     public void RestartLevel()
     {
         GlobalData.Init();
-        GlobalData.LevelData.RestartCurrentLevel();
         GlobalData.CheckPointData.ResetCheckPoint();
+        GlobalData.LevelData.RestartCurrentLevel();
+
+        GlobalData.OverlayData.HideOverlay();
     }
 }
