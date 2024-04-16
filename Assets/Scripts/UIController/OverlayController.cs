@@ -42,9 +42,17 @@ public class OverlayController : MonoBehaviour
         InGameMenuDialog.SetActive(t == OverlayContent.IN_GAME_MENU);
     }
 
-    public void RestartFromCheckpoint()
+    public void Restart()
     {
         GlobalData.CheckPointData.Reset();
+        GlobalData.OverlayData.HideOverlay();
+    }
+
+    public void Reload()
+    {
+        GlobalData.Init();
+        GlobalData.LevelData.RestartCurrentLevel();
+
         GlobalData.OverlayData.HideOverlay();
     }
 
@@ -59,15 +67,6 @@ public class OverlayController : MonoBehaviour
     public void ReloadFromCheckpoint()
     {
         GlobalData.Init();
-        GlobalData.LevelData.RestartCurrentLevel();
-
-        GlobalData.OverlayData.HideOverlay();
-    }
-
-    public void RestartLevel()
-    {
-        GlobalData.Init();
-        GlobalData.CheckPointData.ResetCheckPoint();
         GlobalData.LevelData.RestartCurrentLevel();
 
         GlobalData.OverlayData.HideOverlay();
