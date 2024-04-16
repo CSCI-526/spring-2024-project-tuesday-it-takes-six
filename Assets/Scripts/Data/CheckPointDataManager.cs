@@ -1,26 +1,19 @@
 using UnityEngine;
 using Game;
+using UnityEngine.SceneManagement;
 
 public class CheckPointDataManager
 {
     private readonly Publisher<Vector3?> lastCheckPointPosition = new(null);
     private readonly Publisher<bool> resetSignal = new(false);
-    private string currentSceneName = "";
-
-
-    public void SetCurrentSceneName(string scene)
-    {
-        currentSceneName = scene;
-    }
 
     public string GetCurrentSceneName()
     {
-        return currentSceneName;
+        return SceneManager.GetActiveScene().name;
     }
 
     public void ResetCheckPoint()
     {
-        currentSceneName = "";
         lastCheckPointPosition.Update(null);
     }
 

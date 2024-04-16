@@ -14,6 +14,10 @@ public class HUD : MonoBehaviour
 
     private Subscriber<TimeTense> subscriber;
 
+
+	private const float fireDelay = 1.0f;
+    private float fireTimestamp;
+
     private readonly Dictionary<TimeTense, string> TEXT_MAPPING = new()
     {
         { TimeTense.PRESENT, "Time: Present" },
@@ -30,6 +34,8 @@ public class HUD : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        fireTimestamp = Time.realtimeSinceStartup + fireDelay;
+
         level.text = SceneManager.GetActiveScene().name;
 
         subscriber = GlobalData.TimeTenseData.CreateTimeTenseSubscriber();
@@ -49,6 +55,8 @@ public class HUD : MonoBehaviour
 
     private void Update()
     {
+        if (Time.realtimeSinceStartup <= fireTimestamp) return;
+
         var current = GlobalData.OverlayData.GetActiveOverlay();
         if (current == OverlayContent.GAME_OVER) return;
 

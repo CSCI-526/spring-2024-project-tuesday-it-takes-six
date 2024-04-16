@@ -48,7 +48,6 @@ public class LevelSelection : MonoBehaviour
     {
         GlobalData.Init();
         GlobalData.CheckPointData.ResetCheckPoint();
-        var sceneName = GlobalData.LevelData.StartLevel(x);
-        GlobalData.CheckPointData.SetCurrentSceneName(sceneName);
+        GlobalData.LevelData.StartLevel(x);
     }
 }

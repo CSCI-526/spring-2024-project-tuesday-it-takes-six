@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelDataManager
 {
-    public readonly int LEVEL_COUNT = 5;
+    public readonly int LEVEL_COUNT = 6;
 
     private int currentLevel = 1;
     private int maxLevelReached = 1;
