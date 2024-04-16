@@ -1429,7 +1429,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 251264906382309150, guid: b7c158541d0b9af44be175bf0c087157, type: 3}
       propertyPath: m_Text
-      value: Reload
+      value: Reset
       objectReference: {fileID: 0}
     - target: {fileID: 251264906382309150, guid: b7c158541d0b9af44be175bf0c087157, type: 3}
       propertyPath: m_FontData.m_MaxSize
@@ -1587,7 +1587,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 251264906382309150, guid: b7c158541d0b9af44be175bf0c087157, type: 3}
       propertyPath: m_Text
-      value: Reload
+      value: Reset
       objectReference: {fileID: 0}
     - target: {fileID: 251264906382309150, guid: b7c158541d0b9af44be175bf0c087157, type: 3}
       propertyPath: m_FontData.m_MaxSize
