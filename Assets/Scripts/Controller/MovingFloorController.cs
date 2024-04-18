@@ -63,14 +63,14 @@ public class MovingFloorController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (!other.CompareTag("Player")) return;
+        // if (!other.CompareTag("Player")) return;
         var player = other.transform.parent;
         player.transform.SetParent(transform);
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (!other.CompareTag("Player")) return;
+        // if (!other.CompareTag("Player")) return;
         var player = other.transform.parent;
         player.transform.SetParent(null);
     }
