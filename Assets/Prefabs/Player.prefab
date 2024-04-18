@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1759140577071240137}
   - component: {fileID: 536150507488902227}
   - component: {fileID: 1473025085223941406}
-  - component: {fileID: 5989142440248729369}
-  - component: {fileID: 9081381572036468814}
+  - component: {fileID: 1904065860851733846}
+  - component: {fileID: 283570383456107316}
   m_Layer: 0
   m_Name: PlayerRB
   m_TagString: Player
@@ -114,8 +114,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!61 &5989142440248729369
-BoxCollider2D:
+--- !u!60 &1904065860851733846
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -146,7 +146,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0021945238, y: 0.003255844}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -156,11 +156,17 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.0172987, y: 1.0048977}
-  m_EdgeRadius: 0
---- !u!61 &9081381572036468814
-BoxCollider2D:
+  m_Points:
+    m_Paths:
+    - - {x: -0.50073093, y: 0.5004107}
+      - {x: -0.5006037, y: -0.500156}
+      - {x: -0.43156734, y: -0.47777689}
+      - {x: 0.4168608, y: -0.47512582}
+      - {x: 0.5000262, y: -0.5000318}
+      - {x: 0.50053316, y: 0.50022686}
+  m_UseDelaunayMesh: 0
+--- !u!60 &283570383456107316
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -191,7 +197,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0010496378, y: -0.50131154}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -201,9 +207,13 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.0109129, y: 0.0045920014}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.43107542, y: -0.47699586}
+      - {x: -0.5006613, y: -0.5001524}
+      - {x: 0.5000226, y: -0.50003076}
+      - {x: 0.41700175, y: -0.47523254}
+  m_UseDelaunayMesh: 0
 --- !u!1 &2911716639030387266
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,7 +263,6 @@ MonoBehaviour:
   rb: {fileID: 1473025085223941406}
   blood: {fileID: 6863328743093033339, guid: ab391ece3ffe8412bae117f4d59167f3, type: 3}
   analytics: {fileID: 2090487710302974108}
-  startPos: {x: 1, y: 0, z: 0}
 --- !u!114 &2090487710302974108
 MonoBehaviour:
   m_ObjectHideFlags: 0
