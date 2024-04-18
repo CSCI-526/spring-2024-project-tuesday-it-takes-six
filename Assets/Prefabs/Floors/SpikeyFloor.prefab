@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7603488269899290130}
   m_Layer: 0
   m_Name: Triangle (15)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 3239902958681894084}
   m_Layer: 0
   m_Name: Triangle (13)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 6514084073571976221}
   m_Layer: 0
   m_Name: Triangle (1)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -312,7 +312,7 @@ GameObject:
   - component: {fileID: 8320751614785795063}
   m_Layer: 0
   m_Name: Triangle (14)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -396,7 +396,7 @@ GameObject:
   - component: {fileID: 1288399347182235920}
   m_Layer: 0
   m_Name: Triangle (6)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -480,7 +480,7 @@ GameObject:
   - component: {fileID: 1167333733920930660}
   m_Layer: 0
   m_Name: Triangle (18)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -564,7 +564,7 @@ GameObject:
   - component: {fileID: 6416445197099840075}
   m_Layer: 0
   m_Name: Triangle (20)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -648,7 +648,7 @@ GameObject:
   - component: {fileID: 987745628434126421}
   m_Layer: 0
   m_Name: Triangle (17)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -732,7 +732,7 @@ GameObject:
   - component: {fileID: 3217026622824686037}
   m_Layer: 0
   m_Name: Triangle
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -816,7 +816,7 @@ GameObject:
   - component: {fileID: 4941016078853412462}
   m_Layer: 0
   m_Name: Triangle (11)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -900,7 +900,7 @@ GameObject:
   - component: {fileID: 1379600644307935041}
   m_Layer: 0
   m_Name: Triangle (3)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -984,7 +984,7 @@ GameObject:
   - component: {fileID: 928394513938508027}
   m_Layer: 0
   m_Name: Triangle (16)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1069,7 +1069,7 @@ GameObject:
   - component: {fileID: 3297445890441477805}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1198,7 +1198,7 @@ GameObject:
   - component: {fileID: 6073258009822081426}
   m_Layer: 0
   m_Name: Triangle (4)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1282,7 +1282,7 @@ GameObject:
   - component: {fileID: 4211533152604650977}
   m_Layer: 0
   m_Name: Triangle (8)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1366,7 +1366,7 @@ GameObject:
   - component: {fileID: 5974005908484962089}
   m_Layer: 0
   m_Name: Triangle (2)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1450,7 +1450,7 @@ GameObject:
   - component: {fileID: 5255178383615171445}
   m_Layer: 0
   m_Name: Triangle (10)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1534,7 +1534,7 @@ GameObject:
   - component: {fileID: 2831400758401166901}
   m_Layer: 0
   m_Name: Triangle (19)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1618,7 +1618,7 @@ GameObject:
   - component: {fileID: 7117769854826898203}
   m_Layer: 0
   m_Name: Triangle (9)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1702,7 +1702,7 @@ GameObject:
   - component: {fileID: 3708436960027853892}
   m_Layer: 0
   m_Name: Triangle (7)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1786,7 +1786,7 @@ GameObject:
   - component: {fileID: 2620974883183969682}
   m_Layer: 0
   m_Name: Triangle (21)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1873,7 +1873,7 @@ GameObject:
   - component: {fileID: 6132441039723998568}
   m_Layer: 0
   m_Name: Spikes
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2131,7 +2131,7 @@ GameObject:
   - component: {fileID: 2472362567774125405}
   m_Layer: 0
   m_Name: Triangle (5)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2215,7 +2215,7 @@ GameObject:
   - component: {fileID: 1747883144561365221}
   m_Layer: 0
   m_Name: Triangle (12)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2299,7 +2299,7 @@ GameObject:
   - component: {fileID: 7468820231464380294}
   m_Layer: 0
   m_Name: Triangle (22)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

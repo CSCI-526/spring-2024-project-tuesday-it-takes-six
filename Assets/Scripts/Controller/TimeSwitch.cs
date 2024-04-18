@@ -21,6 +21,8 @@ public class TimeSwitch : RespawnableMonoBehaviour
 
     private Subscriber<TimeTense> subscriber;
 
+    private readonly Color GREY = new (0.6f, 0.6f, 0.6f);
+
     override public void Start()
     {
         player = GameObject.Find("Player");
@@ -56,12 +58,12 @@ public class TimeSwitch : RespawnableMonoBehaviour
 
         foreach (var r in presentFloorsRender)
         {
-            r.color = Color.grey;
+            if (r.gameObject.CompareTag("Floor")) r.color = GREY;
         }
 
         foreach (var r in pastFloorsRender)
         {
-            r.color = Color.grey;
+            if (r.gameObject.CompareTag("Floor")) r.color = GREY;
         }
     }
 
