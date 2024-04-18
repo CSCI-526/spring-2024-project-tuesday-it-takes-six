@@ -4,7 +4,7 @@ using Unity.Services.Core;
 using System;
 using Game;
 
-public class PlayerController : ResetableMonoBehaviour
+public class PlayerController : RespawnableMonoBehaviour
 {
     [SerializeField]
     private Rigidbody2D rb;
@@ -141,7 +141,7 @@ public class PlayerController : ResetableMonoBehaviour
         GlobalData.OverlayData.ShowGameOver();
     }
 
-    override public void OnReset(bool _)
+    override public void OnRespawn(bool _)
     {
         MovePlayer2Checkpoint();
         GlobalData.PlayerStatusData.Respawn();

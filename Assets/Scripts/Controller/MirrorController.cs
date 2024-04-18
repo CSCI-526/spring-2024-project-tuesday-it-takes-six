@@ -129,7 +129,7 @@ public class MirrorController : MonoBehaviour
         lineDrawer = GetComponent<LineDrawer>();
     }
 
-    // public override void OnReset(bool r)
+    // public override void OnRespawn(bool r)
     // {
     //     // hitPlayer = false;
     //     LaserGone();

@@ -40,7 +40,7 @@ public class LaserLauncherControll : MonoBehaviour
         }
     }
 
-    // public override void OnReset(bool r)
+    // public override void OnRespawn(bool r)
     // {
     //     lauchDirection = initialDirection;
         // hitPlayer = false;

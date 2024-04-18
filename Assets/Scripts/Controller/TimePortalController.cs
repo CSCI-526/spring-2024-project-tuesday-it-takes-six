@@ -44,7 +44,7 @@ public class TimePortalController : MonoBehaviour
         lineDrawer = GetComponent<LineDrawer>();
     }
 
-    public void OnReset(bool r)
+    public void OnRespawn(bool r)
     {
         // hitPlayer = false;
         LaserGone();

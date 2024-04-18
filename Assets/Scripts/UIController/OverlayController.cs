@@ -38,13 +38,13 @@ public class OverlayController : MonoBehaviour
         InGameMenuDialog.SetActive(t == OverlayContent.IN_GAME_MENU);
     }
 
-    public void Restart()
+    public void Respawn()
     {
         GlobalData.CheckPointData.Reset();
         GlobalData.OverlayData.HideOverlay();
     }
 
-    public void Reload()
+    public void ResetWorld()
     {
         GlobalData.Init();
         GlobalData.LevelData.RestartCurrentLevel();

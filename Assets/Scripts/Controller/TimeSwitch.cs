@@ -4,7 +4,7 @@ using UnityEngine.Analytics;
 using Game;
 
 
-public class TimeSwitch : ResetableMonoBehaviour
+public class TimeSwitch : RespawnableMonoBehaviour
 {
     [SerializeField]
     private GameObject presentObjects;
@@ -39,7 +39,7 @@ public class TimeSwitch : ResetableMonoBehaviour
         subscriber?.Unsubscribe(OnTimeSwitch);
     }
 
-    override public void OnReset(bool _)
+    override public void OnRespawn(bool _)
     {
         if (GlobalData.TimeTenseData.IsPast())
         {

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPatrol : ResetableMonoBehaviour
+public class EnemyPatrol : RespawnableMonoBehaviour
 {
     [SerializeField]
     private bool enablePatrol = true;
@@ -103,7 +103,7 @@ public class EnemyPatrol : ResetableMonoBehaviour
     }
 
 
-    override public void OnReset(bool _)
+    override public void OnRespawn(bool _)
     {
         if (enablePatrol) enabled = true;
     }
