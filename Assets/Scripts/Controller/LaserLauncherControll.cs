@@ -16,6 +16,8 @@ public class LaserLauncherControll : MonoBehaviour
 
     private GameObject activeUI;
     // private bool hitPlayer = false;
+    private float pressTimer = 0f;
+    private const float pressCD = 0.3f;
 
     private struct HitInfo
     {
@@ -169,21 +171,57 @@ public class LaserLauncherControll : MonoBehaviour
         return (distance <= 2.0f);
     }
 
+    private bool IsCoolDown()
+    {
+        if (pressTimer < pressCD)
+        {
+            pressTimer += Time.deltaTime;
+            return true;
+        }
+        else
+        {
+            pressTimer = 0f;
+            return false;
+        }
+    }
+
+    private void DoRotate(int direction)
+    {
+        lauchDirection = Utils.RotateRound(lauchDirection, new Vector3(0, 0, 0), Vector3.forward * direction, rotateAngle);
+        ClearTransferredLaser();
+    }
+
+    private void DetectDiscreteRotate()
+    {
+        if (Input.GetButtonDown("LaserRotateAntiClock"))
+        {
+            DoRotate(1);
+        }
+        else if (Input.GetButtonDown("LaserRotateClock"))
+        {
+            DoRotate(-1);
+        }
+    }
+
+    private void DetectContinuousRotate()
+    {
+        if (Input.GetButton("LaserRotateAntiClock") && !IsCoolDown())
+        {
+            DoRotate(1);
+        }
+        else if (Input.GetButton("LaserRotateClock") && !IsCoolDown())
+        {
+            DoRotate(-1);
+        }
+    }
+
     private void DetectRotate()
     {
         if (PlayerIsClose() && rotateAngle > 0)
         {
             activeUI.SetActive(true);
-            if (Input.GetButtonDown("LaserRotateAntiClock"))
-            {
-                lauchDirection = Utils.RotateRound(lauchDirection, new Vector3(0, 0, 0), Vector3.forward, rotateAngle);
-                ClearTransferredLaser();
-            }
-            else if (Input.GetButtonDown("LaserRotateClock"))
-            {
-                lauchDirection = Utils.RotateRound(lauchDirection, new Vector3(0, 0, 0), -Vector3.forward, rotateAngle);
-                ClearTransferredLaser();
-            }
+            DetectDiscreteRotate();
+            DetectContinuousRotate();
         }
         else
         {
