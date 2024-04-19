@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-df = pd.read_csv("analytics-raw-csv.csv")
+df = pd.read_csv("new-raw-analytics.csv")
 checkpoint_events = df[df['eventType'] == 'checkpointUsed']
 
 checkpoint_usage = checkpoint_events.groupby(['currentLevel', 'Checkpoint']).size().reset_index(name='count')

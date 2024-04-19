@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-df = pd.read_csv("analytics-raw-csv.csv")
+df = pd.read_csv("new-raw-analytics.csv")
 df['currentLevel'] = pd.to_numeric(df['currentLevel'], errors='coerce').dropna().astype(int) #type conversion to deal with errors. 
 
 # Filter to include only timeSwitch events and checkpoints

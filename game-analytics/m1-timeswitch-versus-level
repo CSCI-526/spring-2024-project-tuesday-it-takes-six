@@ -1,0 +1,19 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('new-raw-analytics.csv')
+time_switch_events = df[df['eventType'] == 'timeSwitch']
+
+# Group by level and sessionID, then count events
+time_switch_count = time_switch_events.groupby(['currentLevel', 'sessionID']).size().reset_index(name='Count')
+average_time_switches = time_switch_count.groupby('currentLevel')['Count'].mean()
+
+# Plotting
+plt.figure(figsize=(10, 5))
+average_time_switches.plot(kind='bar', color='blue')
+plt.title('Average Number of Time Switches Per Level')
+plt.xlabel('Level')
+plt.ylabel('Average Number of Time Switches')
+plt.xticks(rotation=0)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.show()

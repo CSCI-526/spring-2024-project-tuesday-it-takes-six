@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-df = pd.read_csv("analytics-raw-csv.csv")
+df = pd.read_csv("new-raw-analytics.csv")
 df['Timestamp'] = pd.to_datetime(df['Timestamp'])
 
 # Filter for playerDied events and time
@@ -9,7 +9,7 @@ df_deaths = df[df['eventType'] == 'playerDied'].sort_values(['sessionID', 'Times
 df_deaths['time_diff'] = df_deaths.groupby('sessionID')['Timestamp'].diff().dt.total_seconds()
 
 # Consider only the first death in a 10-second window as a valid death to get rid of duplicates or glitches
-df_deaths['valid_death'] = (df_deaths['time_diff'] > 10) | (df_deaths['time_diff'].isna())
+df_deaths['valid_death'] = (df_deaths['time_diff'] > 1.5) | (df_deaths['time_diff'].isna())
 deaths_per_level = df_deaths[df_deaths['valid_death']].groupby('currentLevel').size()
 session_counts = df.groupby('currentLevel')['sessionID'].nunique()
 average_deaths_per_player = deaths_per_level / session_counts

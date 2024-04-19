@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-df = pd.read_csv("analytics-raw-csv.csv")
+df = pd.read_csv("new-raw-analytics.csv")
 
 # Data verification to silence errors
 expected_columns = ['Timestamp', 'sessionID', 'eventType', 'Checkpoint', 'currentLevel']
