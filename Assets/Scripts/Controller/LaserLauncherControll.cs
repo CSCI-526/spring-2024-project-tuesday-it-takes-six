@@ -171,7 +171,7 @@ public class LaserLauncherControll : MonoBehaviour
 
     private void DetectRotate()
     {
-        if (PlayerIsClose())
+        if (PlayerIsClose() && rotateAngle > 0)
         {
             activeUI.SetActive(true);
             if (Input.GetButtonDown("LaserRotateAntiClock"))
