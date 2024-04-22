@@ -1,0 +1,17 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+df = pd.read_csv('new-raw-analytics.csv')
+
+unique_sessions_per_level = df.groupby('currentLevel')['sessionID'].nunique()
+
+# Plotting
+plt.figure(figsize=(10, 6))
+unique_sessions_per_level.plot(kind='line', marker='o', linestyle='-', color='blue')
+plt.title('Number of Attempts per Level')
+plt.xlabel('Level')
+plt.ylabel('Number of Unique Players')
+plt.grid(True, linestyle='--', alpha=0.7)
+plt.xticks(list(unique_sessions_per_level.index))  # Ensure x-ticks match the levels
+plt.show()

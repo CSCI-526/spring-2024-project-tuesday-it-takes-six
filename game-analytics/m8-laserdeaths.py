@@ -2,7 +2,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta
 
-# Load your CSV file
 df = pd.read_csv('new-raw-analytics.csv')
 df['Timestamp'] = pd.to_datetime(df['Timestamp'])
 died_events = df[df['eventType'] == 'playerDied']
